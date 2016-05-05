@@ -14,10 +14,12 @@ public class ConfigUtil {
     public static final String AUTH_TOKEN = "auth_token";
     public static final String LOGIN_PHONE = "login_phone";
     public static final String SHOP_NAME = "shop_name";
+    public static final String SHOP_MOBILE = "shop_moble";
 
     public static String uuid;
     public static String authToken;
     public static String shopName;
+    public static String shopMobile;
 
     /**
      * 获取Device Uuid
@@ -103,5 +105,27 @@ public class ConfigUtil {
             shopName = SpUtil.get(SHOP_NAME, "");
         }
         return shopName;
+    }
+
+    /**
+     * 保存店铺手机号码
+     *
+     * @param mobile
+     */
+    public static void setShopMobile(String mobile) {
+        shopMobile = mobile;
+        SpUtil.save(SHOP_MOBILE, shopMobile);
+    }
+
+    /**
+     * 获取店铺手机号
+     *
+     * @return
+     */
+    public static String getShopMobile() {
+        if (TextUtils.isEmpty(shopMobile)) {
+            shopMobile = SpUtil.get(SHOP_MOBILE, "");
+        }
+        return shopMobile;
     }
 }

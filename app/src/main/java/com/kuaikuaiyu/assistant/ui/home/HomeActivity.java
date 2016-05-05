@@ -16,6 +16,7 @@ import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
+import com.kuaikuaiyu.assistant.ui.setting.SettingActivity;
 import com.kuaikuaiyu.assistant.utils.CommonUtil;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
@@ -87,6 +88,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.ll_school:
                 WebViewActivity.start(this, AppConfig.URL_SCHOOL, "商学院");
+                break;
+
+            case R.id.iv_setting:
+                goActivity(SettingActivity.class);
                 break;
 
             default:

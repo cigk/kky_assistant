@@ -13,11 +13,15 @@
     <string name="input_shop_name">请输入店铺名称</string>
     <string name="sign_up">注册</string>
     <string name="forget_pwd">忘记密码？</string>
-
     <string name="err_no_username">请输入正确的手机号</string>
     <string name="err_no_pwd">请输入密码</string>
     <string name="err_length_pwd">密码长度为6&#8211;16位</string>
     <string name="input_verifycode">输入验证码</string>
 
+    <!--设置页面-->
+    <string name="change_shop_name">修改店铺名</string>
+    <string name="change_pwd">修改密码</string>
+    <string name="feedback">帮助反馈</string>
+    <string name="about">关于</string>
 
 </resources>

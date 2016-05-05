@@ -48,6 +48,10 @@
             android:name=".ui.common.WebViewActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:screenOrientation="portrait"/>
+
         <receiver
             android:name=".sys.receiver.MyPushReceiver"
             android:exported="false">
