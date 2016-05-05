@@ -1,9 +1,11 @@
 package com.kuaikuaiyu.assistant.ui.home.signup;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kuaikuaiyu.assistant.R;
@@ -17,7 +19,6 @@ import com.kuaikuaiyu.assistant.utils.UIUtil;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -27,6 +28,13 @@ import butterknife.OnClick;
  * Desc:
  */
 public class SignUpActivity extends BaseActivity implements SignUpView {
+
+    public static final String LAUNCH_TYPE = "launch_type";
+    public static final int SIGN_UP = 0;
+    public static final int RESET_PWD = 1;
+
+    private static final int TIME_OUT = 30;
+
     @Bind(R.id.ib_back)
     ImageButton ibBack;
     @Bind(R.id.tv_title)
@@ -41,15 +49,22 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     EditText etPwdConfirm;
     @Bind(R.id.btn_verify_code)
     Button btnVerfyCode;
-
-    private static final int TIME_OUT = 30;
+    @Bind(R.id.btn_signup)
+    Button btnSignUp;
+    @Bind(R.id.ll_shop_name)
+    LinearLayout llShopName;
+    @Bind(R.id.et_shop_name)
+    EditText etShopName;
 
     @Inject
     SignUpPresenter signUpPresenter;
 
+    private int type;
+
     @Override
-    protected void setupActivityComponent() {
+    protected void initComponent() {
         DaggerSignUpComponent.builder().signUpModule(new SignUpModule(this)).build().inject(this);
+        type = getIntent().getIntExtra(LAUNCH_TYPE, 0);
     }
 
     @Override
@@ -64,7 +79,10 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-
+        boolean signUp = type == SIGN_UP;
+        tvTitle.setText(signUp ? "注册" : "重置密码");
+        llShopName.setVisibility(signUp ? View.VISIBLE : View.GONE);
+        btnSignUp.setText(signUp ? "注册" : "重置密码");
     }
 
     @Override
@@ -73,15 +91,8 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @Override
     public void jump() {
-        UIUtil.showToast("注册成功，马上登陆吧");
+        UIUtil.showToast(type == SIGN_UP ? "注册成功，马上登陆吧" : "找回密码成功，马上登陆吧");
         goActivityAndFinish(LoginActivity.class);
     }
 
@@ -111,7 +122,10 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
             UIUtil.showToast("电话号码不正确，请重新输入");
             return;
         }
-        signUpPresenter.getVerifyCode(mobile);
+        if (type == SIGN_UP)
+            signUpPresenter.getSignUpVerifyCode(mobile);
+        else
+            signUpPresenter.getResetPwdCode(mobile);
     }
 
     /**
@@ -123,6 +137,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         String pwd = etPwd.getText().toString().trim();
         String pwdConfirm = etPwdConfirm.getText().toString().trim();
         String verifyCode = etVerifyCode.getText().toString().trim();
+        String shopName = etShopName.getText().toString().trim();
 
         if (CommonUtil.checkEmpty(mobile, "电话号码不能为空")) return;
         if (CommonUtil.checkEmpty(pwd, "密码不能为空")) return;
@@ -140,8 +155,18 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
             return;
         }
 
-        signUpPresenter.signUp(mobile, pwd, verifyCode);
+        if (type == SIGN_UP) {
+            if (CommonUtil.checkEmpty(shopName, "店铺名不能为空")) return;
+            signUpPresenter.signUp(mobile, pwd, verifyCode, shopName);
+        } else {
+            signUpPresenter.resetPwd(mobile, pwd, verifyCode);
+        }
 
+    }
+
+    @OnClick(R.id.ib_back)
+    public void back() {
+        finish();
     }
 
     /**

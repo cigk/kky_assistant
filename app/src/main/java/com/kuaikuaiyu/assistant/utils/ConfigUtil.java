@@ -13,9 +13,11 @@ public class ConfigUtil {
     public static final String UUID = "uuid";
     public static final String AUTH_TOKEN = "auth_token";
     public static final String LOGIN_PHONE = "login_phone";
+    public static final String SHOP_NAME = "shop_name";
 
     public static String uuid;
     public static String authToken;
+    public static String shopName;
 
     /**
      * 获取Device Uuid
@@ -78,5 +80,28 @@ public class ConfigUtil {
      */
     public static void setLoginPhone(String phone) {
         SpUtil.save(LOGIN_PHONE, phone);
+    }
+
+    /**
+     * 保存店铺名
+     *
+     * @param name
+     * @return
+     */
+    public static void setShopName(String name) {
+        shopName = name;
+        SpUtil.save(SHOP_NAME, shopName);
+    }
+
+    /**
+     * 获取店铺名称
+     *
+     * @return
+     */
+    public static String getShopName() {
+        if (TextUtils.isEmpty(shopName)) {
+            shopName = SpUtil.get(SHOP_NAME, "");
+        }
+        return shopName;
     }
 }

@@ -17,6 +17,14 @@ android {
         versionName "1.0"
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         buildConfigField "String", "AppName", "\"kky/assistant\""
+
+        //个推配置
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "FqAShDOg7E62bcvkvEJkz9",
+                GETUI_APP_KEY   : "15JTnXsP0w9SQpsDn80mq7",
+                GETUI_APP_SECRET: "wDcKGTiFGh5T9Q9SFmQawA",
+                PACKAGE_NAME    : applicationId
+        ]
     }
 
     signingConfigs {
@@ -102,6 +110,10 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    //个推
+    compile 'com.getui:sdk:2.8.1.0'
+    compile 'com.getui:ext:2.0.3'
+
     // test dependencies
     testCompile 'junit:junit:4.12'
 }

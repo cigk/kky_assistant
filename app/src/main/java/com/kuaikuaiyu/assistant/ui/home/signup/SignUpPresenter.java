@@ -31,11 +31,11 @@ public class SignUpPresenter implements BasePresenter {
     }
 
     /**
-     * 获取验证码
+     * 获取注册验证码
      *
      * @param phone
      */
-    public void getVerifyCode(String phone) {
+    public void getSignUpVerifyCode(String phone) {
         verifyCodeSubscriber = new RxSubscriber(signUpView) {
             @Override
             public void onNext(Object o) {
@@ -59,12 +59,40 @@ public class SignUpPresenter implements BasePresenter {
     }
 
     /**
+     * 获取重置密码
+     *
+     * @param phone
+     */
+    public void getResetPwdCode(String phone) {
+        verifyCodeSubscriber = new RxSubscriber(signUpView) {
+            @Override
+            public void onNext(Object o) {
+                signUpView.codeSent();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                signUpView.codeSendFail();
+            }
+        };
+
+        ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_RESET_PWD_SMS);
+        params.addParam("mobile", phone);
+
+        service.getResetPwdSms(params.getQueryMap(), params.getFieldMap())
+                .compose(new IoTransformer())
+                .subscribe(verifyCodeSubscriber);
+
+    }
+
+    /**
      * 注册
      *
      * @param mobile
      * @param pwd
      */
-    public void signUp(String mobile, String pwd, String code) {
+    public void signUp(String mobile, String pwd, String code, String shopName) {
         signUpSubscriber = new RxSubscriber(signUpView) {
             @Override
             public void onNext(Object o) {
@@ -78,7 +106,34 @@ public class SignUpPresenter implements BasePresenter {
         params.addParam("code", code);
         params.addParam("password", DigestUtil.getMd5(pwd));
         params.addParam("duuid", ConfigUtil.getUuid());
+        params.addParam("nickname", shopName);
         service.signUp(params.getQueryMap(), params.getFieldMap())
+                .compose(new IoTransformer())
+                .subscribe(signUpSubscriber);
+
+    }
+
+    /**
+     * 重置密码
+     *
+     * @param mobile
+     * @param pwd
+     */
+    public void resetPwd(String mobile, String pwd, String code) {
+        signUpSubscriber = new RxSubscriber(signUpView) {
+            @Override
+            public void onNext(Object o) {
+                ConfigUtil.setLoginPhone(mobile);
+                signUpView.jump();
+            }
+        };
+
+        ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_RESET_PWD);
+        params.addParam("mobile", mobile);
+        params.addParam("code", code);
+        params.addParam("password", DigestUtil.getMd5(pwd));
+        params.addParam("duuid", ConfigUtil.getUuid());
+        service.resetPwd(params.getQueryMap(), params.getFieldMap())
                 .compose(new IoTransformer())
                 .subscribe(signUpSubscriber);
 

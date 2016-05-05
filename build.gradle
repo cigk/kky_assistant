@@ -25,6 +25,11 @@ ext {
 allprojects {
     repositories {
         jcenter()
+
+        //个推依赖
+        maven {
+            url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"
+        }
     }
 }
 

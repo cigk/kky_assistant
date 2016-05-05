@@ -3,6 +3,7 @@ package com.kuaikuaiyu.assistant.ui.home.splash;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.igexin.sdk.PushManager;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
@@ -37,7 +38,8 @@ public class SplashActivity extends BaseActivity implements SplashView {
     }
 
     @Override
-    protected void setupActivityComponent() {
+    protected void initComponent() {
+        PushManager.getInstance().initialize(UIUtil.getContext());
         DaggerSplashComponent.builder().splashModule(new SplashModule(this)).build().inject(this);
     }
 

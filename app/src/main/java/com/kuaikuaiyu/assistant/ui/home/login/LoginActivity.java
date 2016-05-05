@@ -1,5 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.home.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,6 +22,10 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
+import static com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity.LAUNCH_TYPE;
+import static com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity.RESET_PWD;
+import static com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity.SIGN_UP;
+
 /**
  * 登录页面
  */
@@ -41,7 +46,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     LoginPresenter loginPresenter;
 
     @Override
-    protected void setupActivityComponent() {
+    protected void initComponent() {
         DaggerLoginComponent.builder().loginModule(new LoginModule(this)).build().inject(this);
     }
 
@@ -80,11 +85,15 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
                 break;
 
             case R.id.tv_forget_pwd:
-//                goActivity(ForgetPassActivity.class);
+                Intent intent = new Intent(this, SignUpActivity.class);
+                intent.putExtra(LAUNCH_TYPE, RESET_PWD);
+                startActivity(intent);
                 break;
 
             case R.id.btn_signup:
-                goActivity(SignUpActivity.class);
+                Intent signIntent = new Intent(this, SignUpActivity.class);
+                signIntent.putExtra(LAUNCH_TYPE, SIGN_UP);
+                startActivity(signIntent);
                 break;
 
             default:

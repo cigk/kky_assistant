@@ -5,10 +5,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.igexin.sdk.PushManager;
 import com.kuaikuaiyu.assistant.R;
+import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
+import com.kuaikuaiyu.assistant.modle.service.PassService;
+import com.kuaikuaiyu.assistant.net.NetUtil;
+import com.kuaikuaiyu.assistant.net.ReqParams;
+import com.kuaikuaiyu.assistant.rx.IoTransformer;
+import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.utils.CommonUtil;
+import com.kuaikuaiyu.assistant.utils.ConfigUtil;
+import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import butterknife.Bind;
 
@@ -32,8 +41,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     ImageView ivSetting;
 
     @Override
-    protected void setupActivityComponent() {
-
+    protected void initComponent() {
+        updatePushId();
     }
 
     @Override
@@ -82,5 +91,24 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    /**
+     * 更新个推id
+     */
+    private void updatePushId() {
+        String did = PushManager.getInstance().getClientid(UIUtil.getContext());
+        PassService service = NetUtil.create(PassService.class);
+        ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_UPDATE_PUSH_ID);
+        params.addParam("duuid", ConfigUtil.getUuid());
+        params.addParam("device_push_id", did);
+        service.updatePushId(params.getQueryMap(), params.getFieldMap())
+                .compose(new IoTransformer())
+                .subscribe(new RxSubscriber(null) {
+                    @Override
+                    public void onNext(Object o) {
+
+                    }
+                });
     }
 }

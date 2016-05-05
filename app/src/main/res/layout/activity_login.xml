@@ -41,7 +41,7 @@
         <EditText
             android:id="@+id/et_pwd"
             style="@style/BaseEditTextStyle"
-            android:hint="@string/input_password"
+            android:hint="@string/input_pwd"
             android:inputType="textPassword"/>
     </LinearLayout>
 
@@ -57,6 +57,7 @@
         android:text="@string/sign_up"/>
 
     <TextView
+        android:padding="@dimen/distance16"
         android:id="@+id/tv_forget_pwd"
         style="@style/BaseTextViewStyle"
         android:text="@string/forget_pwd"/>

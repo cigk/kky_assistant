@@ -8,4 +8,5 @@ package com.kuaikuaiyu.assistant.modle.domain;
  */
 public class LoginResp {
     public String at;
+    public String nickname;
 }

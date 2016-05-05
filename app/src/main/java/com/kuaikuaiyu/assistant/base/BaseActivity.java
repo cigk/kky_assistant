@@ -27,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setupActivityComponent();
+        initComponent();
         mContext = this;
         ActivityManager.addActivity(this);
         setContentView(getRootView());
@@ -39,9 +39,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     /**
-     * Dagger 注入
+     * 1. for dagger2 injection
+     * 2. for other init action before setContentView
      */
-    protected abstract void setupActivityComponent();
+    protected abstract void initComponent();
 
 
     /**

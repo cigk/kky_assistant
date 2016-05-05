@@ -39,6 +39,18 @@
             android:name=".ui.home.signup.SignUpActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.CommonActivity"
+            android:screenOrientation="portrait"/>
+
+        <receiver
+            android:name=".sys.receiver.MyPushReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
