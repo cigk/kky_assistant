@@ -41,7 +41,7 @@ public class LoginPresenter implements BasePresenter {
             public void onNext(LoginResp loginResp) {
                 ConfigUtil.setAuthToken(loginResp.at);
                 ConfigUtil.setShopName(loginResp.nickname);
-                ConfigUtil.setLoginPhone(mobile);//登录成功后设置为默认登录密码
+                ConfigUtil.setShopMobile(mobile);
                 loginView.jump();
             }
         };

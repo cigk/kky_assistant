@@ -11,6 +11,7 @@
         android:id="@+id/ll_shop_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <ImageView
@@ -31,6 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+
+    <View style="@style/Divider"/>
 
     <RelativeLayout
         android:id="@+id/rl_change_shop_name"
@@ -105,5 +108,13 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/arrow_right"/>
     </RelativeLayout>
+
+    <View style="@style/Divider"/>
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="退出"/>
 
 </LinearLayout>
