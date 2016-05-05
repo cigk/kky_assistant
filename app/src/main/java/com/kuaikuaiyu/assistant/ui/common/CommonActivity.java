@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui;
+package com.kuaikuaiyu.assistant.ui.common;
 
 import android.app.Activity;
 import android.content.Context;

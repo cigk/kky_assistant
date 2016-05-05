@@ -14,7 +14,6 @@ import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.home.HomeActivity;
 import com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
-import com.kuaikuaiyu.assistant.utils.DigestUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
@@ -129,6 +128,6 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
             return;
         }
 
-        loginPresenter.login(mobile, DigestUtil.getMd5(password));
+        loginPresenter.login(mobile, password);
     }
 }

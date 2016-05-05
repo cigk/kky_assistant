@@ -15,6 +15,7 @@ import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
+import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
 import com.kuaikuaiyu.assistant.utils.CommonUtil;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
@@ -25,7 +26,7 @@ import butterknife.Bind;
  * Author:  Gavin
  * Email:   gavinking@163.com
  * Date:    2016/5/3
- * Desc:
+ * Desc:    主页面
  */
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -81,11 +82,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 break;
 
             case R.id.ll_assistant:
-
+                WebViewActivity.start(this, AppConfig.URL_ASSISTANT, "平台助手");
                 break;
 
             case R.id.ll_school:
-
+                WebViewActivity.start(this, AppConfig.URL_SCHOOL, "商学院");
                 break;
 
             default:
@@ -98,7 +99,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
      */
     private void updatePushId() {
         String did = PushManager.getInstance().getClientid(UIUtil.getContext());
-        PassService service = NetUtil.create(PassService.class);
+        PassService service = NetUtil.createForPass(PassService.class);
         ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_UPDATE_PUSH_ID);
         params.addParam("duuid", ConfigUtil.getUuid());
         params.addParam("device_push_id", did);

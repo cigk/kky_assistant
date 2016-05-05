@@ -41,7 +41,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.CommonActivity"
+            android:name=".ui.common.CommonActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.common.WebViewActivity"
             android:screenOrientation="portrait"/>
 
         <receiver

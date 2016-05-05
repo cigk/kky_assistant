@@ -19,30 +19,4 @@ import rx.Observable;
  */
 public interface AccountService {
 
-    /**
-     * 更新设备信息
-     *
-     * @return
-     */
-    @GET("/v1/ping")
-    Observable<HttpResult<Uuid>> updateDeviceInfo();
-
-    @Multipart
-    @POST("/v1/info")
-    Observable<HttpResult<Uuid>> updateDeviceInfo1(@QueryMap Map<String, String> queryMap,
-                                                   @FieldMap Map<String, String> deviceInfo,
-                                                   @Part RequestBody image);
-
-
-    @GET("/v1/info")
-    Observable<HttpResult<Uuid>> lallala(@QueryMap Map<String, String> opt);
-
 }
-
-
-//    RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), imageFile);
-//    MultipartBuilder multipartBuilder = new MultipartBuilder();
-//    multipartBuilder.addFormDataPart("photo", imageFile.getName(), fileBody);
-//    RequestBody fileRequestBody = multipartBuilder.build();
-//
-//    mRestClient.getRetrofitService().uploadProfilePhoto(fileRequestBody, sessionId);

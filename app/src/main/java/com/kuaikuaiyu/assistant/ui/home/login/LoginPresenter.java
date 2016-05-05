@@ -8,6 +8,7 @@ import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
+import com.kuaikuaiyu.assistant.utils.DigestUtil;
 
 import javax.inject.Inject;
 
@@ -57,7 +58,7 @@ public class LoginPresenter implements BasePresenter {
     private void subscribe(String mobile, String pwd) {
         ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_LOGIN);
         params.addParam("mobile", mobile);
-        params.addParam("password", pwd);
+        params.addParam("password", DigestUtil.getMd5(pwd));
         service.login(params.getQueryMap(), params.getFieldMap())
                 .compose(new IoTransformer<>())
                 .subscribe(loginSubscriber);
