@@ -59,12 +59,17 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        etMobile.setText(ConfigUtil.getLoginPhone());
     }
 
     @Override
     protected BasePresenter getPresenter() {
-        return null;
+        return loginPresenter;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        etMobile.setText(ConfigUtil.getLoginPhone());
     }
 
     @Override

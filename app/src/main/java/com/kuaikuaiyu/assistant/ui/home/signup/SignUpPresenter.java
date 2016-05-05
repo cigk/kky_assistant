@@ -6,6 +6,8 @@ import com.kuaikuaiyu.assistant.modle.service.PassService;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
+import com.kuaikuaiyu.assistant.utils.ConfigUtil;
+import com.kuaikuaiyu.assistant.utils.DigestUtil;
 
 import javax.inject.Inject;
 
@@ -34,7 +36,7 @@ public class SignUpPresenter implements BasePresenter {
      * @param phone
      */
     public void getVerifyCode(String phone) {
-        signUpSubscriber = new RxSubscriber(signUpView) {
+        verifyCodeSubscriber = new RxSubscriber(signUpView) {
             @Override
             public void onNext(Object o) {
                 signUpView.codeSent();
@@ -51,18 +53,34 @@ public class SignUpPresenter implements BasePresenter {
         params.addParam("mobile", phone);
 
         service.getSignUpSms(params.getQueryMap(), params.getFieldMap())
-                .compose(new IoTransformer<>())
-                .subscribe(signUpSubscriber);
+                .compose(new IoTransformer())
+                .subscribe(verifyCodeSubscriber);
 
     }
 
     /**
      * 注册
      *
-     * @param phone
+     * @param mobile
      * @param pwd
      */
-    public void signUp(String phone, String pwd) {
+    public void signUp(String mobile, String pwd, String code) {
+        signUpSubscriber = new RxSubscriber(signUpView) {
+            @Override
+            public void onNext(Object o) {
+                ConfigUtil.setLoginPhone(mobile);
+                signUpView.jump();
+            }
+        };
+
+        ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_SIGN_UP);
+        params.addParam("mobile", mobile);
+        params.addParam("code", code);
+        params.addParam("password", DigestUtil.getMd5(pwd));
+        params.addParam("duuid", ConfigUtil.getUuid());
+        service.signUp(params.getQueryMap(), params.getFieldMap())
+                .compose(new IoTransformer())
+                .subscribe(signUpSubscriber);
 
     }
 

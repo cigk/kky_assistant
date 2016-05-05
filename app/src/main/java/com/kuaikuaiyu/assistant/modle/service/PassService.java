@@ -40,11 +40,29 @@ public interface PassService {
     Observable<HttpResult<Uuid>> updateDeviceInfo(@QueryMap Map<String, String> queryMap,
                                                   @FieldMap Map<String, String> fieldMap);
 
+    /**
+     * 注册验证码
+     *
+     * @param queryMap
+     * @param fieldMap
+     * @return
+     */
     @FormUrlEncoded
     @POST(AppConfig.URL_SIGN_UP_SMS)
-    Observable<HttpResult<Uuid>> getSignUpSms(@QueryMap Map<String, String> queryMap,
-                                                  @FieldMap Map<String, String> fieldMap);
+    Observable<HttpResult> getSignUpSms(@QueryMap Map<String, String> queryMap,
+                                        @FieldMap Map<String, String> fieldMap);
 
+    /**
+     * 注册
+     *
+     * @param queryMap
+     * @param fieldMap
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AppConfig.URL_SIGN_UP)
+    Observable<HttpResult> signUp(@QueryMap Map<String, String> queryMap,
+                                  @FieldMap Map<String, String> fieldMap);
 
 
     /**
