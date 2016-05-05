@@ -1,0 +1,107 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+def ext = rootProject.ext
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "com.kuaikuaiyu.assistant"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        buildConfigField "String", "AppName", "\"kky/assistant\""
+    }
+
+    signingConfigs {
+        releasekeystore {
+            storeFile file("android_assistant.jks")
+            storePassword "kuaikuaiyu888"
+            keyAlias "Assistant"
+            keyPassword "kuaikuaiyu888"
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField "String", "PASS_SERVRE", "\"dev-matrixpassport.kuaikuaiyu.com\""
+            buildConfigField "String", "SERVER_URL", "\"dev-shop.kuaikuaiyu.com\""
+            buildConfigField "String", "INVITE_USER_URL", "\"https://dw-shop.kuaikuaiyu.com/api.invite.user\""
+            signingConfig signingConfigs.releasekeystore
+            buildConfigField "Boolean", "DEBUG_MODE", "true"
+            debuggable true
+        }
+        alpha {
+            minifyEnabled false
+            buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
+            buildConfigField "String", "SERVER_URL", "\"shop.kuaikuaiyu.com\""
+            buildConfigField "String", "INVITE_USER_URL", "\"https://aw-shop.kuaikuaiyu.com/api.invite.user\""
+            signingConfig signingConfigs.releasekeystore
+            buildConfigField "Boolean", "DEBUG_MODE", "false"
+            debuggable true
+        }
+        release {
+            minifyEnabled true
+            buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
+            buildConfigField "String", "SERVER_URL", "\"shop.kuaikuaiyu.com\""
+            buildConfigField "String", "INVITE_USER_URL", "\"https://w-shop.kuaikuaiyu.com/api.invite.user\""
+            signingConfig signingConfigs.releasekeystore
+            buildConfigField "Boolean", "DEBUG_MODE", "false"
+            debuggable false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def name = output.outputFile.name;
+            name = name.replace("app-", "android_assistant_");
+            name = name.replace(".apk", "_v" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk");
+            output.outputFile = new File(output.outputFile.parent, name)
+        }
+    }
+
+//    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.jakewharton.timber:timber:4.1.2'
+    // dagger dependencies
+    apt 'com.google.dagger:dagger-compiler:2.4'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.google.dagger:dagger:2.4'
+    // rxjava dependencies
+    compile 'io.reactivex:rxjava:1.1.3'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    // retrofit dependencies
+    compile "com.squareup.retrofit2:retrofit:$ext.retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava:$ext.retrofit_version"
+    compile "com.squareup.retrofit2:converter-gson:$ext.retrofit_version"
+    // okhttp dependencies
+    compile "com.squareup.okhttp3:okhttp:$ext.okhttp_version"
+    compile "com.squareup.okhttp3:logging-interceptor:$ext.okhttp_version"
+
+    //leakcanary dependencies
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    // test dependencies
+    testCompile 'junit:junit:4.12'
+}
