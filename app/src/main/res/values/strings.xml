@@ -15,6 +15,7 @@
     <string name="err_no_username">请输入正确的手机号</string>
     <string name="err_no_pwd">请输入密码</string>
     <string name="err_length_pwd">密码长度为6&#8211;16位</string>
+    <string name="input_verifycode">输入验证码</string>
 
 
 </resources>

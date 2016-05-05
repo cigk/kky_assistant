@@ -7,6 +7,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.home.HomeActivity;
+import com.kuaikuaiyu.assistant.ui.home.login.LoginActivity;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
@@ -16,8 +17,6 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Inject
     SplashPresenter splashPresenter;
-
-    private SplashComponent splashComponent;
 
     @Override
     protected int getRootView() {
@@ -39,9 +38,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     protected void setupActivityComponent() {
-        splashComponent = DaggerSplashComponent.builder().splashModule(new SplashModule(this))
-                .build();
-        splashComponent.inject(this);
+        DaggerSplashComponent.builder().splashModule(new SplashModule(this)).build().inject(this);
     }
 
     @Override
@@ -60,12 +57,6 @@ public class SplashActivity extends BaseActivity implements SplashView {
         }, 2000);
     }
 
-    @Override
-    protected void onDestroy() {
-        splashPresenter.clean();
-        super.onDestroy();
-    }
-
     /**
      * 跳转到主页面
      */
@@ -77,6 +68,6 @@ public class SplashActivity extends BaseActivity implements SplashView {
      * 跳转到登录页面
      */
     private void toLogin() {
-
+        goActivityAndFinish(LoginActivity.class);
     }
 }

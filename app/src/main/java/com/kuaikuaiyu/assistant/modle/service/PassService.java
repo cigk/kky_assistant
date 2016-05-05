@@ -38,7 +38,14 @@ public interface PassService {
     @FormUrlEncoded
     @POST(AppConfig.URL_INFO)
     Observable<HttpResult<Uuid>> updateDeviceInfo(@QueryMap Map<String, String> queryMap,
-                                                  @FieldMap Map<String, String> deviceInfo);
+                                                  @FieldMap Map<String, String> fieldMap);
+
+    @FormUrlEncoded
+    @POST(AppConfig.URL_SIGN_UP_SMS)
+    Observable<HttpResult<Uuid>> getSignUpSms(@QueryMap Map<String, String> queryMap,
+                                                  @FieldMap Map<String, String> fieldMap);
+
+
 
     /**
      * 登录
@@ -48,7 +55,7 @@ public interface PassService {
     @FormUrlEncoded
     @POST(AppConfig.URL_LOGIN)
     Observable<HttpResult<LoginResp>> login(@QueryMap Map<String, String> queryMap,
-                                            @FieldMap Map<String, String> deviceInfo);
+                                            @FieldMap Map<String, String> fieldMap);
 
 }
 

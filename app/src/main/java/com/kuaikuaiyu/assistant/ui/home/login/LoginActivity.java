@@ -11,6 +11,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.home.HomeActivity;
+import com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.DigestUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
@@ -78,7 +79,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
                 break;
 
             case R.id.btn_signup:
-//                goActivity(SignupActivity.class);
+                goActivity(SignUpActivity.class);
                 break;
 
             default:

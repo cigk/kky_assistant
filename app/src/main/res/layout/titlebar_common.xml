@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    style="@style/TitleBarStyle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector_ib"
+        android:paddingLeft="@dimen/distance8"
+        android:paddingRight="@dimen/distance8"
+        android:src="@mipmap/arrow_left_white"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/TitleBarTextStyle"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_ib"
+            android:gravity="center"
+            android:paddingLeft="@dimen/distance16"
+            android:paddingRight="@dimen/distance16"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font14"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_ib"
+            android:paddingLeft="@dimen/distance16"
+            android:paddingRight="@dimen/distance16"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+
+</RelativeLayout>
