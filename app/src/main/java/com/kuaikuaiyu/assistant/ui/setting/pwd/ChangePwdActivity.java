@@ -38,7 +38,9 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView {
 
     @Override
     protected void initComponent() {
-
+        DaggerChangePwdComponent.builder()
+                .changePwdModule(new ChangePwdModule(this))
+                .build().inject(this);
     }
 
     @Override
