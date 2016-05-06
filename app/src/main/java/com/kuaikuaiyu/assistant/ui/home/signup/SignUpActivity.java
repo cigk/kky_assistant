@@ -155,6 +155,11 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
             return;
         }
 
+        if (!pwd.equals(pwdConfirm)) {
+            UIUtil.showToast("两次输入的密码不一致");
+            return;
+        }
+
         if (type == SIGN_UP) {
             if (CommonUtil.checkEmpty(shopName, "店铺名不能为空")) return;
             signUpPresenter.signUp(mobile, pwd, verifyCode, shopName);

@@ -52,6 +52,10 @@
             android:name=".ui.setting.SettingActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".ui.setting.pwd.ChangePwdActivity"
+            android:screenOrientation="portrait"/>
+
         <receiver
             android:name=".sys.receiver.MyPushReceiver"
             android:exported="false">
