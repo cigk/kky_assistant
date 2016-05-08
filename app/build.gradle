@@ -25,6 +25,13 @@ android {
                 GETUI_APP_SECRET: "wDcKGTiFGh5T9Q9SFmQawA",
                 PACKAGE_NAME    : applicationId
         ]
+
+        //ndk config
+        ndk{
+            moduleName "kkylib"			//生成的so名字
+            ldLibs "log", "z", "m"	//添加依赖库文件，因为有log打印等
+            abiFilters "armeabi", "armeabi-v7a", "x86"	//输出指定三种abi体系结构下的so库。目前可有可无。
+        }
     }
 
     signingConfigs {

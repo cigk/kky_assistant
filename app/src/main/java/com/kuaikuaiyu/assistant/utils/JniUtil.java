@@ -11,5 +11,11 @@ public class JniUtil {
     static {
         System.loadLibrary("kkylib");
     }
-//    public native String getSignKey();
+
+    /**
+     * 获取签名秘钥
+     *
+     * @return
+     */
+    public static native String getSignKey();
 }

@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
+import com.kuaikuaiyu.assistant.utils.JniUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -126,7 +127,7 @@ public class ReqParams {
 
         //加密  _sig
         try {
-            SecretKeySpec keySpec = new SecretKeySpec(AppConfig.SECRET_KEY.getBytes(),
+            SecretKeySpec keySpec = new SecretKeySpec(JniUtil.getSignKey().getBytes(),
                     "HmacSHA256");
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(keySpec);
