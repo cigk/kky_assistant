@@ -11,5 +11,5 @@ public class JniUtil {
     static {
         System.loadLibrary("kkylib");
     }
-    public native String getSignKey();
+//    public native String getSignKey();
 }
