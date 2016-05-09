@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="background">#EEEEEE</color>
+    <color name="background">#f9f9f9</color>
 
     <!--Base color-->
     <color name="white">#FFFFFF</color>
@@ -13,4 +13,7 @@
     <color name="text_hint_color">#ff9b9b9b</color>
 
     <color name="divide_line">#ffd2d2d2</color>
+
+    <!--边框颜色-->
+    <color name="border_gray_light">#f9f9f9</color>
 </resources>

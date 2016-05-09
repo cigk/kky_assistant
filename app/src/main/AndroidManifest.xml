@@ -66,6 +66,14 @@
             android:name=".ui.setting.pwd.ChangePwdActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".ui.income.IncomeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.income.account.AccountActivity"
+            android:screenOrientation="portrait"/>
+
         <receiver
             android:name=".sys.receiver.MyPushReceiver"
             android:exported="false">

@@ -14,9 +14,9 @@
         android:src="@mipmap/arrow_left_white"/>
 
     <TextView
-        android:layout_centerInParent="true"
         android:id="@+id/tv_title"
-        style="@style/TitleBarTextStyle"/>
+        style="@style/TitleBarTextStyle"
+        android:layout_centerInParent="true"/>
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -32,8 +32,7 @@
             android:paddingLeft="@dimen/distance16"
             android:paddingRight="@dimen/distance16"
             android:textColor="@color/white"
-            android:textSize="@dimen/font14"
-            android:visibility="gone"/>
+            android:textSize="@dimen/font14"/>
 
         <ImageView
             android:id="@+id/iv_right"
@@ -41,8 +40,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/selector_ib"
             android:paddingLeft="@dimen/distance16"
-            android:paddingRight="@dimen/distance16"
-            android:visibility="gone"/>
+            android:paddingRight="@dimen/distance16"/>
     </FrameLayout>
 
 
