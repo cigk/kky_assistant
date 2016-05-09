@@ -26,11 +26,6 @@ android {
                 PACKAGE_NAME    : applicationId
         ]
 
-        sourceSets.main{
-            jni.srcDirs = []
-            jniLibs.srcDir 'src/main/libs'
-        }
-
         //ndk config
         ndk{
             moduleName "kkylib"			//生成的so名字
