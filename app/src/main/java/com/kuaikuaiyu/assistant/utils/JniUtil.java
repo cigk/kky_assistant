@@ -17,5 +17,5 @@ public class JniUtil {
      *
      * @return
      */
-    public static native String getSignKey();
+    public static native String sign(String msg);
 }

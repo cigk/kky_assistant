@@ -124,21 +124,21 @@ public class ReqParams {
         }
 
         Timber.d("sig = %s", sb.toString());
-
+        mSignature = JniUtil.sign(sb.toString());
         //加密  _sig
-        try {
-            SecretKeySpec keySpec = new SecretKeySpec(JniUtil.getSignKey().getBytes(),
-                    "HmacSHA256");
-            Mac mac = Mac.getInstance("HmacSHA256");
-            mac.init(keySpec);
-            byte[] result = mac.doFinal(sb.toString().getBytes("UTF-8"));
-            for (byte b : result) {
-                signature.append(byteToHexString(b));
-            }
-            mSignature = signature.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            SecretKeySpec keySpec = new SecretKeySpec(JniUtil.getSignKey().getBytes(),
+//                    "HmacSHA256");
+//            Mac mac = Mac.getInstance("HmacSHA256");
+//            mac.init(keySpec);
+//            byte[] result = mac.doFinal(sb.toString().getBytes("UTF-8"));
+//            for (byte b : result) {
+//                signature.append(byteToHexString(b));
+//            }
+//            mSignature = signature.toString();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         return mSignature;
     }
