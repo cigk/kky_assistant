@@ -30,4 +30,6 @@
 
     <dimen name="title_height">44dp</dimen>
     <dimen name="button_height">44dp</dimen>
+
+    <dimen name="list_divider_height">2px</dimen>
 </resources>
