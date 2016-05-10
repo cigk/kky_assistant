@@ -15,14 +15,16 @@
         style="@style/BaseItemLayoutSelect">
 
         <TextView
-            style="@style/BaseItemTitle"
+            style="@style/BaseTextViewStyle"
             android:text="开户银行:"/>
 
         <TextView
             android:id="@+id/tv_bank_name"
             style="@style/BaseTextViewStyle"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/distance16"
             android:text="中国工商银行"/>
 
         <ImageView style="@style/BaseArrowIcon"/>
@@ -36,21 +38,24 @@
         style="@style/BaseItemLayoutSelect">
 
         <TextView
-            style="@style/BaseItemTitle"
+            style="@style/BaseTextViewStyle"
             android:text="开户省市:"/>
 
         <TextView
             android:id="@+id/tv_province"
             style="@style/BaseTextViewStyle"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:gravity="end|center_vertical"
+            android:paddingLeft="@dimen/distance16"
             android:text="北京市"/>
 
         <TextView
             android:id="@+id/tv_city"
-            style="@style/BaseItemTitle"
+            style="@style/BaseTextViewStyle"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="start|center_vertical"
+            android:paddingLeft="@dimen/distance16"
             android:text="北京市"/>
 
         <ImageView style="@style/BaseArrowIcon"/>
@@ -62,13 +67,18 @@
         style="@style/BaseItemLayoutWhite">
 
         <TextView
-            style="@style/BaseItemTitle"
+            style="@style/BaseTextViewStyle"
             android:text="银行卡号:"/>
 
         <EditText
             android:id="@+id/et_card_num"
             style="@style/BaseEditTextStyle"
-            android:inputType="number"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:inputType="number"
+            android:paddingLeft="@dimen/distance16"/>
     </LinearLayout>
 
     <View style="@style/Divider"/>
@@ -76,12 +86,17 @@
     <LinearLayout style="@style/BaseItemLayoutWhite">
 
         <TextView
-            style="@style/BaseItemTitle"
+            style="@style/BaseTextViewStyle"
             android:text="开卡户名:"/>
 
         <com.kuaikuaiyu.assistant.ui.widgets.PlainEditText
             android:id="@+id/et_card_name"
-            style="@style/BaseEditTextStyle"/>
+            style="@style/BaseEditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/distance16"/>
     </LinearLayout>
 
     <View style="@style/Divider"/>

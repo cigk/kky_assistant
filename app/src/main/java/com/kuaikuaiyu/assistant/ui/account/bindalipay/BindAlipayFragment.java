@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.account.bindaccount;
+package com.kuaikuaiyu.assistant.ui.account.bindalipay;
 
 import android.app.Activity;
 import android.text.TextUtils;
@@ -17,6 +17,8 @@ import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 
 /**
@@ -25,7 +27,7 @@ import butterknife.Bind;
  * Date:    2015/12/8
  * Desc:    绑定支付宝页面 refactor from BinaAlipayActivity
  */
-public class BindAlipayFragment extends BaseFragment {
+public class BindAlipayFragment extends BaseFragment implements BindAlipayView {
 
     @Bind(R.id.tv_info)
     TextView tv_info;
@@ -36,6 +38,8 @@ public class BindAlipayFragment extends BaseFragment {
     @Bind(R.id.btn_submit)
     Button btn_submit;
 
+    @Inject
+    BindAlipayPresenter mPresenter;
     private VerifyData mVerifyData;
 
     @Override
@@ -45,7 +49,7 @@ public class BindAlipayFragment extends BaseFragment {
 
     @Override
     protected BasePresenter getPresenter() {
-        return null;
+        return mPresenter;
     }
 
     @Override
@@ -65,6 +69,7 @@ public class BindAlipayFragment extends BaseFragment {
 
     @Override
     protected void initData() throws Exception {
+        mLoadingPage.setSucceed();
         if (null != mVerifyData)
             initView();
     }
@@ -129,6 +134,8 @@ public class BindAlipayFragment extends BaseFragment {
             UIUtil.showToast(R.string.enter_valid_account);
             return;
         }
+
+        mPresenter.bindAlipay(name, account);
 //        NetTask netTask = new NetTask(mActivity) {
 //            @Override
 //            protected JSONObject onLoad() {
@@ -142,5 +149,10 @@ public class BindAlipayFragment extends BaseFragment {
 //            }
 //        };
 //        netTask.execute();
+    }
+
+    @Override
+    public void bindSucceed() {
+
     }
 }

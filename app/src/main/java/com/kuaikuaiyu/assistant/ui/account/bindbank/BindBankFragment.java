@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.account.bindaccount;
+package com.kuaikuaiyu.assistant.ui.account.bindbank;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -23,9 +23,9 @@ import com.kuaikuaiyu.assistant.utils.DialogUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
-import org.json.JSONObject;
-
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
@@ -35,7 +35,7 @@ import butterknife.Bind;
  * Date:    2015/12/8
  * Desc:    绑定银行卡页面   refactor from BainBankFragment
  */
-public class BindBankFragment extends BaseFragment implements View.OnClickListener {
+public class BindBankFragment extends BaseFragment implements BindBankView, View.OnClickListener {
 
     @Bind(R.id.tv_info)
     TextView tv_info;
@@ -56,6 +56,9 @@ public class BindBankFragment extends BaseFragment implements View.OnClickListen
     @Bind(R.id.btn_submit)
     Button btn_submit;
 
+    @Inject
+    BindBankPresenter mPresenter;
+
     private String cardNum;
     private String cardName;
     private String province;
@@ -70,7 +73,7 @@ public class BindBankFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     protected BasePresenter getPresenter() {
-        return null;
+        return mPresenter;
     }
 
     @Override
@@ -87,6 +90,7 @@ public class BindBankFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     protected void initData() throws Exception {
+        mLoadingPage.setSucceed();
         if (mVerifyData != null)
             initView();
     }
@@ -213,17 +217,12 @@ public class BindBankFragment extends BaseFragment implements View.OnClickListen
             UIUtil.showToast(R.string.owner_name_be_chinese);
             return;
         }
-//        new NetTask(mActivity) {
-//            @Override
-//            protected JSONObject onLoad() {
-//                return AccountEngine.bindBank(bankName, cardNum, cardName, province, city);
-//            }
-//
-//            @Override
-//            protected void onSuccess(JSONObject jsonObj) throws Exception {
-//                UIUtil.showToast(R.string.success_submit_bind);
-//                mActivity.finish();
-//            }
-//        }.execute();
+        mPresenter.bindBank(bankName, cardNum, cardName, province, city);
+
+    }
+
+    @Override
+    public void bindSucceed() {
+
     }
 }

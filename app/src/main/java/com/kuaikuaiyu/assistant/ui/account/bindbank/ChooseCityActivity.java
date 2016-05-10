@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.account.bindaccount;
+package com.kuaikuaiyu.assistant.ui.account.bindbank;
 
 import android.app.Activity;
 import android.content.Intent;

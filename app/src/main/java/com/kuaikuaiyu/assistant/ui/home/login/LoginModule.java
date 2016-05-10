@@ -24,13 +24,13 @@ public class LoginModule {
 
     @PerActivity
     @Provides
-    LoginView getLoginView() {
+    LoginView getView() {
         return loginView;
     }
 
     @PerActivity
     @Provides
-    PassService getPassService() {
+    PassService getService() {
         return NetUtil.createForPass(PassService.class);
     }
 }

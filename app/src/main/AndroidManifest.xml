@@ -84,7 +84,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.account.bindaccount.ChooseCityActivity"
+            android:name=".ui.account.bindbank.ChooseCityActivity"
             android:screenOrientation="portrait"/>
 
 
