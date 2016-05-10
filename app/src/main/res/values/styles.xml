@@ -99,8 +99,6 @@
     <style name="LoginItemLayout" parent="BaseItemLayoutWhite">
         <item name="android:layout_marginLeft">@dimen/distance48</item>
         <item name="android:layout_marginRight">@dimen/distance48</item>
-        <item name="android:layout_marginTop">@dimen/distance16</item>
-        <item name="android:padding">0dp</item>
     </style>
 
     <style name="LoginEditTextStyle">
@@ -126,8 +124,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">@dimen/font14</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:layout_marginRight">@dimen/distance48</item>
-        <item name="android:layout_marginLeft">@dimen/distance48</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
     </style>
@@ -135,7 +131,7 @@
     <!--分隔线的Style-->
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">2px</item>
+        <item name="android:layout_height">3px</item>
         <item name="android:background">@color/background</item>
     </style>
 

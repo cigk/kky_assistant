@@ -6,7 +6,6 @@ import com.kuaikuaiyu.assistant.modle.service.PassService;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
-import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.DigestUtil;
 
 import javax.inject.Inject;
@@ -50,7 +49,7 @@ public class ChangePwdPresenter implements BasePresenter {
         };
 
         ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_CHANGE_PWD);
-        params.addParam("at", ConfigUtil.getShopMobile());
+//        params.addParam("at", ConfigUtil.getShopMobile());
         params.addParam("oldPassword", DigestUtil.getMd5(oldPwd));
         params.addParam("newPassword", DigestUtil.getMd5(newPwd));
         service.changePwd(params.getQueryMap(), params.getFieldMap())

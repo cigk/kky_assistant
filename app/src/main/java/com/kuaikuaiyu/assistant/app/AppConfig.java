@@ -11,8 +11,6 @@ public class AppConfig {
     public static final String PROTOCAL_HTTP = "http://";
     public static final String PROTOCAL_HTTPS = "https://";
 
-    public static final String SECRET_KEY = "0f654197bba48eac7a36d32dae278a7ab4e1d29c80ad80d5617c5a555c0b8381";
-
     public static final String URL_ASSISTANT = "http://kuaikuaiyu.com/";
     public static final String URL_SCHOOL = "http://kuaikuaiyu.com/";
 

@@ -10,7 +10,7 @@
 
     <!--登录注册页面-->
     <string name="login">登录</string>
-    <string name="input_phone">输入手机号</string>
+    <string name="input_phone">输入您的手机号</string>
     <string name="input_pwd">输入密码(6至16位)</string>
     <string name="input_pwd_confirm">再次输入密码</string>
     <string name="input_pwd_old">输入原密码</string>
@@ -18,7 +18,7 @@
     <string name="input_pwd_new_confirm">再次输入新密码</string>
     <string name="input_shop_name">请输入店铺名称</string>
     <string name="sign_up">注册</string>
-    <string name="forget_pwd">忘记密码？</string>
+    <string name="forget_pwd">忘记密码</string>
     <string name="err_no_username">请输入正确的手机号</string>
     <string name="err_no_pwd">请输入密码</string>
     <string name="err_length_pwd">密码长度为6&#8211;16位</string>

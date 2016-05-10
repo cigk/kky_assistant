@@ -22,6 +22,8 @@
     <dimen name="distance24">24dp</dimen>
     <dimen name="distance32">32dp</dimen>
     <dimen name="distance48">48dp</dimen>
+    <dimen name="distance50">50dp</dimen>
+    <dimen name="distance60">60dp</dimen>
     <dimen name="distance64">64dp</dimen>
 
     <dimen name="title_height">44dp</dimen>

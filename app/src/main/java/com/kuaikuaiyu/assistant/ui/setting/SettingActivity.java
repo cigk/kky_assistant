@@ -1,5 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.setting;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -8,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.kuaikuaiyu.assistant.BuildConfig;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
@@ -16,6 +18,7 @@ import com.kuaikuaiyu.assistant.ui.home.login.LoginActivity;
 import com.kuaikuaiyu.assistant.ui.setting.pwd.ChangePwdActivity;
 import com.kuaikuaiyu.assistant.utils.CommonUtil;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
+import com.kuaikuaiyu.assistant.utils.DialogUtil;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -47,6 +50,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     RelativeLayout rlFeedback;
     @Bind(R.id.rl_about)
     RelativeLayout rlAbout;
+    @Bind(R.id.tv_version)
+    TextView tvVersion;
 
     @Override
     protected void initComponent() {
@@ -73,6 +78,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         tvTitle.setText("设置");
         tvShopName.setText(ConfigUtil.getShopName());
         tvShopMobile.setText(ConfigUtil.getShopMobile());
+        tvVersion.setText(new StringBuilder().append("V").append(BuildConfig.VERSION_NAME));
     }
 
     @Override
@@ -113,12 +119,22 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-
-    //TODO need remove
     @OnClick(R.id.btn_logout)
     public void logout() {
-        ConfigUtil.setAuthToken("");
-        goActivity(LoginActivity.class);
-        ActivityManager.finishOtherActivities(LoginActivity.class);
+        DialogUtil.getConfirmDialog(this, "确定退出登录么?", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ConfigUtil.setAuthToken("");
+                goActivity(LoginActivity.class);
+                dialog.dismiss();
+                ActivityManager.finishOtherActivities(LoginActivity.class);
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).create().show();
+
     }
 }
