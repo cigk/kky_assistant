@@ -13,5 +13,5 @@ import dagger.Component;
 @PerFragment
 @Component(modules = BindBankModule.class)
 public interface BindBankComponent {
-    BindBankFragment inject(BindBankFragment bindBankFragment);
+    BindBankFragment inject(BindBankFragment fragment);
 }

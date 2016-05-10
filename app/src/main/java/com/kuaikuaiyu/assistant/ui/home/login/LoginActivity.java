@@ -73,7 +73,9 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     @Override
     protected void onResume() {
         super.onResume();
-        etMobile.setText(ConfigUtil.getLoginPhone());
+        if (!TextUtils.isEmpty(ConfigUtil.getLoginPhone())) {
+            etMobile.setText(ConfigUtil.getLoginPhone());
+        }
     }
 
     @Override

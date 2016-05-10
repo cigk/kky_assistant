@@ -10,6 +10,7 @@ import java.util.Map;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -95,6 +96,7 @@ public interface PassService {
      *
      * @return
      */
+//    @Headers("Cache-Control: max-age=10")
     @FormUrlEncoded
     @POST(AppConfig.URL_LOGIN)
     Observable<HttpResult<LoginResp>> login(@QueryMap Map<String, String> queryMap,
