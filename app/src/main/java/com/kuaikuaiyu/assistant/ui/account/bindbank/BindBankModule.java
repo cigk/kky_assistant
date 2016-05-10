@@ -32,7 +32,7 @@ public class BindBankModule {
 
     @PerFragment
     @Provides
-    PassService getService() {
+    AccountService getService() {
         return NetUtil.create(AccountService.class);
     }
 }
