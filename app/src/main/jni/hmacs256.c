@@ -344,14 +344,14 @@ char* sign(char* msg) {
     hmac_sha256_update(&hmac, msg, msglen);
     /* Finalize the HMAC-SHA256 digest and output its value. */
     hmac_sha256_finalize(&hmac, NULL, 0);
-    char signature[64];
-    int i = 0;
-    for (; i < 32; ++i) {
+    //char signature[64];
+    //int i = 0;
+    //for (; i < 32; ++i) {
         //  Cast added by RKW to get format specifier to work as expected
         //printf("%02lx", (unsigned long)hmac.digest[i]);
-        sprintf(signature+i*2,"%02lx", hmac.digest[i]);
-    }
+        //sprintf(signature+i*2,"%02lx", hmac.digest[i]);
+    //}
     //putchar('\n');
     /* That's all folks! */
-    return signature;
+    return hmac.digest;
 }
