@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:id="@+id/ll_cash_desk"
             android:layout_width="@dimen/distance120"
             android:layout_height="@dimen/distance120"
-            android:layout_marginRight="@dimen/distance50"
+            android:layout_marginRight="@dimen/distance32"
             android:background="@drawable/selector_cash_desk"
             android:gravity="center"
             android:orientation="vertical">
