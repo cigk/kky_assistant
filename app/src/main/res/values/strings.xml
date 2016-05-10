@@ -5,6 +5,9 @@
     <string name="assistant">平台助手</string>
     <string name="school">商学院</string>
 
+    <string name="load_more">加载中&#8230;&#8230;&#8230;</string>
+    <string name="load_error">加载失败,点击重试</string>
+
     <!--登录注册页面-->
     <string name="login">登录</string>
     <string name="input_phone">输入您的手机号</string>
@@ -28,6 +31,18 @@
     <string name="change_pwd">修改密码</string>
     <string name="feedback">帮助反馈</string>
     <string name="about">关于</string>
+    <string name="income_qrcode">店铺收款码</string>
+    <string name="income_account">查看流水</string>
+    <string name="income_account_pay_account">支付账户:&#160;</string>
+    <string name="income_account_pay_type">支付方式:&#160;</string>
+    <string name="income_title">收款</string>
+    <string name="income_account_title">流水记录</string>
+    <string name="income_qrcode_pay_title">在此扫码付款</string>
+    <string name="income_qrcode_label_bottom">快店助手 钱包</string>
+    <string name="income_weixin_pay">微信支付</string>
+    <string name="income_zhifubao_pay">支付宝</string>
+    <string name="income_qrcode_title">店铺收款码</string>
+    <string name="income_qrcode_save">保存到相册</string>
 
     <!--账户相关模块-->
     <string name="account_not_bind">还没有绑定提现账号，需要先绑定提现账号才能提现</string>

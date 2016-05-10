@@ -76,17 +76,12 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.account.balance.BalanceActivity"
+            android:name=".ui.income.IncomeActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.account.withdraw.WithdrawActivity"
+            android:name=".ui.income.account.AccountActivity"
             android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".ui.account.bindbank.ChooseCityActivity"
-            android:screenOrientation="portrait"/>
-
 
         <receiver
             android:name=".sys.receiver.MyPushReceiver"
@@ -95,17 +90,6 @@
                 <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>
             </intent-filter>
         </receiver>
-
-        <!--友盟更新 begin-->
-        <service
-            android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService">
-        </service>
-        <activity
-            android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
-        </activity>
-        <!--友盟更新 end-->
     </application>
 
 </manifest>

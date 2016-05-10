@@ -13,8 +13,6 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.ui.account.bindalipay.BindAlipayFragment;
-import com.kuaikuaiyu.assistant.ui.account.bindbank.BindBankFragment;
 
 import butterknife.Bind;
 
@@ -50,10 +48,8 @@ public class CommonActivity extends BaseActivity implements View.OnClickListener
 //    public static final int DISPLAY_LUCKY_MONEY = 19;
 //    public static final int DISPLAY_SHARE_LUCKY_MONEY = 20;
 
-    @Bind(R.id.ib_back)
-    ImageButton ib_back;
-    @Bind(R.id.tv_title)
-    TextView tv_title;
+    @Bind(R.id.top_bar)
+    CommonTitleBar top_bar;
 
     private BaseFragment mFragment;
     private Bundle bundle;
@@ -74,19 +70,19 @@ public class CommonActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void setListener() {
-        ib_back.setOnClickListener(this);
+        top_bar.onBackClick(v -> onBackPressed());
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        tv_title.setText(title);
+        top_bar.setTitle(title);
         createFragment();
         if (mFragment == null) {
             throw new RuntimeException("Fragment can not be null");
         }
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fl_container, mFragment).commit();
-//        mFragment.show();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, mFragment)
+                .commit();
+        //        mFragment.show();
     }
 
     @Override
@@ -108,22 +104,11 @@ public class CommonActivity extends BaseActivity implements View.OnClickListener
                 break;
 
 
-            default:
-                break;
+        default:
+            break;
         }
-        if (bundle != null) mFragment.setArguments(bundle);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ib_back:
-                finish();
-                break;
-
-            default:
-                break;
-        }
+        if (bundle != null)
+            mFragment.setArguments(bundle);
     }
 
     /**
@@ -134,7 +119,7 @@ public class CommonActivity extends BaseActivity implements View.OnClickListener
      * @param title
      */
     public static void start(@NonNull Context context, @NonNull int displayType,
-                             @NonNull String title, Bundle bundle) {
+            @NonNull String title, Bundle bundle) {
         Intent intent = new Intent(context, CommonActivity.class);
         intent.putExtra(DISPLAY_TYPE, displayType);
         intent.putExtra(TITLE, title);
@@ -150,8 +135,7 @@ public class CommonActivity extends BaseActivity implements View.OnClickListener
      * @param title
      */
     public static void startForResult(@NonNull Activity context, @NonNull int displayType,
-                                      @NonNull String title, @NonNull int requestCode,
-                                      Bundle bundle) {
+            @NonNull String title, @NonNull int requestCode, Bundle bundle) {
         Intent intent = new Intent(context, CommonActivity.class);
         intent.putExtra(DISPLAY_TYPE, displayType);
         intent.putExtra(TITLE, title);
