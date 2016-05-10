@@ -2,7 +2,6 @@
 // Created by Gavin on 2016/5/9.
 //
 
-#include "hmacs256.h"
 /*
  * Copyright 2006 Apple Computer, Inc.  All rights reserved.
  *
@@ -72,11 +71,9 @@
 // should work on latter-day gcc installs, but c99 can be made explicit this way:
 //    gcc -std=c99 -o hmac-sha256 hmac-sha256.c
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-/* #include <string.h> */
+#include "hmacs256.h"
 #include <stdint.h>	//  Added by RKW, needed for types uint8_t, uint32_t; requires C99 compiler
+
 
 /******************************************************************************
  * SHA-256.
@@ -327,13 +324,14 @@ void hmac_sha256_get(uint8_t digest[32],
  * Input/output.
  */
 
-int main() {
+char* sign(char* msg) {
     hmac_sha256 hmac;
     sha256 sha;
     char *key ="0f654197bba48eac7a36d32dae278a7ab4e1d29c80ad80d5617c5a555c0b8381";
-    unsigned char block[1024];
-    int len, c, d;
+    printf("MSG======%s", msg);
+    int len, c, d, msglen;
     len = strlen(key);
+    msglen = strlen(msg);
     /* Initialize the HMAC-SHA256 digest with the key or its hash. */
     if (len <= 64) {
         hmac_sha256_initialize(&hmac, key, len);
@@ -343,14 +341,17 @@ int main() {
     }
     /* Read the message, updating the HMAC-SHA256 digest accordingly. */
 
-    hmac_sha256_update(&hmac, key, len);
+    hmac_sha256_update(&hmac, msg, msglen);
     /* Finalize the HMAC-SHA256 digest and output its value. */
     hmac_sha256_finalize(&hmac, NULL, 0);
-    for (i = 0; i < 32; ++i) {
-		//  Cast added by RKW to get format specifier to work as expected
-        printf("%02lx", (unsigned long)hmac.digest[i]);
+    char signature[64];
+    int i = 0;
+    for (; i < 32; ++i) {
+        //  Cast added by RKW to get format specifier to work as expected
+        //printf("%02lx", (unsigned long)hmac.digest[i]);
+        sprintf(signature+i*2,"%02lx", hmac.digest[i]);
     }
-    putchar('\n');
+    //putchar('\n');
     /* That's all folks! */
-    return 0;
+    return signature;
 }

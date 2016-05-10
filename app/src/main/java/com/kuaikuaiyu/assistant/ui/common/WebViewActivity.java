@@ -33,6 +33,8 @@ import butterknife.OnClick;
  */
 public class WebViewActivity extends BaseActivity {
 
+    private static final String INTERFACE_NAME = "interface";
+
     @Bind(R.id.tv_title)
     TextView tv_title;
     @Bind(R.id.ib_back)
@@ -66,7 +68,7 @@ public class WebViewActivity extends BaseActivity {
             mWebView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         mWebView.setWebViewClient(new MyWebClient());
         mWebView.setWebChromeClient(new MyWebChromeClient());
-        mWebView.addJavascriptInterface(new JavaScriptInterface(this), "interface");
+        mWebView.addJavascriptInterface(new JavaScriptInterface(this), INTERFACE_NAME);
         mWebView.getSettings().setUseWideViewPort(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -169,8 +171,11 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        if (mWebView != null)
+        if (mWebView != null) {
+            mWebView.removeAllViews();
+            mWebView.removeJavascriptInterface(INTERFACE_NAME);
             mWebView.destroy();
+        }
         super.onDestroy();
     }
 }
