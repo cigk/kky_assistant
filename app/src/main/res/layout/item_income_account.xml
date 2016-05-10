@@ -21,7 +21,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/distance2"
+                android:paddingTop="@dimen/distance2">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -31,17 +33,59 @@
                     android:textSize="@dimen/font14"/>
 
                 <TextView
+                    android:id="@+id/tv_pay_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/font14"
+                    android:text="13911223344"
                     android:textColor="@color/text_color"
-                    android:text="13911223344"/>
+                    android:textSize="@dimen/font14"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/distance2"
+                android:paddingTop="@dimen/distance2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/income_account_pay_type"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/font14"/>
+
+                <TextView
+                    android:id="@+id/tv_pay_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="微信支付"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/font14"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/distance2"
+                android:paddingTop="@dimen/distance2">
+
+                <TextView
+                    android:id="@+id/tv_pay_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016-05-12 12:34"
+                    android:textColor="@color/text_hint_color"
+                    android:textSize="@dimen/font12"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_income_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/distance16"

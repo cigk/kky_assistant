@@ -1,5 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.income.account;
 
+import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.rx.PerActivity;
 
 import dagger.Module;
@@ -23,5 +25,11 @@ public class AccountModule {
     @Provides
     AccountView getAccountView() {
         return mView;
+    }
+
+    @PerActivity
+    @Provides
+    IncomeService getIncomeService() {
+        return NetUtil.create(IncomeService.class);
     }
 }

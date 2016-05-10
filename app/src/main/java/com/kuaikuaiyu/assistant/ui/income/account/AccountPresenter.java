@@ -1,6 +1,10 @@
 package com.kuaikuaiyu.assistant.ui.income.account;
 
 import com.kuaikuaiyu.assistant.base.BasePresenter;
+import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
+import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.rx.IoTransformer;
+import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 
 import javax.inject.Inject;
 
@@ -12,14 +16,29 @@ import javax.inject.Inject;
  */
 public class AccountPresenter implements BasePresenter {
     private AccountView mView;
+    private IncomeService mService;
+    private RxSubscriber<IncomeAccount> subscriber;
 
     @Inject
-    public AccountPresenter(AccountView view) {
+    public AccountPresenter(IncomeService service, AccountView view) {
+        mService = service;
         mView = view;
+    }
+
+    public void getIncomeAccount() {
+        subscriber = new RxSubscriber<IncomeAccount>(mView) {
+            @Override
+            public void onNext(IncomeAccount incomeAccount) {
+                mView.setAdapter(incomeAccount);
+            }
+        };
+        mService.getIncomeAccount().compose(new IoTransformer<>()).subscribe(subscriber);
     }
 
     @Override
     public void clean() {
-
+        if (subscriber != null) {
+            subscriber.unsubscribe();
+        }
     }
 }

@@ -5,6 +5,9 @@
     <string name="assistant">平台助手</string>
     <string name="school">商学院</string>
 
+    <string name="load_more">加载中&#8230;&#8230;&#8230;</string>
+    <string name="load_error">加载失败,点击重试</string>
+
     <!--登录注册页面-->
     <string name="login">登录</string>
     <string name="input_phone">输入手机号</string>
@@ -30,11 +33,9 @@
     <string name="about">关于</string>
     <string name="income_qrcode">店铺收款码</string>
     <string name="income_account">查看流水</string>
-    <string name="income_account_pay_account">支付账户: :</string>
+    <string name="income_account_pay_account">支付账户:&#160;</string>
+    <string name="income_account_pay_type">支付方式:&#160;</string>
     <string name="income_title">收款</string>
     <string name="income_account_title">流水记录</string>
-
-    <string name="load_more">加载中&#8230;&#8230;&#8230;</string>
-    <string name="load_error">加载失败,点击重试</string>
 
 </resources>

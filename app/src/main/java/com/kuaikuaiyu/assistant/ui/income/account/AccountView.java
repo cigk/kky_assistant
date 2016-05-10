@@ -1,6 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.income.account;
 
 import com.kuaikuaiyu.assistant.base.BaseView;
+import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
 
 /**
  * Created by binlly
@@ -9,5 +10,5 @@ import com.kuaikuaiyu.assistant.base.BaseView;
  * desc:
  */
 public interface AccountView extends BaseView {
-
+    void refresh(IncomeAccount incomeAccount);
 }

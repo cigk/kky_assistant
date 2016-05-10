@@ -9,4 +9,5 @@ import com.kuaikuaiyu.assistant.base.BaseView;
  * desc:
  */
 public interface IncomeView extends BaseView {
+
 }

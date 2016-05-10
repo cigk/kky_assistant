@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
+import com.kuaikuaiyu.assistant.ui.income.account.AccountActivity;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 
 import javax.inject.Inject;
@@ -41,9 +42,7 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
 
     @Override
     protected void setListener() {
-        top_bar.onBackClick(v -> {
-            onBackPressed();
-        });
+        top_bar.onBackClick(v -> onBackPressed());
 
         top_bar.onRightClick(v -> {
             // TODO: 2016/5/9           
@@ -53,9 +52,7 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
             // TODO: 2016/5/9  
         });
 
-        ll_income_account.setOnClickListener(v -> {
-            // TODO: 2016/5/9
-        });
+        ll_income_account.setOnClickListener(v -> goActivity(AccountActivity.class));
     }
 
     @Override
