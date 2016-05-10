@@ -23,6 +23,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- umeng key -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="573141c867e58eaa7f0018d7"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Channel ID"/>
+        <!-- umeng key end -->
+
         <activity
             android:name=".ui.home.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

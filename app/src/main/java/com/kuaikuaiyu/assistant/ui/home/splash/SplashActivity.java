@@ -56,7 +56,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
             } else {
                 toHome();
             }
-        }, 2000);
+        }, 1000);
     }
 
     /**

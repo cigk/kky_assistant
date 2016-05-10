@@ -25,10 +25,11 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     protected BaseActivity mActivity;
     private MyProgressDialog loadingDia;
-    private LoadingPage mLoadingPage;
+    protected LoadingPage mLoadingPage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        initComponent();
         mActivity = (BaseActivity) getActivity();
         preLoad();
         if (null == mLoadingPage) {
@@ -56,6 +57,12 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         }
         return mLoadingPage;
     }
+
+    /**
+     * 1. for dagger2 injection
+     * 2. for other init action before setContentView
+     */
+    protected abstract void initComponent();
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -95,9 +102,16 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         if (loadingDia != null)
             loadingDia.dismiss();
         loadingDia = null;
-        super.onDestroyView();
+        BasePresenter presenter = getPresenter();
+        if (null != presenter) presenter.clean();
         ButterKnife.unbind(this);
+        super.onDestroyView();
     }
+
+    /**
+     * 获取Presenter
+     */
+    protected abstract BasePresenter getPresenter();
 
     /**
      * 显示加载进度对话框
@@ -191,7 +205,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 内容为空的布局id
      * 自定义空布局是可以在fragment中重写次方法
-     * <p/>
+     * <p>
      * 默认点击图片可以重新加载
      *
      * @return
@@ -201,7 +215,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         view.findViewById(R.id.iv_empty).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BaseFragment.this.preLoad();
+                mLoadingPage.setLoading();
+                BaseFragment.this.refresh();
             }
         });
         return view;
@@ -218,6 +233,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         view.findViewById(R.id.iv_reload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLoadingPage.setLoading();
                 BaseFragment.this.refresh();
             }
         });

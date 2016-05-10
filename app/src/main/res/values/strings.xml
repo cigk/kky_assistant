@@ -44,4 +44,25 @@
     <string name="income_qrcode_title">店铺收款码</string>
     <string name="income_qrcode_save">保存到相册</string>
 
+    <!--账户相关模块-->
+    <string name="account_not_bind">还没有绑定提现账号，需要先绑定提现账号才能提现</string>
+    <string name="withdraw_limit_info">每天最多提现一次，累计提现超过5000元，最低提现提升至500元</string>
+    <string name="err_no_alipay">您未绑定支付宝账号</string>
+    <string name="err_no_bankcard">您未绑定银行卡</string>
+    <string name="err_withdraw_num">请输入正确的提现金额</string>
+    <string name="err_over_balance">提现金额不能大于账户余额</string>
+    <string name="waitting_bankaccount_verify">银行卡信息正在审核中，请耐心等待</string>
+    <string name="waitting_alipay_verify">支付宝信息正在审核中，请耐心等待</string>
+    <string name="success_alipay_verify">支付宝信息审核成功</string>
+    <string name="err_alipay_verify">支付宝信息审核失败，请重新填写提交</string>
+    <string name="owner_name_be_chinese">户名只能是中文</string>
+    <string name="enter_valid_account">账号格式不正确，请输入手机号或邮箱</string>
+    <string name="err_bankaccount_verify">银行卡信息审核失败，请重新填写提交</string>
+
+    <string name="choose_bank">请选择开户行</string>
+    <string name="choose_province_and_city">请选择开户行省市</string>
+    <string name="enter_bank_number">请输入银行账号</string>
+    <string name="enter_bank_owner_name">请输入户名</string>
+    <string name="success_bankaccount_verify">银行卡信息审核成功</string>
+
 </resources>

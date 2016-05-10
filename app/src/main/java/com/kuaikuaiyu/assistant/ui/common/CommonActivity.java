@@ -5,13 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.ui.income.account.AccountFragment;
-import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 
 import butterknife.Bind;
 
@@ -21,13 +22,31 @@ import butterknife.Bind;
  * Date:    2015/12/2
  * Desc:    通用Activity， 用来承载不同的Fragment
  */
-public class CommonActivity extends BaseActivity {
+public class CommonActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String DISPLAY_TYPE = "DISPLAY_TYPE";
     public static final String TITLE = "TITLE";
     public static final String BUNDLE = "BUNDlE";
 
-    public static final int DISPLAY_INCOME_ACCOUNT = 1;
+    public static final int DISPLAY_BIND_BANK = 1;
+    public static final int DISPLAY_BIND_ALIPAY = 2;
+//    public static final int DISPLAY_BALANCE = 1;
+//    public static final int DISPLAY_ORDER_DETAIL = 2;
+//    public static final int DISPLAY_DELIVERY_METHOD = 3;
+//    public static final int DISPLAY_RESERVE_SETTING = 6;
+//    public static final int DISPLAY_PROCESSED_ORDER = 7;
+//    public static final int DISPLAY_GOODS_DETAIL = 8;
+//    public static final int DISPLAY_ADD_GOODS = 9;
+//    public static final int DISPLAY_GOODS_INFO = 10;
+//    public static final int DISPLAY_CASH_ON_DELIVERY_SETTING = 11;
+//    public static final int DISPLAY_SHOP_INFO = 12;
+//    public static final int DISPLAY_PRINTER_INFO = 13;
+//    public static final int DISPLAY_MORE = 15;
+//    public static final int DISPLAY_BILL = 16;
+//    public static final int DISPLAY_WITHDRAW = 17;
+//    public static final int DISPLAY_ABOUT = 18;
+//    public static final int DISPLAY_LUCKY_MONEY = 19;
+//    public static final int DISPLAY_SHARE_LUCKY_MONEY = 20;
 
     @Bind(R.id.top_bar)
     CommonTitleBar top_bar;
@@ -76,9 +95,13 @@ public class CommonActivity extends BaseActivity {
      */
     private void createFragment() {
         switch (displayType) {
-        case DISPLAY_INCOME_ACCOUNT:
-            mFragment = new AccountFragment();
-            break;
+            case DISPLAY_BIND_BANK:
+                mFragment = new BindBankFragment();
+                break;
+
+            case DISPLAY_BIND_ALIPAY:
+                mFragment = new BindAlipayFragment();
+                break;
 
 
         default:

@@ -25,6 +25,8 @@
     <dimen name="distance50">50dp</dimen>
     <dimen name="distance60">60dp</dimen>
     <dimen name="distance64">64dp</dimen>
+    <dimen name="distance100">100dp</dimen>
+    <dimen name="distance200">200dp</dimen>
 
     <dimen name="title_height">44dp</dimen>
     <dimen name="button_height">44dp</dimen>
