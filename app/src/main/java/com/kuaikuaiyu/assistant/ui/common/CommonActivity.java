@@ -28,7 +28,7 @@ public class CommonActivity extends BaseActivity implements View.OnClickListener
     public static final String TITLE = "TITLE";
     public static final String BUNDLE = "BUNDlE";
 
-    public static final int DISPLAY_MODIFY_GOODS = 1;
+    public static final int DISPLAY_BALANCE = 1;
     public static final int DISPLAY_ORDER_DETAIL = 2;
     public static final int DISPLAY_DELIVERY_METHOD = 3;
     public static final int DISPLAY_BIND_BANK = 4;
@@ -97,7 +97,7 @@ public class CommonActivity extends BaseActivity implements View.OnClickListener
      */
     private void createFragment() {
         switch (displayType) {
-            case DISPLAY_MODIFY_GOODS:
+            case DISPLAY_BALANCE:
 //                mFragment = new ModifyGoodsFragment();
                 break;
 
