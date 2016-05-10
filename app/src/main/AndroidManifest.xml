@@ -79,6 +79,15 @@
             android:name=".ui.account.balance.BalanceActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".ui.account.withdraw.WithdrawActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.account.bindaccount.ChooseCityActivity"
+            android:screenOrientation="portrait"/>
+
+
         <receiver
             android:name=".sys.receiver.MyPushReceiver"
             android:exported="false">

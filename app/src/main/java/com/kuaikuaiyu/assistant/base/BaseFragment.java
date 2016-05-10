@@ -25,7 +25,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     protected BaseActivity mActivity;
     private MyProgressDialog loadingDia;
-    private LoadingPage mLoadingPage;
+    protected LoadingPage mLoadingPage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -215,6 +215,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         view.findViewById(R.id.iv_empty).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLoadingPage.setLoading();
                 BaseFragment.this.refresh();
             }
         });
@@ -232,6 +233,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         view.findViewById(R.id.iv_reload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLoadingPage.setLoading();
                 BaseFragment.this.refresh();
             }
         });
