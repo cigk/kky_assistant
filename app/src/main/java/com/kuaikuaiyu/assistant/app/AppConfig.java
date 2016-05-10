@@ -24,6 +24,4 @@ public class AppConfig {
     public static final String URL_RESET_PWD = "/v1/reset_password";
     public static final String URL_UPDATE_PUSH_ID = "/v1/lazy_update";
     /*---------- Pass Url End---------- */
-
-    public static final int LIST_LIMIT = 10;
 }

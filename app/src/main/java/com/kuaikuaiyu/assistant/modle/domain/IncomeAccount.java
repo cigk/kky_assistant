@@ -1,5 +1,7 @@
 package com.kuaikuaiyu.assistant.modle.domain;
 
+import java.util.List;
+
 /**
  * Created by binlly
  * <p>
@@ -7,4 +9,5 @@ package com.kuaikuaiyu.assistant.modle.domain;
  * desc:
  */
 public class IncomeAccount {
+    public List<Item> mItems;
 }
