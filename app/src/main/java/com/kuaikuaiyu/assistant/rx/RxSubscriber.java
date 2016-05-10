@@ -42,7 +42,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
         e.printStackTrace();
         //有网的情况下需要提示用户出错了，没网的时候提示网络不给力
         if (NetUtil.isNetAvailable(UIUtil.getContext())) {
-            UIUtil.showToast("出错了，请稍后重试…");
+            UIUtil.showToast(e.getMessage());
         } else {
             UIUtil.showToast("网络不给力，请联网后重试");
         }
