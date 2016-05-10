@@ -55,12 +55,16 @@
     <LinearLayout style="@style/BaseItemLayoutWhite">
 
         <TextView
-            style="@style/BaseItemTitle"
+            style="@style/BaseTextViewStyle"
             android:layout_width="90dp"
             android:text="提现金额:"/>
 
         <com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText
             android:id="@+id/et_money"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
             style="@style/BaseEditTextStyle"/>
 
     </LinearLayout>
@@ -85,6 +89,7 @@
         android:text="提现"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_withdraw_management"
         style="@style/BaseItemTitle"
         android:layout_width="wrap_content"

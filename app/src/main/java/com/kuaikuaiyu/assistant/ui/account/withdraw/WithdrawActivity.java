@@ -16,9 +16,11 @@ import com.kuaikuaiyu.assistant.modle.domain.Account;
 import com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 
-public class WithdrawActivity extends BaseActivity implements View.OnClickListener {
+public class WithdrawActivity extends BaseActivity implements WithdrawView, View.OnClickListener {
 
     @Bind(R.id.tv_alipay)
     TextView tv_alipay;
@@ -45,10 +47,19 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
     @Bind(R.id.tv_right)
     TextView tv_right;
 
+    @Inject
+    WithdrawPresenter mPresenter;
+
     private boolean withdrawFlag = false;
     private Account mAccount;
 
-    private String withodMethod = "alipay";
+    private String method = "alipay";
+
+    @Override
+    protected void initComponent() {
+        DaggerWithdrawComponent.builder().withdrawModule(new WithdrawModule(this))
+                .build().inject(this);
+    }
 
     @Override
     protected int getRootView() {
@@ -68,27 +79,12 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-//        new NetTask(this) {
-//            @Override
-//            protected JSONObject onLoad() {
-//                return AccountEngine.getAccountInfo();
-//            }
-//
-//            @Override
-//            protected void onSuccess(JSONObject jsonObj) throws Exception {
-//                mAccount = GsonUitl.parse(jsonObj, Account.class);
-//                ConfigUtil.saveAccountInfo(mAccount);
-//                initView();
-//            }
-//        }.execute();
-
-//        tv_right.setVisibility(View.VISIBLE);
-//        tv_right.setText("提现记录");
+        mPresenter.updateAccountInfo();
     }
 
     @Override
     protected BasePresenter getPresenter() {
-        return null;
+        return mPresenter;
     }
 
     /**
@@ -112,13 +108,13 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.ll_alipay:
-                withodMethod = "alipay";
+                method = "alipay";
                 rb_alipay.setChecked(true);
                 rb_bank.setChecked(false);
                 break;
 
             case R.id.ll_bank:
-                withodMethod = "bank";
+                method = "bank";
                 rb_bank.setChecked(true);
                 rb_alipay.setChecked(false);
                 break;
@@ -129,24 +125,19 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
                     return;
                 }
 
-                if (withodMethod.equals("alipay") && TextUtils.isEmpty(mAccount.alipay)) {
+                if (method.equals("alipay") && TextUtils.isEmpty(mAccount.alipay)) {
                     UIUtil.showToast(R.string.err_no_alipay);
                     return;
                 }
 
-                if (withodMethod.equals("bank") && TextUtils.isEmpty(mAccount.bank.card_no)) {
+                if (method.equals("bank") && TextUtils.isEmpty(mAccount.bank.card_no)) {
                     UIUtil.showToast(R.string.err_no_bankcard);
                     return;
                 }
-                submitWithdraw(withodMethod, et_money.getMoney());
+                submitWithdraw(method, et_money.getMoney());
                 break;
 
             case R.id.tv_withdraw_management:
-//                goActivity(AccountInfoActivity.class);
-                break;
-
-            case R.id.tv_right:
-//                CommonActivity.start(this, CommonActivity.DISPLAY_WITHDRAW, "提现记录", null);
                 break;
 
             default:
@@ -174,16 +165,18 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
                     + String.valueOf(mAccount.min_withdraw_money / 100));
             return;
         }
-    }
 
-    @Override
-    protected void initComponent() {
-
+        mPresenter.withdraw(method, money);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 //        if (withdrawFlag) EventBus.getDefault().post(new SetupAccountInfoEvent());
+    }
+
+    @Override
+    public void withdrawSucceed() {
+
     }
 }
