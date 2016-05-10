@@ -29,7 +29,7 @@ public class AccountPresenter implements BasePresenter {
         subscriber = new RxSubscriber<IncomeAccount>(mView) {
             @Override
             public void onNext(IncomeAccount incomeAccount) {
-                mView.refresh(incomeAccount);
+                mView.fillData(incomeAccount);
             }
         };
         mService.getIncomeAccount().compose(new IoTransformer<>()).subscribe(subscriber);

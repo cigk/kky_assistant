@@ -17,19 +17,13 @@ import dagger.Provides;
 public class AccountModule {
     private AccountView mView;
 
-    public AccountModule(AccountView incomeView) {
-        this.mView = incomeView;
+    public AccountModule(AccountView accountView) {
+        this.mView = accountView;
     }
 
     @PerActivity
     @Provides
     AccountView getAccountView() {
         return mView;
-    }
-
-    @PerActivity
-    @Provides
-    IncomeService getIncomeService() {
-        return NetUtil.create(IncomeService.class);
     }
 }

@@ -26,10 +26,4 @@ public class IncomeModule {
     IncomeView getIncomeView() {
         return mView;
     }
-
-    @PerActivity
-    @Provides
-    IncomeService getIncomeService() {
-        return NetUtil.create(IncomeService.class);
-    }
 }

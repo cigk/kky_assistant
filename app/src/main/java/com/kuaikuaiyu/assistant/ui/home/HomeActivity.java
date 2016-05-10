@@ -17,6 +17,7 @@ import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.ui.account.balance.BalanceActivity;
 import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
+import com.kuaikuaiyu.assistant.ui.income.IncomeActivity;
 import com.kuaikuaiyu.assistant.ui.setting.SettingActivity;
 import com.kuaikuaiyu.assistant.utils.CommonUtil;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
@@ -87,7 +88,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 break;
 
             case R.id.ll_balance:
-                goActivity(BalanceActivity.class);
+                goActivity(IncomeActivity.class);
                 break;
 
             case R.id.ll_assistant:

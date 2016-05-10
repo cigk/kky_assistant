@@ -10,5 +10,5 @@ import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
  * desc:
  */
 public interface AccountView extends BaseView {
-    void refresh(IncomeAccount incomeAccount);
+    void fillData(IncomeAccount incomeAccount);
 }

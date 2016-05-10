@@ -9,5 +9,5 @@ import java.util.List;
  * desc:
  */
 public class IncomeAccount {
-    public List<Item> mItems;
+
 }

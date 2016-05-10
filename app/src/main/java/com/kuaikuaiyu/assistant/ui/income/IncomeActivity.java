@@ -7,6 +7,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.common.CommonActivity;
+import com.kuaikuaiyu.assistant.ui.income.qrcode.QrcodeActivity;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 
 import javax.inject.Inject;
@@ -32,7 +33,8 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
 
     @Override
     protected void initComponent() {
-        DaggerIncomeComponent.builder().incomeModule(new IncomeModule(this)).build().inject(this);
+        DaggerIncomeComponent.builder().commonModule(new CommonModule()).incomeModule(new
+                IncomeModule(this)).build().inject(this);
     }
 
     @Override
@@ -48,9 +50,7 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
             // TODO: 2016/5/9           
         });
 
-        ll_income_qrcode.setOnClickListener(v -> {
-            // TODO: 2016/5/9  
-        });
+        ll_income_qrcode.setOnClickListener(v -> goActivity(QrcodeActivity.class));
 
         ll_income_account.setOnClickListener(v -> CommonActivity.start(this, CommonActivity
                 .DISPLAY_INCOME_ACCOUNT, getString(R.string.income_account_title), null));

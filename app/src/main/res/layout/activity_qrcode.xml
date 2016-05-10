@@ -24,6 +24,7 @@
         android:textSize="@dimen/font14"/>
 
     <LinearLayout
+        android:id="@+id/ll_qrcode_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/top_bar"

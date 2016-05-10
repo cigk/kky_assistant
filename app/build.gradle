@@ -136,8 +136,8 @@ dependencies {
     compile files('libs/umeng-update-v2.6.0.1.jar')
 
     //crash woodpecker
-    debugCompile "me.drakeet.library:crashwoodpecker:$ext.crashwoodpecker_version"
-    releaseCompile "me.drakeet.library:crashwoodpecker-do-nothing:$ext.crashwoodpecker_version"
+//    debugCompile "me.drakeet.library:crashwoodpecker:$ext.crashwoodpecker_version"
+//    releaseCompile "me.drakeet.library:crashwoodpecker-do-nothing:$ext.crashwoodpecker_version"
 
     // test dependencies
     testCompile 'junit:junit:4.12'

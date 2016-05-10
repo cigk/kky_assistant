@@ -26,7 +26,10 @@ public class AccountAdapter extends CommonAdapter<IncomeAccount> {
 
     @Override
     public void convert(ViewHolder holder, IncomeAccount incomeAccount) {
-        holder.setText(R.id.tv_pay_account, incomeAccount);
+        holder.setText(R.id.tv_pay_account, "11234");
+        holder.setText(R.id.tv_pay_type, "11234");
+        holder.setText(R.id.tv_pay_date, "12:34");
+        holder.setText(R.id.tv_income_money, "123.99");
 
         //加载到底部继续加载数据
         if (getPosition(holder) == getItemCount() - 1) {

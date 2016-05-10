@@ -8,7 +8,6 @@ import com.kuaikuaiyu.assistant.BuildConfig;
 import com.kuaikuaiyu.assistant.utils.ImageUtil;
 import com.squareup.leakcanary.LeakCanary;
 
-import me.drakeet.library.CrashWoodpecker;
 import timber.log.Timber;
 
 /**
@@ -59,7 +58,7 @@ public class AssistantApp extends Application {
         LeakCanary.install(this);
 
         //初始化CrashWoodpecker
-        CrashWoodpecker.init(this);
+        //        CrashWoodpecker.init(this);
     }
 
 

@@ -1,7 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.income;
 
 import com.kuaikuaiyu.assistant.rx.PerActivity;
-import com.kuaikuaiyu.assistant.ui.income.account.AccountActivity;
+import com.kuaikuaiyu.assistant.ui.income.account.AccountFragment;
 import com.kuaikuaiyu.assistant.ui.income.account.AccountModule;
 
 import dagger.Component;
@@ -13,9 +13,7 @@ import dagger.Component;
  * Desc:
  */
 @PerActivity
-@Component(modules = {IncomeModule.class, AccountModule.class})
+@Component(modules = {CommonModule.class, IncomeModule.class})
 public interface IncomeComponent {
     IncomeActivity inject(IncomeActivity incomeActivity);
-
-    AccountActivity inject(AccountActivity accountActivity);
 }
