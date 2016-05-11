@@ -49,7 +49,7 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
     protected void setListener() {
         top_bar.onBackClick(v -> onBackPressed());
         tv_save_qrcode.setOnClickListener(v -> {
-            mPresenter.saveImage(QrcodeActivity.this, mPresenter.createViewBitmap(ll_qrcode_root));
+            mPresenter.saveView(QrcodeActivity.this, ll_qrcode_root);
         });
     }
 

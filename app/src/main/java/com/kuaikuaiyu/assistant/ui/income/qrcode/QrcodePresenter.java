@@ -6,11 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.View;
 
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.rx.SchedulersCompat;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import java.io.File;
@@ -19,6 +19,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.inject.Inject;
+
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by binlly
@@ -52,21 +55,20 @@ public class QrcodePresenter implements BasePresenter {
     /**
      * 保存并且插入图片到系统相册中
      *
-     * @param context
-     * @param bmp
+     * @param bitmap
      * @return
      */
-    public String saveImage(Context context, Bitmap bmp) {
+    public String storeImage(Bitmap bitmap) {
         // 保存图片
         File appDir = new File(Environment.getExternalStorageDirectory(), "assistant_store");
         if (!appDir.exists()) {
             appDir.mkdir();
         }
-        String fileName = "qrcode_" + System.currentTimeMillis() + ".jpg";
+        String fileName = "assistant_qrcode" + ".jpg";
         File file = new File(appDir, fileName);
         try {
             FileOutputStream fos = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
         } catch (FileNotFoundException e) {
@@ -77,33 +79,29 @@ public class QrcodePresenter implements BasePresenter {
             return null;
         }
 
-//        // 把文件插入到系统图库
-        //        fixMediaDir();
-        //        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bmp,
-        //                null, null);
-
-        // 通知图库更新
-        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse
-                ("file://" + file.getAbsolutePath())));
-
-        UIUtil.showToast("保存成功: " + file.getAbsolutePath());
         return file.getAbsolutePath();
     }
 
-    private void fixMediaDir() {
-        File sdcard = Environment.getExternalStorageDirectory();
-        if (sdcard == null) {
-            return;
-        }
-        File dcim = new File(sdcard, "DCIM");
-        if (dcim == null) {
-            return;
-        }
-        File camera = new File(dcim, "Camera");
-        if (camera.exists()) {
-            return;
-        }
-        camera.mkdir();
+    synchronized public void saveView(Context context, View view) {
+        Observable.just(storeImage(createViewBitmap(view))).compose(SchedulersCompat
+                .applyIoSchedulers()).subscribe(new Subscriber<String>() {
+            @Override
+            public void onNext(String s) {
+                // 通知图库更新
+                context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse
+                        ("file://" + s)));
+                UIUtil.showLongToast("保存成功: " + s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                UIUtil.showToast("保存失败 请重试");
+            }
+
+            @Override
+            public void onCompleted() {
+            }
+        });
     }
 
     @Override
