@@ -21,6 +21,7 @@
     <dimen name="distance16">16dp</dimen>
     <dimen name="distance24">24dp</dimen>
     <dimen name="distance32">32dp</dimen>
+    <dimen name="distance36">36dp</dimen>
     <dimen name="distance48">48dp</dimen>
     <dimen name="distance50">50dp</dimen>
     <dimen name="distance60">60dp</dimen>

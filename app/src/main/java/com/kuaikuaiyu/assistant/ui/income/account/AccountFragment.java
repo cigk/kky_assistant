@@ -1,17 +1,22 @@
 package com.kuaikuaiyu.assistant.ui.income.account;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
+import com.kuaikuaiyu.assistant.rx.SchedulersCompat;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
+import com.kuaikuaiyu.assistant.utils.UIUtil;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by binlly
@@ -22,8 +27,8 @@ import butterknife.Bind;
 public class AccountFragment extends BaseFragment implements AccountView {
     @Bind(R.id.sfl)
     SwipeRefreshLayout sfl;
-    @Bind(R.id.rv_account)
-    RecyclerView rv_account;
+    //    @Bind(R.id.rv_account)
+    //    RecyclerView rv_account;
 
     @Inject
     AccountPresenter mPresenter;
@@ -49,13 +54,29 @@ public class AccountFragment extends BaseFragment implements AccountView {
     @Override
     protected void setListener() {
         sfl.setOnRefreshListener(() -> {
-            // TODO: 2016/5/10
+            UIUtil.showToast("刷新ing...");
+            Observable.just(false).delay(3, TimeUnit.SECONDS).compose(SchedulersCompat
+                    .applyIoSchedulers()).subscribe(new Subscriber<Boolean>() {
+                @Override
+                public void onCompleted() {
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                }
+
+                @Override
+                public void onNext(Boolean aBoolean) {
+                    UIUtil.showToast("ok");
+                    sfl.setRefreshing(aBoolean);
+                }
+            });
         });
     }
 
     @Override
     protected void initData() throws Exception {
-
+        mLoadingPage.setSucceed();
     }
 
     @Override
