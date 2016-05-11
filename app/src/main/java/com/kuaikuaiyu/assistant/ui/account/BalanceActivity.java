@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.account.balance;
+package com.kuaikuaiyu.assistant.ui.account;
 
 import android.os.Bundle;
 import android.view.View;

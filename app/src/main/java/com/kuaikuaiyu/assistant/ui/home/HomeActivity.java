@@ -15,7 +15,7 @@ import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
-import com.kuaikuaiyu.assistant.ui.account.balance.BalanceActivity;
+import com.kuaikuaiyu.assistant.ui.account.BalanceActivity;
 import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
 import com.kuaikuaiyu.assistant.ui.income.IncomeActivity;
 import com.kuaikuaiyu.assistant.ui.setting.SettingActivity;

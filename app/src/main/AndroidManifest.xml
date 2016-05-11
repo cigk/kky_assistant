@@ -80,7 +80,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.account.balance.BalanceActivity"
+            android:name=".ui.account.BalanceActivity"
             android:screenOrientation="portrait"/>
 
         <activity

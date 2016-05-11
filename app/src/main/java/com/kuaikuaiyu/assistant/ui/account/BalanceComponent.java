@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.account.balance;
+package com.kuaikuaiyu.assistant.ui.account;
 
 import com.kuaikuaiyu.assistant.rx.PerFragment;
 
