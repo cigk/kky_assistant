@@ -1,8 +1,7 @@
-package com.kuaikuaiyu.assistant.ui.account.balance;
+package com.kuaikuaiyu.assistant.ui.account;
 
 import com.kuaikuaiyu.assistant.modle.service.AccountService;
 import com.kuaikuaiyu.assistant.net.NetUtil;
-import com.kuaikuaiyu.assistant.rx.PerActivity;
 import com.kuaikuaiyu.assistant.rx.PerFragment;
 
 import dagger.Module;

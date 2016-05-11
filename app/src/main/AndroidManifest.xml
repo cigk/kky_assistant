@@ -80,11 +80,19 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.account.balance.BalanceActivity"
+            android:name=".ui.account.BalanceActivity"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.income.qrcode.QrcodeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.account.bindbank.ChooseCityActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.account.withdraw.WithdrawActivity"
             android:screenOrientation="portrait"/>
 
         <receiver
@@ -94,6 +102,17 @@
                 <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>
             </intent-filter>
         </receiver>
+
+        <!--友盟更新 begin-->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService">
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+        <!--友盟更新 end-->
     </application>
 
 </manifest>

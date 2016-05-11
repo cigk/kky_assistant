@@ -136,7 +136,7 @@ public class NetUtil {
      * @param <T>
      * @return
      */
-    public static <T> T create(Class<?> clazz) {
+    public static <T> T create(Class<T> clazz) {
         return (T) serverRetrofit.create(clazz);
     }
 
@@ -147,7 +147,7 @@ public class NetUtil {
      * @param <T>
      * @return
      */
-    public static <T> T createForPass(Class<?> clazz) {
+    public static <T> T createForPass(Class<T> clazz) {
         return (T) passRetrofit.create(clazz);
     }
 

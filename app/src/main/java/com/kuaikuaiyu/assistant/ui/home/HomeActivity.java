@@ -15,7 +15,7 @@ import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
-import com.kuaikuaiyu.assistant.ui.account.balance.BalanceActivity;
+import com.kuaikuaiyu.assistant.ui.account.BalanceActivity;
 import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
 import com.kuaikuaiyu.assistant.ui.income.IncomeActivity;
 import com.kuaikuaiyu.assistant.ui.setting.SettingActivity;
@@ -66,12 +66,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        UIUtil.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                UmengUpdateAgent.update(HomeActivity.this);
-            }
-        }, 500);
+        UIUtil.postDelayed(() -> UmengUpdateAgent.update(HomeActivity.this), 500);
     }
 
     @Override
