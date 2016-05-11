@@ -136,6 +136,9 @@ dependencies {
     //crash woodpecker
     //    debugCompile "me.drakeet.library:crashwoodpecker:$ext.crashwoodpecker_version"
     //    releaseCompile "me.drakeet.library:crashwoodpecker-do-nothing:$ext.crashwoodpecker_version"
+
+//    compile 'com.jakewharton.scalpel:scalpel:1.1.2'
+
     // test dependencies
     testCompile 'junit:junit:4.12'
     compile files('libs/zxing.jar')

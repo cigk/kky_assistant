@@ -38,7 +38,7 @@ public class AccountPresenter implements BasePresenter {
     @Override
     public void clean() {
         if (subscriber != null) {
-            subscriber.unsubscribe();
+            subscriber.cancel();
         }
     }
 }
