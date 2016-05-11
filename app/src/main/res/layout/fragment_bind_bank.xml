@@ -19,6 +19,7 @@
             android:text="开户银行:"/>
 
         <TextView
+            android:layout_width="0dp"
             android:id="@+id/tv_bank_name"
             style="@style/BaseTextViewStyle"
             android:layout_height="match_parent"
@@ -50,6 +51,7 @@
             android:text="北京市"/>
 
         <TextView
+            android:layout_width="0dp"
             android:id="@+id/tv_city"
             style="@style/BaseTextViewStyle"
             android:layout_height="match_parent"
