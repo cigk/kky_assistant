@@ -115,4 +115,11 @@
         android:layout_marginBottom="@dimen/distance16"
         android:padding="@dimen/distance16"
         android:src="@mipmap/ic_setting"/>
+
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Test Redirect"/>
 </RelativeLayout>

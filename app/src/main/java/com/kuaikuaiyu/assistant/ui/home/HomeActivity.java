@@ -24,7 +24,14 @@ import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 import com.umeng.update.UmengUpdateAgent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.Bind;
+import butterknife.OnClick;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Author:  Gavin
@@ -79,28 +86,28 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         if (CommonUtil.isFastDoubleClick())
             return;
         switch (v.getId()) {
-        case R.id.ll_cash_desk:
-            goActivity(IncomeActivity.class);
-            break;
+            case R.id.ll_cash_desk:
+                goActivity(IncomeActivity.class);
+                break;
 
-        case R.id.ll_balance:
-            goActivity(BalanceActivity.class);
-            break;
+            case R.id.ll_balance:
+                goActivity(BalanceActivity.class);
+                break;
 
-        case R.id.ll_assistant:
-            WebViewActivity.start(this, AppConfig.URL_ASSISTANT, "平台助手");
-            break;
+            case R.id.ll_assistant:
+                WebViewActivity.start(this, AppConfig.URL_ASSISTANT, "平台助手");
+                break;
 
-        case R.id.ll_school:
-            WebViewActivity.start(this, AppConfig.URL_SCHOOL, "商学院");
-            break;
+            case R.id.ll_school:
+                WebViewActivity.start(this, AppConfig.URL_SCHOOL, "商学院");
+                break;
 
-        case R.id.iv_setting:
-            goActivity(SettingActivity.class);
-            break;
+            case R.id.iv_setting:
+                goActivity(SettingActivity.class);
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     }
 
@@ -120,5 +127,21 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
             }
         });
+    }
+
+    @OnClick(R.id.btn_test)
+    public void test() {
+        PassService service = NetUtil.createForTest(PassService.class);
+        Map<String, String> query = new HashMap<>();
+        query.put("state", "closed");
+        service.testRedirect(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+
+                    }
+                });
     }
 }

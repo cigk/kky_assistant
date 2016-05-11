@@ -10,7 +10,6 @@ import java.util.Map;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -122,6 +121,14 @@ public interface PassService {
     @POST(AppConfig.URL_CHANGE_PWD)
     Observable<HttpResult> changePwd(@QueryMap Map<String, String> queryMap,
                                      @FieldMap Map<String, String> fieldMap);
+
+    /**
+     * 测试重定向
+     *
+     * @return
+     */
+    @GET("data")
+    Observable<Object> testRedirect(@QueryMap Map<String, String> queryMap);
 }
 
 
