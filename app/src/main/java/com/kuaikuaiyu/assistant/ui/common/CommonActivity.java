@@ -12,6 +12,7 @@ import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.account.bindalipay.BindAlipayFragment;
 import com.kuaikuaiyu.assistant.ui.account.bindbank.BindBankFragment;
+import com.kuaikuaiyu.assistant.ui.account.records.WithdrawRecordFragment;
 import com.kuaikuaiyu.assistant.ui.income.account.AccountFragment;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 
@@ -32,6 +33,7 @@ public class CommonActivity extends BaseActivity {
     public static final int DISPLAY_BIND_BANK = 1;
     public static final int DISPLAY_BIND_ALIPAY = 2;
     public static final int DISPLAY_INCOME_ACCOUNT = 3;
+    public static final int DISPLAY_WITHDRAW_RECORDS = 5;
 
 
     @Bind(R.id.top_bar)
@@ -81,20 +83,24 @@ public class CommonActivity extends BaseActivity {
      */
     private void createFragment() {
         switch (displayType) {
-        case DISPLAY_BIND_BANK:
-            mFragment = new BindBankFragment();
-            break;
+            case DISPLAY_BIND_BANK:
+                mFragment = new BindBankFragment();
+                break;
 
-        case DISPLAY_BIND_ALIPAY:
-            mFragment = new BindAlipayFragment();
-            break;
+            case DISPLAY_BIND_ALIPAY:
+                mFragment = new BindAlipayFragment();
+                break;
 
-        case DISPLAY_INCOME_ACCOUNT:
-            mFragment = new AccountFragment();
-            break;
+            case DISPLAY_INCOME_ACCOUNT:
+                mFragment = new AccountFragment();
+                break;
 
-        default:
-            break;
+            case DISPLAY_WITHDRAW_RECORDS:
+                mFragment = new WithdrawRecordFragment();
+                break;
+
+            default:
+                break;
         }
         if (bundle != null)
             mFragment.setArguments(bundle);
@@ -108,7 +114,7 @@ public class CommonActivity extends BaseActivity {
      * @param title
      */
     public static void start(@NonNull Context context, @NonNull int displayType,
-            @NonNull String title, Bundle bundle) {
+                             @NonNull String title, Bundle bundle) {
         Intent intent = new Intent(context, CommonActivity.class);
         intent.putExtra(DISPLAY_TYPE, displayType);
         intent.putExtra(TITLE, title);
@@ -124,7 +130,7 @@ public class CommonActivity extends BaseActivity {
      * @param title
      */
     public static void startForResult(@NonNull Activity context, @NonNull int displayType,
-            @NonNull String title, @NonNull int requestCode, Bundle bundle) {
+                                      @NonNull String title, @NonNull int requestCode, Bundle bundle) {
         Intent intent = new Intent(context, CommonActivity.class);
         intent.putExtra(DISPLAY_TYPE, displayType);
         intent.putExtra(TITLE, title);

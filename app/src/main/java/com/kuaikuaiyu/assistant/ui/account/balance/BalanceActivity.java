@@ -2,15 +2,15 @@ package com.kuaikuaiyu.assistant.ui.account.balance;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
+import com.kuaikuaiyu.assistant.ui.common.CommonActivity;
+import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 /**
  * Author:  Gavin
@@ -20,10 +20,8 @@ import butterknife.OnClick;
  */
 public class BalanceActivity extends BaseActivity {
 
-    @Bind(R.id.tv_title)
-    TextView tvTitle;
-    @Bind(R.id.tv_right)
-    TextView tvRight;
+    @Bind(R.id.top_bar)
+    CommonTitleBar topBar;
 
     @Override
     protected void initComponent() {
@@ -37,14 +35,15 @@ public class BalanceActivity extends BaseActivity {
 
     @Override
     protected void setListener() {
-
+        topBar.onBackClick(v -> finish());
+        topBar.onRightClick(v -> records());
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        tvTitle.setText("余额");
-        tvRight.setVisibility(View.VISIBLE);
-        tvRight.setText("账单记录");
+        topBar.setTitle("余额");
+        topBar.setRightText("账单记录");
+        topBar.setRightTextVisibility(View.VISIBLE);
         BaseFragment fragment = new BalanceFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, fragment).commit();
     }
@@ -54,13 +53,10 @@ public class BalanceActivity extends BaseActivity {
         return null;
     }
 
-    @OnClick(R.id.ib_back)
-    public void back() {
-        finish();
-    }
-
-    @OnClick(R.id.tv_right)
+    /**
+     * 提现记录页面
+     */
     public void records() {
-
+        CommonActivity.start(this, CommonActivity.DISPLAY_WITHDRAW_RECORDS, "提现记录", null);
     }
 }

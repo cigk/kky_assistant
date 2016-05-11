@@ -24,23 +24,28 @@
         android:layout_alignParentRight="true">
 
         <TextView
+
             android:id="@+id/tv_right"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/selector_ib"
+            android:clickable="true"
             android:gravity="center"
             android:paddingLeft="@dimen/distance16"
             android:paddingRight="@dimen/distance16"
             android:textColor="@color/white"
-            android:textSize="@dimen/font14"/>
+            android:textSize="@dimen/font14"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/iv_right"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:background="@drawable/selector_ib"
             android:paddingLeft="@dimen/distance16"
-            android:paddingRight="@dimen/distance16"/>
+            android:paddingRight="@dimen/distance16"
+            android:visibility="gone"/>
     </FrameLayout>
 
 

@@ -75,7 +75,7 @@ public class CommonTitleBar extends BaseCustomView {
     }
 
     public void onRightClick(OnClickListener listener) {
-        iv_right.setOnClickListener(listener);
+        tv_right.setOnClickListener(listener);
     }
 
     public void setTitle(String title) {
@@ -92,5 +92,23 @@ public class CommonTitleBar extends BaseCustomView {
 
     public void setRightImage(int rightImageRes) {
         iv_right.setImageResource(rightImageRes);
+    }
+
+    /**
+     * 设置右侧文字是否可见
+     *
+     * @param visibility View.VISIBLE/ View.GONE  (default GONE)
+     */
+    public void setRightTextVisibility(int visibility) {
+        tv_right.setVisibility(visibility);
+    }
+
+    /**
+     * 设置右侧图片是否可见
+     *
+     * @param visibility View.VISIBLE/ View.GONE (default GONE)
+     */
+    public void setRightImgVisibility(int visibility) {
+        iv_right.setVisibility(visibility);
     }
 }
