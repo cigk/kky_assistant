@@ -108,7 +108,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.zhy:base-adapter:2.0.0'
-//    compile 'com.hkm.ui:ultimaterecyclerview:0.5.6'
+    //    compile 'com.hkm.ui:ultimaterecyclerview:0.5.6'
     compile 'com.jakewharton.timber:timber:4.1.2'
     // dagger dependencies
     apt 'com.google.dagger:dagger-compiler:2.4'
@@ -128,18 +128,15 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
-
     //个推
     compile 'com.getui:sdk:2.8.1.0'
     compile 'com.getui:ext:2.0.3'
     //友盟自动更新
     compile files('libs/umeng-update-v2.6.0.1.jar')
-
     //crash woodpecker
-//    debugCompile "me.drakeet.library:crashwoodpecker:$ext.crashwoodpecker_version"
-//    releaseCompile "me.drakeet.library:crashwoodpecker-do-nothing:$ext.crashwoodpecker_version"
-
+    //    debugCompile "me.drakeet.library:crashwoodpecker:$ext.crashwoodpecker_version"
+    //    releaseCompile "me.drakeet.library:crashwoodpecker-do-nothing:$ext.crashwoodpecker_version"
     // test dependencies
     testCompile 'junit:junit:4.12'
-
+    compile files('libs/zxing.jar')
 }
