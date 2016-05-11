@@ -14,6 +14,9 @@ import com.kuaikuaiyu.assistant.modle.service.IncomeService;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -54,46 +57,52 @@ public class QrcodePresenter implements BasePresenter {
      * @return
      */
     public String saveImage(Context context, Bitmap bmp) {
-        //        // 首先保存图片
-        //        File appDir = new File(Environment.getExternalStorageDirectory(), "assistant");
-        //        if (!appDir.exists()) {
-        //            appDir.mkdir();
-        //        }
-        //        String fileName = "qrcode_" + System.currentTimeMillis() + ".jpg";
-        //        File file = new File(appDir, fileName);
-        //        try {
-        //            FileOutputStream fos = new FileOutputStream(file);
-        //            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-        //            fos.flush();
-        //            fos.close();
-        //        } catch (FileNotFoundException e) {
-        //            e.printStackTrace();
-        //            return null;
-        //        } catch (IOException e) {
-        //            e.printStackTrace();
-        //            return null;
-        //        }
+        // 保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "assistant_store");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = "qrcode_" + System.currentTimeMillis() + ".jpg";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
 
-        // 把文件插入到系统图库
-        fixMediaDir();
-        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bmp,
-                "1234", "");
+//        // 把文件插入到系统图库
+        //        fixMediaDir();
+        //        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bmp,
+        //                null, null);
 
-        // 最后通知图库更新
+        // 通知图库更新
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse
-                ("file://" + path)));
+                ("file://" + file.getAbsolutePath())));
 
-        UIUtil.showToast("保存成功: " + path);
-        return path;
+        UIUtil.showToast("保存成功: " + file.getAbsolutePath());
+        return file.getAbsolutePath();
     }
 
     private void fixMediaDir() {
         File sdcard = Environment.getExternalStorageDirectory();
-        if (sdcard == null) { return; }
+        if (sdcard == null) {
+            return;
+        }
         File dcim = new File(sdcard, "DCIM");
-        if (dcim == null) { return; }
+        if (dcim == null) {
+            return;
+        }
         File camera = new File(dcim, "Camera");
-        if (camera.exists()) { return; }
+        if (camera.exists()) {
+            return;
+        }
         camera.mkdir();
     }
 

@@ -80,6 +80,10 @@
             android:screenOrientation="portrait"/>
 
         <activity
+            android:name=".ui.account.balance.BalanceActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.income.qrcode.QrcodeActivity"
             android:screenOrientation="portrait"/>
 

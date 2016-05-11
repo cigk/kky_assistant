@@ -81,30 +81,31 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (CommonUtil.isFastDoubleClick()) return;
+        if (CommonUtil.isFastDoubleClick())
+            return;
         switch (v.getId()) {
-            case R.id.ll_cash_desk:
+        case R.id.ll_cash_desk:
+            goActivity(IncomeActivity.class);
+            break;
 
-                break;
+        case R.id.ll_balance:
+            goActivity(BalanceActivity.class);
+            break;
 
-            case R.id.ll_balance:
-                goActivity(IncomeActivity.class);
-                break;
+        case R.id.ll_assistant:
+            WebViewActivity.start(this, AppConfig.URL_ASSISTANT, "平台助手");
+            break;
 
-            case R.id.ll_assistant:
-                WebViewActivity.start(this, AppConfig.URL_ASSISTANT, "平台助手");
-                break;
+        case R.id.ll_school:
+            WebViewActivity.start(this, AppConfig.URL_SCHOOL, "商学院");
+            break;
 
-            case R.id.ll_school:
-                WebViewActivity.start(this, AppConfig.URL_SCHOOL, "商学院");
-                break;
+        case R.id.iv_setting:
+            goActivity(SettingActivity.class);
+            break;
 
-            case R.id.iv_setting:
-                goActivity(SettingActivity.class);
-                break;
-
-            default:
-                break;
+        default:
+            break;
         }
     }
 
@@ -117,13 +118,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_UPDATE_PUSH_ID);
         params.addParam("duuid", ConfigUtil.getUuid());
         params.addParam("device_push_id", did);
-        service.updatePushId(params.getQueryMap(), params.getFieldMap())
-                .compose(new IoTransformer())
-                .subscribe(new RxSubscriber(null) {
-                    @Override
-                    public void onNext(Object o) {
+        service.updatePushId(params.getQueryMap(), params.getFieldMap()).compose(new
+                IoTransformer()).subscribe(new RxSubscriber(null) {
+            @Override
+            public void onNext(Object o) {
 
-                    }
-                });
+            }
+        });
     }
 }
