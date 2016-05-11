@@ -134,14 +134,14 @@ public class ChooseCityActivity extends BaseActivity {
                 view = convertView;
                 holderTextView = (TextView) view.getTag();
             } else {
-                view = UIUtil.inflate(R.layout.list_item_province_list);
-                holderTextView = (TextView) view.findViewById(R.id.tv_item_province_chooseshopcity);
+                view = UIUtil.inflate(R.layout.list_item_province);
+                holderTextView = (TextView) view.findViewById(R.id.tv_item_province);
                 view.setTag(holderTextView);
             }
             if (position == selectIndex) {
-                holderTextView.setBackgroundResource(R.mipmap.list_city_sel);
+                holderTextView.setBackgroundResource(R.color.colorPrimary);
             } else {
-                holderTextView.setBackgroundResource(R.drawable.list_city_selector);
+                holderTextView.setBackgroundResource(R.color.white);
             }
             holderTextView.setText(provinceNameList.get(position));
             return view;
@@ -174,8 +174,8 @@ public class ChooseCityActivity extends BaseActivity {
                 view = convertView;
                 holderTextView = (TextView) view.getTag();
             } else {
-                view = UIUtil.inflate(R.layout.list_item_city_list);
-                holderTextView = (TextView) view.findViewById(R.id.tv_item_city_chooseshopcity);
+                view = UIUtil.inflate(R.layout.list_item_city);
+                holderTextView = (TextView) view.findViewById(R.id.tv_item_city);
                 view.setTag(holderTextView);
             }
             holderTextView.setText(cityNameList.get(position));

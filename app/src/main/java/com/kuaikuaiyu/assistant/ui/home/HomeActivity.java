@@ -66,12 +66,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        UIUtil.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                UmengUpdateAgent.update(HomeActivity.this);
-            }
-        }, 500);
+        UIUtil.postDelayed(() -> UmengUpdateAgent.update(HomeActivity.this), 500);
     }
 
     @Override
