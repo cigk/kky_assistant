@@ -25,6 +25,12 @@ public class AppConfig {
     public static final String URL_UPDATE_PUSH_ID = "/v1/lazy_update";
     /*---------- Pass Url End---------- */
 
+
+    /*---------- Balance Module Url Begin---------- */
+    public static final String URL_BIND_ALIPAY = "/REST/WithdrawBindAlipay";
+    /*---------- Balance Module Url End---------- */
+
+
     /**
      * ********************** RequestCode *****************************
      */
