@@ -1,6 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.income.account;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
@@ -18,6 +19,7 @@ import butterknife.Bind;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.header.MaterialHeader;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -82,6 +84,7 @@ public class AccountFragment extends BaseFragment implements AccountView {
 
     @Override
     protected void initData() throws Exception {
+        setMaterialHeader(ptr);
         mLoadingPage.setSucceed();
     }
 
@@ -100,5 +103,23 @@ public class AccountFragment extends BaseFragment implements AccountView {
         //        } else {
         //            mAdapter.notifyDataSetChanged();
         //        }
+    }
+
+    /**
+     * 设置Material风格的下拉刷新头
+     *
+     * @param ptr
+     */
+    public void setMaterialHeader(PtrClassicFrameLayout ptr) {
+        final MaterialHeader header = new MaterialHeader(mActivity);
+        int[] colors = getResources().getIntArray(R.array.progress_colors);
+        header.setColorSchemeColors(colors);
+        header.setLayoutParams(new PtrFrameLayout.LayoutParams(ViewGroup.LayoutParams
+                .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        header.setPadding(0, UIUtil.dp2px(30), 0, UIUtil.dp2px(10));
+        header.setPtrFrameLayout(ptr);
+        ptr.setHeaderView(header);
+        ptr.addPtrUIHandler(header);
+        ptr.setPinContent(true);
     }
 }
