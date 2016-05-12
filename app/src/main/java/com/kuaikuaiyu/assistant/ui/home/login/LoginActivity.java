@@ -88,13 +88,13 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
             case R.id.tv_forget_pwd:
                 Intent intent = new Intent(this, SignUpActivity.class);
                 intent.putExtra(LAUNCH_TYPE, RESET_PWD);
-                startActivity(intent);
+                goActivity(intent);
                 break;
 
             case R.id.btn_signup:
                 Intent signIntent = new Intent(this, SignUpActivity.class);
                 signIntent.putExtra(LAUNCH_TYPE, SIGN_UP);
-                startActivity(signIntent);
+                goActivity(signIntent);
                 break;
 
             default:

@@ -52,7 +52,8 @@ public class NetUtil {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(headerInterceptor)
                 .addInterceptor(cacheControlInterceptor)
-                .cache(cache);
+                .cache(cache)
+                .followRedirects(true);
         if (BuildConfig.DEBUG_MODE) {
             HttpLoggingInterceptor bodyInterceptor = new HttpLoggingInterceptor();
             bodyInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -121,6 +122,15 @@ public class NetUtil {
     }
 
     /**
+     * 创建Test服务器对应的Retrofit
+     *
+     * @return
+     */
+    private static Retrofit createTestRetrofit() {
+        return createRetrofit("http://192.168.1.101/");
+    }
+
+    /**
      * 创建retrofit实例
      */
     private static Retrofit createRetrofit(String baseurl) {
@@ -137,7 +147,7 @@ public class NetUtil {
      * @return
      */
     public static <T> T create(Class<T> clazz) {
-        return (T) serverRetrofit.create(clazz);
+        return serverRetrofit.create(clazz);
     }
 
     /**
@@ -148,9 +158,19 @@ public class NetUtil {
      * @return
      */
     public static <T> T createForPass(Class<T> clazz) {
-        return (T) passRetrofit.create(clazz);
+        return passRetrofit.create(clazz);
     }
 
+
+    /**
+     * For Test
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> T createForTest(Class<T> clazz) {
+        return createTestRetrofit().create(clazz);
+    }
 
     /**
      * 检查是否有网络

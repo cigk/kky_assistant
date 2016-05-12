@@ -57,26 +57,23 @@ android {
         debug {
             minifyEnabled false
             buildConfigField "String", "PASS_SERVRE", "\"dev-matrixpassport.kuaikuaiyu.com\""
-            buildConfigField "String", "SERVER_URL", "\"dev-shop.kuaikuaiyu.com\""
-            buildConfigField "String", "INVITE_USER_URL", "\"https://dw-shop.kuaikuaiyu.com/api.invite.user\""
+            buildConfigField "String", "SERVER_URL", "\"dev-matrixpassport.kuaikuaiyu.com\""
             signingConfig signingConfigs.releasekeystore
             buildConfigField "Boolean", "DEBUG_MODE", "true"
             debuggable true
         }
         alpha {
-            minifyEnabled false
+            minifyEnabled true
             buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
-            buildConfigField "String", "SERVER_URL", "\"shop.kuaikuaiyu.com\""
-            buildConfigField "String", "INVITE_USER_URL", "\"https://aw-shop.kuaikuaiyu.com/api.invite.user\""
+            buildConfigField "String", "SERVER_URL", "\"matrixpassport.kuaikuaiyu.com\""
             signingConfig signingConfigs.releasekeystore
             buildConfigField "Boolean", "DEBUG_MODE", "false"
-            debuggable true
+            debuggable false
         }
         release {
             minifyEnabled true
             buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
-            buildConfigField "String", "SERVER_URL", "\"shop.kuaikuaiyu.com\""
-            buildConfigField "String", "INVITE_USER_URL", "\"https://w-shop.kuaikuaiyu.com/api.invite.user\""
+            buildConfigField "String", "SERVER_URL", "\"matrixpassport.kuaikuaiyu.com\""
             signingConfig signingConfigs.releasekeystore
             buildConfigField "Boolean", "DEBUG_MODE", "false"
             debuggable false
