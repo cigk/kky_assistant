@@ -1,6 +1,9 @@
 package com.kuaikuaiyu.assistant.ui.account.records;
 
 import com.kuaikuaiyu.assistant.base.BaseView;
+import com.kuaikuaiyu.assistant.modle.domain.WithdrawItem;
+
+import java.util.List;
 
 /**
  * Author:  Gavin
@@ -13,7 +16,7 @@ public interface WithdrawRecordView extends BaseView {
     /**
      * 数据加载成功
      */
-    void loadSucceed();
+    void loadSucceed(List<WithdrawItem> data);
 
     /**
      * 加载数据为空
