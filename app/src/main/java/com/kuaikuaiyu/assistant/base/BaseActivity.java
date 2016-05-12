@@ -1,5 +1,6 @@
 package com.kuaikuaiyu.assistant.base;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -8,10 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Explode;
 import android.transition.Fade;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.Window;
 
 import com.kuaikuaiyu.assistant.sys.ActivityManager;
@@ -31,15 +29,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private MyProgressDialog loadingDia;
     protected Context mContext;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getWindow().setEnterTransition(new Fade());
-        getWindow().setReenterTransition(new Fade());
-//        getWindow().setEnterTransition(new Slide(Gravity.BOTTOM));
-//        getWindow().setReenterTransition(new Slide(Gravity.TOP));
+//        getWindow().setEnterTransition(new Fade());
+//        getWindow().setReenterTransition(new Fade());
+        //        getWindow().setEnterTransition(new Slide(Gravity.BOTTOM));
+        //        getWindow().setReenterTransition(new Slide(Gravity.TOP));
         super.onCreate(savedInstanceState);
         initComponent();
         mContext = this;
@@ -63,16 +60,17 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * findViewById
      * 用于ButterKnife有时候空指针异常的问题
      */
-//    protected void getElement() {
-//
-//    }
+    //    protected void getElement() {
+    //
+    //    }
     @Override
     protected void onDestroy() {
         if (loadingDia != null)
             loadingDia.dismiss();
         loadingDia = null;
         BasePresenter presenter = getPresenter();
-        if (null != presenter) presenter.clean();
+        if (null != presenter)
+            presenter.clean();
         ButterKnife.unbind(this);
         super.onDestroy();
         ActivityManager.removeActivity(this);
@@ -81,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     /**
      * setContentView前预初始化
      */
-//    protected abstract void init();
+    //    protected abstract void init();
 
     /**
      * 获取布局id
@@ -138,8 +136,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void hideLoading() {
         try {
-            if (this.isFinishing()) return;
-            if (loadingDia != null && loadingDia.isShowing()) loadingDia.hide();
+            if (this.isFinishing())
+                return;
+            if (loadingDia != null && loadingDia.isShowing())
+                loadingDia.hide();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,15 +158,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onResume() {
         super.onResume();
-//        MobclickAgent.onPageStart(this.getClass().getName());
-//        MobclickAgent.onResume(this);
+        //        MobclickAgent.onPageStart(this.getClass().getName());
+        //        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        MobclickAgent.onPageEnd(this.getClass().getName());
-//        MobclickAgent.onPause(this);
+        //        MobclickAgent.onPageEnd(this.getClass().getName());
+        //        MobclickAgent.onPause(this);
     }
 
     /**
