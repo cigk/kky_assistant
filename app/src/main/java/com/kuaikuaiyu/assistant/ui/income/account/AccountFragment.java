@@ -19,8 +19,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -69,12 +67,16 @@ public class AccountFragment extends BaseFragment implements AccountView {
                     .applyIoSchedulers()).subscribe(new Subscriber<Boolean>() {
                 @Override
                 public void onCompleted() {
-                    mpf.compelete();
+                    if (mpf != null) {
+                        mpf.complete();
+                    }
                 }
 
                 @Override
                 public void onError(Throwable e) {
-                    mpf.compelete();
+                    if (mpf != null) {
+                        mpf.complete();
+                    }
                 }
 
                 @Override

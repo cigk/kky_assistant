@@ -1,17 +1,14 @@
 package com.kuaikuaiyu.assistant.base;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Fade;
 import android.view.Window;
 
+import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.sys.ActivityManager;
 import com.kuaikuaiyu.assistant.ui.widgets.MyProgressDialog;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
@@ -32,9 +29,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-//        getWindow().setEnterTransition(new Fade());
-//        getWindow().setReenterTransition(new Fade());
+        //        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        //        getWindow().setEnterTransition(new Fade());
+        //        getWindow().setReenterTransition(new Fade());
         //        getWindow().setEnterTransition(new Slide(Gravity.BOTTOM));
         //        getWindow().setReenterTransition(new Slide(Gravity.TOP));
         super.onCreate(savedInstanceState);
@@ -190,6 +187,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, act);
         ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    /**
+     * 跳转到其他Activity但不finish当前的Activity
+     *
+     * @param act
+     */
+    protected void goActivityAndFinishTransition(final Class<?> act) {
+        Intent intent = new Intent(this, act);
+        ActivityCompat.startActivity(this, intent, null);
+        finish();
+        overridePendingTransition(R.anim.fade_scanle_in, R.anim.fade_scanle_out);
     }
 
     /**

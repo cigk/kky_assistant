@@ -105,7 +105,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     @Override
     public void jump() {
         UIUtil.showToast("登录成功");
-        goActivityAndFinish(HomeActivity.class);
+        goActivityAndFinishTransition(HomeActivity.class);
     }
 
     /**

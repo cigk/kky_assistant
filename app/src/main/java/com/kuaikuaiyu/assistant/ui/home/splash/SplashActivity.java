@@ -63,13 +63,13 @@ public class SplashActivity extends BaseActivity implements SplashView {
      * 跳转到主页面
      */
     private void toHome() {
-        goActivityAndFinish(HomeActivity.class);
+        goActivityAndFinishTransition(HomeActivity.class);
     }
 
     /**
      * 跳转到登录页面
      */
     private void toLogin() {
-        goActivityAndFinish(LoginActivity.class);
+        goActivityAndFinishTransition(LoginActivity.class);
     }
 }

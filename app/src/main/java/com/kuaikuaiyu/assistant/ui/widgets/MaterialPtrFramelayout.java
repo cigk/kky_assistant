@@ -46,7 +46,7 @@ public class MaterialPtrFramelayout extends PtrClassicFrameLayout {
     /**
      * 结束刷新操作，同时恢复使能，可以接受新的操作
      */
-    public void compelete() {
+    public void complete() {
         refreshComplete();
         setEnabled(true);
         if (mChangedListener != null) {
