@@ -36,7 +36,7 @@ public class BalanceActivity extends BaseActivity {
     @Override
     protected void setListener() {
         topBar.onBackClick(v -> finish());
-        topBar.onRightClick(v -> records());
+        topBar.onRightTextClick(v -> records());
     }
 
     @Override

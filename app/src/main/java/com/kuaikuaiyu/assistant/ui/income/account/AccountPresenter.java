@@ -26,13 +26,14 @@ public class AccountPresenter implements BasePresenter {
     }
 
     public void getIncomeAccount() {
-        subscriber = new RxSubscriber<IncomeAccount>(mView) {
-            @Override
-            public void onNext(IncomeAccount incomeAccount) {
-                mView.fillData(incomeAccount);
-            }
-        };
-        mService.getIncomeAccount().compose(new IoTransformer<>()).subscribe(subscriber);
+//        subscriber = new RxSubscriber<IncomeAccount>(mView) {
+//            @Override
+//            public void onNext(IncomeAccount incomeAccount) {
+//                mView.fillData(incomeAccount);
+//            }
+//        };
+//        mService.getIncomeAccount().compose(new IoTransformer<>()).subscribe(subscriber);
+        mView.fillData(new IncomeAccount());
     }
 
     @Override

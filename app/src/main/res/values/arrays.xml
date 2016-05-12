@@ -2,7 +2,7 @@
 <resources>
     <integer-array name="progress_colors">
         <item>@color/colorPrimary</item>
-        <item>@color/progress_green</item>
-        <item>@color/progress_red</item>
+        <!--<item>@color/progress_green</item>-->
+        <!--<item>@color/progress_red</item>-->
     </integer-array>
 </resources>

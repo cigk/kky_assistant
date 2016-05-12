@@ -74,8 +74,12 @@ public class CommonTitleBar extends BaseCustomView {
         ib_back.setOnClickListener(listener);
     }
 
-    public void onRightClick(OnClickListener listener) {
+    public void onRightTextClick(OnClickListener listener) {
         tv_right.setOnClickListener(listener);
+    }
+
+    public void onRightImageClick(OnClickListener listener) {
+        iv_right.setOnClickListener(listener);
     }
 
     public void setTitle(String title) {

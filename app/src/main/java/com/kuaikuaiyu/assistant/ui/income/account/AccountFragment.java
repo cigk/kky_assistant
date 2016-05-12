@@ -1,7 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.income.account;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
@@ -9,17 +8,19 @@ import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.rx.SchedulersCompat;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
+import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
+import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.header.MaterialHeader;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -30,10 +31,10 @@ import rx.Subscriber;
  * desc:
  */
 public class AccountFragment extends BaseFragment implements AccountView {
-    @Bind(R.id.ptr)
-    PtrClassicFrameLayout ptr;
+    @Bind(R.id.mpf)
+    MaterialPtrFramelayout mpf;
     @Bind(R.id.rv_account)
-    RecyclerView rv_account;
+    PtrRecyclerView rv_account;
 
     @Inject
     AccountPresenter mPresenter;
@@ -58,34 +59,36 @@ public class AccountFragment extends BaseFragment implements AccountView {
 
     @Override
     protected void setListener() {
-        ptr.setPtrHandler(new PtrDefaultHandler() {
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                UIUtil.showToast("刷新ing...");
-                Observable.just(false).delay(3, TimeUnit.SECONDS).compose(SchedulersCompat
-                        .applyIoSchedulers()).subscribe(new Subscriber<Boolean>() {
-                    @Override
-                    public void onCompleted() {
-                        ptr.refreshComplete();
-                    }
+        mpf.setRefreshingListener(rv_account);
+        mpf.setMaterialPtrHandler(frame -> {
+            UIUtil.showToast("刷新ing...");
 
-                    @Override
-                    public void onError(Throwable e) {
-                    }
+            mPresenter.getIncomeAccount();
 
-                    @Override
-                    public void onNext(Boolean aBoolean) {
-                        UIUtil.showToast("ok");
-                    }
-                });
-            }
+            Observable.just(false).delay(3, TimeUnit.SECONDS).compose(SchedulersCompat
+                    .applyIoSchedulers()).subscribe(new Subscriber<Boolean>() {
+                @Override
+                public void onCompleted() {
+                    mpf.compelete();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    mpf.compelete();
+                }
+
+                @Override
+                public void onNext(Boolean aBoolean) {
+                    UIUtil.showToast("ok");
+                }
+            });
         });
     }
 
     @Override
     protected void initData() throws Exception {
-        setMaterialHeader(ptr);
         mLoadingPage.setSucceed();
+        mPresenter.getIncomeAccount();
     }
 
     @Override
@@ -93,33 +96,20 @@ public class AccountFragment extends BaseFragment implements AccountView {
         mPresenter.getIncomeAccount();
     }
 
+    private List<String> mList = new ArrayList<>();
+
     @Override
     public void fillData(IncomeAccount incomeAccount) {
-        //        if (mAdapter == null) {
-        //            mAdapter = new AccountAdapter(this, R.layout.item_income_account,
-        // incomeAccount,
-        //                    mPresenter);
-        //            rv_account.setAdapter(mAdapter);
-        //        } else {
-        //            mAdapter.notifyDataSetChanged();
-        //        }
-    }
-
-    /**
-     * 设置Material风格的下拉刷新头
-     *
-     * @param ptr
-     */
-    public void setMaterialHeader(PtrClassicFrameLayout ptr) {
-        final MaterialHeader header = new MaterialHeader(mActivity);
-        int[] colors = getResources().getIntArray(R.array.progress_colors);
-        header.setColorSchemeColors(colors);
-        header.setLayoutParams(new PtrFrameLayout.LayoutParams(ViewGroup.LayoutParams
-                .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        header.setPadding(0, UIUtil.dp2px(30), 0, UIUtil.dp2px(10));
-        header.setPtrFrameLayout(ptr);
-        ptr.setHeaderView(header);
-        ptr.addPtrUIHandler(header);
-        ptr.setPinContent(true);
+        for (int i = 0; i < 5; i++) {
+            mList.add(String.valueOf(i));
+        }
+        if (mAdapter == null) {
+            mAdapter = new AccountAdapter(mActivity, R.layout.item_income_account, mList,
+                    mPresenter);
+            rv_account.setLayoutManager(new LinearLayoutManager(mActivity));
+            rv_account.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }
