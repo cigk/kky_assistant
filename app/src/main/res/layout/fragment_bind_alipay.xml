@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_info"
+        style="@style/VerifyStatusInfo"/>
+
+    <LinearLayout style="@style/BaseItemLayoutWhite">
+
+        <TextView
+            style="@style/BaseTextViewStyle"
+            android:text="账号："/>
+
+        <EditText
+            android:id="@+id/et_account"
+            style="@style/BaseEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:hint="支付宝账号"
+            android:inputType="textEmailAddress"/>
+    </LinearLayout>
+
+    <View style="@style/Divider"/>
+
+    <LinearLayout style="@style/BaseItemLayoutWhite">
+
+        <TextView
+            style="@style/BaseTextViewStyle"
+            android:text="姓名："/>
+
+        <EditText
+            android:id="@+id/et_name"
+            style="@style/BaseEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:hint="真实姓名"/>
+    </LinearLayout>
+
+    <View style="@style/Divider"/>
+
+    <Button
+        android:id="@+id/btn_submit"
+        style="@style/ButtonStyle"
+        android:layout_margin="@dimen/distance32"
+        android:text="提交审核"/>
+</LinearLayout>

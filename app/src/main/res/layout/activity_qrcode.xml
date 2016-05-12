@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true">
+
+    <com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleText="@string/income_qrcode_title"/>
+
+    <TextView
+        android:id="@+id/tv_save_qrcode"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_primary_rect"
+        android:gravity="center"
+        android:text="@string/income_qrcode_save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font14"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_qrcode_root"
+        android:layout_width="match_parent"
+        android:layout_height="425dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/distance36"
+        android:layout_marginRight="@dimen/distance36"
+        android:background="@drawable/shape_white_corner_middle"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height50"
+            android:gravity="center"
+            android:text="@string/income_qrcode_pay_title"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/font32"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="@string/income_qrcode_label_bottom"
+            android:textColor="@color/text_hint_color"
+            android:textSize="@dimen/font16"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/tv_bottom"
+            android:layout_below="@id/tv_top"
+            android:background="@drawable/shape_primary_color_rect"
+            android:orientation="vertical"
+            android:padding="@dimen/distance16">
+
+            <LinearLayout
+                android:id="@+id/ll_pay_label"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/weixin_icon"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/distance8"
+                        android:text="@string/income_weixin_pay"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font14"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/divider_width"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/distance16"
+                    android:layout_marginTop="@dimen/distance16"
+                    android:background="@color/white"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/zhifubao_icon"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/distance8"
+                        android:text="@string/income_zhifubao_pay"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font14"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_qrcode"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/shape_white_corner_middle"
+                    android:padding="@dimen/distance4"
+                    android:scaleType="centerInside"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

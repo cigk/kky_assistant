@@ -56,6 +56,9 @@ public class AssistantApp extends Application {
 
         //初始化LeakCanary
         LeakCanary.install(this);
+
+        //初始化CrashWoodpecker
+        //        CrashWoodpecker.init(this);
     }
 
 

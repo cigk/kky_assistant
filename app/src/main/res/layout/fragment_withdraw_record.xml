@@ -1,0 +1,21 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <ListView
+            android:id="@+id/lv_withdraw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/divide_line"
+            android:dividerHeight="@dimen/list_divider_height"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</FrameLayout>

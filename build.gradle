@@ -21,6 +21,7 @@ buildscript {
 ext {
     retrofit_version = "2.0.2"
     okhttp_version = "3.2.0"
+    crashwoodpecker_version = "0.9.83"
 }
 
 allprojects {
@@ -30,6 +31,9 @@ allprojects {
         //个推依赖
         maven {
             url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"
+        }
+        maven {
+            url "http://dl.bintray.com/jjhesk/maven"
         }
     }
 }

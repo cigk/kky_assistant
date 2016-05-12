@@ -10,6 +10,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
+import java.io.File;
 import java.security.KeyStore;
 
 import javax.net.ssl.KeyManagerFactory;
@@ -17,6 +18,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -42,10 +44,15 @@ public class NetUtil {
      */
     private static OkHttpClient createOkHttpClient() {
 //        SSLSocketFactory socketFactory = getSocketFactory();
+        File cacheFile = new File(UIUtil.getContext().getCacheDir(), "okhttp_cache");
+        Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb缓存
         HttpLoggingInterceptor headerInterceptor = new HttpLoggingInterceptor();
+        CacheControlInterceptor cacheControlInterceptor = new CacheControlInterceptor();
         headerInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
-
-        OkHttpClient.Builder builder = new OkHttpClient.Builder().addInterceptor(headerInterceptor);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .addInterceptor(headerInterceptor)
+                .addInterceptor(cacheControlInterceptor)
+                .cache(cache);
         if (BuildConfig.DEBUG_MODE) {
             HttpLoggingInterceptor bodyInterceptor = new HttpLoggingInterceptor();
             bodyInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -129,7 +136,7 @@ public class NetUtil {
      * @param <T>
      * @return
      */
-    public static <T> T create(Class<?> clazz) {
+    public static <T> T create(Class<T> clazz) {
         return (T) serverRetrofit.create(clazz);
     }
 
@@ -140,7 +147,7 @@ public class NetUtil {
      * @param <T>
      * @return
      */
-    public static <T> T createForPass(Class<?> clazz) {
+    public static <T> T createForPass(Class<T> clazz) {
         return (T) passRetrofit.create(clazz);
     }
 

@@ -14,15 +14,31 @@
     <dimen name="font48">48sp</dimen>
 
     <!--Distance for margin&padding-->
+    <dimen name="distance2">2dp</dimen>
     <dimen name="distance4">4dp</dimen>
     <dimen name="distance8">8dp</dimen>
     <dimen name="distance12">12dp</dimen>
     <dimen name="distance16">16dp</dimen>
     <dimen name="distance24">24dp</dimen>
     <dimen name="distance32">32dp</dimen>
+    <dimen name="distance36">36dp</dimen>
     <dimen name="distance48">48dp</dimen>
+    <dimen name="distance50">50dp</dimen>
+    <dimen name="distance60">60dp</dimen>
     <dimen name="distance64">64dp</dimen>
+    <dimen name="distance100">100dp</dimen>
+    <dimen name="distance120">120dp</dimen>
+    <dimen name="distance150">150dp</dimen>
+    <dimen name="distance200">200dp</dimen>
 
     <dimen name="title_height">44dp</dimen>
     <dimen name="button_height">44dp</dimen>
+
+    <dimen name="height45">45dp</dimen>
+    <dimen name="height50">50dp</dimen>
+
+    <dimen name="divider_width">0.5dp</dimen>
+    <dimen name="divider_height">0.5dp</dimen>
+
+    <dimen name="list_divider_height">2px</dimen>
 </resources>

@@ -2,6 +2,8 @@ package com.kuaikuaiyu.assistant.utils;
 
 import android.text.TextUtils;
 
+import com.kuaikuaiyu.assistant.modle.domain.Account;
+
 /**
  * Author:  Gavin
  * Email:   gavinking@163.com
@@ -127,5 +129,24 @@ public class ConfigUtil {
             shopMobile = SpUtil.get(SHOP_MOBILE, "");
         }
         return shopMobile;
+    }
+
+    /**
+     * 获取账户信息
+     *
+     * @return
+     */
+    public static Account getAccountInfo() {
+        //TODO need implementation
+        return new Account();
+    }
+
+    /**
+     * 保存账户信息
+     *
+     * @param info
+     */
+    public static void saveAccountInfo(Account info) {
+
     }
 }

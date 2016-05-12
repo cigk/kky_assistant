@@ -10,34 +10,40 @@
     <LinearLayout
         android:id="@+id/ll_shop_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_height="120dp"
+        android:background="@mipmap/setting_bg"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/iv_shop_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/setting_icon"/>
 
         <TextView
             android:id="@+id/tv_shop_name"
             style="@style/BaseTextViewStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/distance4"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/tv_shop_mobile"
             style="@style/BaseTextViewStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/distance4"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <View style="@style/Divider"/>
 
     <RelativeLayout
         android:id="@+id/rl_change_shop_name"
-        style="@style/BaseItemLayout">
+        style="@style/BaseItemLayout"
+        android:visibility="gone">
 
         <TextView
             style="@style/BaseItemTitle"
@@ -52,11 +58,14 @@
             android:src="@mipmap/arrow_right"/>
     </RelativeLayout>
 
-    <View style="@style/Divider"/>
+    <View
+        style="@style/Divider"
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:id="@+id/rl_change_pwd"
-        style="@style/BaseItemLayout">
+        style="@style/BaseItemLayout"
+        android:background="@drawable/selector_item_bg">
 
         <TextView
             style="@style/BaseItemTitle"
@@ -71,11 +80,14 @@
             android:src="@mipmap/arrow_right"/>
     </RelativeLayout>
 
-    <View style="@style/Divider"/>
+    <View
+        style="@style/Divider"
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:id="@+id/rl_feedback"
-        style="@style/BaseItemLayout">
+        style="@style/BaseItemLayout"
+        android:visibility="gone">
 
         <TextView
             style="@style/BaseItemTitle"
@@ -94,10 +106,17 @@
 
     <RelativeLayout
         android:id="@+id/rl_about"
-        style="@style/BaseItemLayout">
+        style="@style/BaseItemLayout"
+        android:background="@drawable/selector_item_bg">
 
         <TextView
             style="@style/BaseItemTitle"
+            android:text="@string/about"/>
+
+        <TextView
+            android:id="@+id/tv_version"
+            style="@style/BaseItemTitle"
+            android:layout_alignParentRight="true"
             android:text="@string/about"/>
 
         <ImageView
@@ -106,15 +125,18 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/arrow_right"/>
+            android:src="@mipmap/arrow_right"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <View style="@style/Divider"/>
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonStyle"
+        android:layout_marginLeft="@dimen/distance32"
+        android:layout_marginRight="@dimen/distance32"
+        android:layout_marginTop="@dimen/distance48"
         android:text="退出"/>
 
 </LinearLayout>

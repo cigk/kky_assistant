@@ -81,11 +81,7 @@ public class PermissionUtil {
     public static boolean checkPermission(Activity activity, int... permissions) {
         List<String> permsNotAcquired = getPermissionsNotAcquired(activity,
                 getPermissionList(permissions));
-        if (permsNotAcquired.size() > 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return permsNotAcquired.size() <= 0;
     }
 
 

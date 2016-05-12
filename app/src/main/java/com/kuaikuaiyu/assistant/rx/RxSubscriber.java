@@ -26,7 +26,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
         if (baseView != null)
             baseView.showLoading("加载中…");
         if (!NetUtil.isNetAvailable(UIUtil.getContext())) {
-            this.cancel();
+//            this.cancel();
             UIUtil.showToast("网络不给力，请联网后重试");
         }
     }
@@ -40,7 +40,12 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        UIUtil.showToast(e.getMessage());
+        //有网的情况下需要提示用户出错了，没网的时候提示网络不给力
+        if (NetUtil.isNetAvailable(UIUtil.getContext())) {
+            UIUtil.showToast(e.getMessage());
+        } else {
+            UIUtil.showToast("网络不给力，请联网后重试");
+        }
         // RxJava中的Subscriber执行onError后并不会执行onComplete,所以这里要调用一下
         onCompleted();
     }
