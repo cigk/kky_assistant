@@ -1,6 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.income.account;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -25,10 +28,10 @@ import rx.Subscriber;
  * desc:
  */
 public class AccountFragment extends BaseFragment implements AccountView {
-    @Bind(R.id.sfl)
-    SwipeRefreshLayout sfl;
-    //    @Bind(R.id.rv_account)
-    //    RecyclerView rv_account;
+    @Bind(R.id.ptr)
+    PtrClassicFrameLayout ptr;
+    @Bind(R.id.rv_account)
+    RecyclerView rv_account;
 
     @Inject
     AccountPresenter mPresenter;
@@ -53,24 +56,27 @@ public class AccountFragment extends BaseFragment implements AccountView {
 
     @Override
     protected void setListener() {
-        sfl.setOnRefreshListener(() -> {
-            UIUtil.showToast("刷新ing...");
-            Observable.just(false).delay(3, TimeUnit.SECONDS).compose(SchedulersCompat
-                    .applyIoSchedulers()).subscribe(new Subscriber<Boolean>() {
-                @Override
-                public void onCompleted() {
-                }
+        ptr.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                UIUtil.showToast("刷新ing...");
+                Observable.just(false).delay(3, TimeUnit.SECONDS).compose(SchedulersCompat
+                        .applyIoSchedulers()).subscribe(new Subscriber<Boolean>() {
+                    @Override
+                    public void onCompleted() {
+                        ptr.refreshComplete();
+                    }
 
-                @Override
-                public void onError(Throwable e) {
-                }
+                    @Override
+                    public void onError(Throwable e) {
+                    }
 
-                @Override
-                public void onNext(Boolean aBoolean) {
-                    UIUtil.showToast("ok");
-                    sfl.setRefreshing(aBoolean);
-                }
-            });
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        UIUtil.showToast("ok");
+                    }
+                });
+            }
         });
     }
 

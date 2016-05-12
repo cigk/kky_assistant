@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/sfl"
+<in.srain.cube.views.ptr.PtrClassicFrameLayout
+    android:id="@+id/ptr"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/rv_account"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:divider="@color/border_gray_light"-->
-    <!--android:dividerHeight="0.1dp"/>-->
-
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_account"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="alksdjklasjd"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/font22"/>
+        android:layout_height="match_parent"
+        android:divider="@color/border_gray_light"
+        android:dividerHeight="0.1dp"/>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</in.srain.cube.views.ptr.PtrClassicFrameLayout>
