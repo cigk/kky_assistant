@@ -3,6 +3,7 @@
 //
 #include "com_kuaikuaiyu_assistant_utils_JniUtil.h"
 #include <android/log.h>
+
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG , "KKY", __VA_ARGS__)
 
 jstring CharTojstring(JNIEnv *env, char *str) {
@@ -18,30 +19,28 @@ jstring CharTojstring(JNIEnv *env, char *str) {
     return (jstring)(*env)->NewObject(env, clsstring, mid, barr, strencode);
 }
 
-char*   Jstring2CStr(JNIEnv*   env,   jstring   jstr)
-{
-    char*   rtn   =   NULL;
-    jclass   clsstring   =   (*env)->FindClass(env,"java/lang/String");
-    jstring   strencode   =   (*env)->NewStringUTF(env,"GB2312");
-    jmethodID   mid   =   (*env)->GetMethodID(env,clsstring,   "getBytes",   "(Ljava/lang/String;)[B");
-    jbyteArray   barr=   (jbyteArray)(*env)->CallObjectMethod(env,jstr,mid,strencode); // String .getByte("GB2312");
-    jsize   alen   =   (*env)->GetArrayLength(env,barr);
-    jbyte*   ba   =   (*env)->GetByteArrayElements(env,barr,JNI_FALSE);
-    if(alen   >   0)
-    {
-        rtn   =   (char*)malloc(alen+1);         //"\0"
-        memcpy(rtn,ba,alen);
-        rtn[alen]=0;
+char *Jstring2CStr(JNIEnv *env, jstring jstr) {
+    char *rtn = NULL;
+    jclass clsstring = (*env)->FindClass(env, "java/lang/String");
+    jstring strencode = (*env)->NewStringUTF(env, "GB2312");
+    jmethodID mid = (*env)->GetMethodID(env, clsstring, "getBytes", "(Ljava/lang/String;)[B");
+    jbyteArray barr = (jbyteArray)(*env)->CallObjectMethod(env, jstr, mid,
+                                                           strencode); // String .getByte("GB2312");
+    jsize alen = (*env)->GetArrayLength(env, barr);
+    jbyte *ba = (*env)->GetByteArrayElements(env, barr, JNI_FALSE);
+    if (alen > 0) {
+        rtn = (char *) malloc(alen + 1);         //"\0"
+        memcpy(rtn, ba, alen);
+        rtn[alen] = 0;
     }
-    (*env)->ReleaseByteArrayElements(env,barr,ba,0);  //
+    (*env)->ReleaseByteArrayElements(env, barr, ba, 0);  //
     return rtn;
 }
 
 JNIEXPORT jstring JNICALL Java_com_kuaikuaiyu_assistant_utils_JniUtil_sign
         (JNIEnv *env, jobject obj, jstring str) {
     char *cstr = Jstring2CStr(env, str);
-    LOGD("sig = %s", cstr);
-    char *signature = sign(cstr);
-    LOGD("sig = %s", signature);
-    return  (*env)->NewStringUTF(env,cstr);
+    char *signature[64];
+    signs(cstr, signature);
+    return (*env)->NewStringUTF(env, signature);
 }

@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* sign(char* msg);
+void signs(char* msg, char* signature);
 
 #endif //快店助手_HMACS256_H
 

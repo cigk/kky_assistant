@@ -324,12 +324,11 @@ void hmac_sha256_get(uint8_t digest[32],
  * Input/output.
  */
 
-char* sign(char* msg) {
+void signs(char *msg, char *signature) {
     hmac_sha256 hmac;
     sha256 sha;
-    char *key ="0f654197bba48eac7a36d32dae278a7ab4e1d29c80ad80d5617c5a555c0b8381";
-    printf("MSG======%s", msg);
-    int len, c, d, msglen;
+    char *key = "0f654197bba48eac7a36d32dae278a7ab4e1d29c80ad80d5617c5a555c0b8381";
+    int len, msglen;
     len = strlen(key);
     msglen = strlen(msg);
     /* Initialize the HMAC-SHA256 digest with the key or its hash. */
@@ -345,13 +344,10 @@ char* sign(char* msg) {
     /* Finalize the HMAC-SHA256 digest and output its value. */
     hmac_sha256_finalize(&hmac, NULL, 0);
     //char signature[64];
-    //int i = 0;
-    //for (; i < 32; ++i) {
+    int i = 0;
+    for (; i < 32; ++i) {
         //  Cast added by RKW to get format specifier to work as expected
-        //printf("%02lx", (unsigned long)hmac.digest[i]);
-        //sprintf(signature+i*2,"%02lx", hmac.digest[i]);
-    //}
-    //putchar('\n');
-    /* That's all folks! */
-    return hmac.digest;
+//        printf("%02lx", (unsigned long)hmac.digest[i]);
+        sprintf(signature + i * 2, "%02lx", (unsigned long) hmac.digest[i]);
+    }
 }
