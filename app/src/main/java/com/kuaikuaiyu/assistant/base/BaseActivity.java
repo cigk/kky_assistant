@@ -1,9 +1,17 @@
 package com.kuaikuaiyu.assistant.base;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.Window;
 
 import com.kuaikuaiyu.assistant.sys.ActivityManager;
@@ -23,9 +31,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private MyProgressDialog loadingDia;
     protected Context mContext;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setEnterTransition(new Fade());
+        getWindow().setReenterTransition(new Fade());
+//        getWindow().setEnterTransition(new Slide(Gravity.BOTTOM));
+//        getWindow().setReenterTransition(new Slide(Gravity.TOP));
         super.onCreate(savedInstanceState);
         initComponent();
         mContext = this;
@@ -161,9 +175,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * @param act
      */
     protected void goActivityAndFinish(final Class<?> act) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, act);
-        startActivity(intent);
-        finish();
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+        onBackPressed();
     }
 
     /**
@@ -172,7 +187,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * @param act
      */
     protected void goActivity(final Class<?> act) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, act);
-        startActivity(intent);
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    /**
+     * 跳转到其他Activity但不finish当前的Activity
+     *
+     * @param intent
+     */
+    protected void goActivity(Intent intent) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 }

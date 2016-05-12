@@ -66,12 +66,12 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView {
     @Override
     public void jump() {
         UIUtil.showToast("密码修改成功，再登录请使用新密码");
-        finish();
+        onBackPressed();
     }
 
     @OnClick(R.id.ib_back)
     public void back() {
-        finish();
+        onBackPressed();
     }
 
     @OnClick(R.id.btn_confirm)

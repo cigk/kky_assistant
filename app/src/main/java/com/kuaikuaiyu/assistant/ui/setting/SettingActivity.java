@@ -111,7 +111,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
 
             case R.id.ib_back:
-                finish();
+                onBackPressed();
                 break;
 
             default:

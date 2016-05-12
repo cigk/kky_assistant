@@ -171,7 +171,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
     @OnClick(R.id.ib_back)
     public void back() {
-        finish();
+        onBackPressed();
     }
 
     /**
