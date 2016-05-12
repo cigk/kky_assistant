@@ -147,7 +147,7 @@ public class NetUtil {
      * @return
      */
     public static <T> T create(Class<T> clazz) {
-        return (T) serverRetrofit.create(clazz);
+        return serverRetrofit.create(clazz);
     }
 
     /**
@@ -158,7 +158,7 @@ public class NetUtil {
      * @return
      */
     public static <T> T createForPass(Class<T> clazz) {
-        return (T) passRetrofit.create(clazz);
+        return passRetrofit.create(clazz);
     }
 
 
@@ -169,7 +169,7 @@ public class NetUtil {
      * @return
      */
     public static <T> T createForTest(Class<T> clazz) {
-        return (T) createTestRetrofit().create(clazz);
+        return createTestRetrofit().create(clazz);
     }
 
     /**

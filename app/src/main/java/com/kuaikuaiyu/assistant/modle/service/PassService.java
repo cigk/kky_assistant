@@ -27,7 +27,7 @@ public interface PassService {
      *
      * @return
      */
-    @GET("/v1/ping")
+    @GET("v1/ping")
     Observable<HttpResult<Uuid>> apiTest();
 
     /**
