@@ -1,8 +1,8 @@
 package com.kuaikuaiyu.assistant.ui.setting.pwd;
 
 import com.kuaikuaiyu.assistant.rx.PerActivity;
-import com.kuaikuaiyu.assistant.ui.home.login.LoginActivity;
-import com.kuaikuaiyu.assistant.ui.home.login.LoginModule;
+import com.kuaikuaiyu.assistant.ui.pass.login.LoginActivity;
+import com.kuaikuaiyu.assistant.ui.pass.login.LoginModule;
 
 import dagger.Component;
 

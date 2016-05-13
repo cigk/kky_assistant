@@ -12,8 +12,9 @@ import android.widget.TextView;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.Account;
+import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
 import com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText;
+import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import javax.inject.Inject;
@@ -51,14 +52,14 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
     WithdrawPresenter mPresenter;
 
     private boolean withdrawFlag = false;
-    private Account mAccount;
-
     private String method = "alipay";
+    private ShopInfo shopInfo;
 
     @Override
     protected void initComponent() {
         DaggerWithdrawComponent.builder().withdrawModule(new WithdrawModule(this))
                 .build().inject(this);
+        shopInfo = ConfigUtil.getShopInfo();
     }
 
     @Override
@@ -91,12 +92,12 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
      * 提现时需要更新账户信息
      */
     private void initView() {
-        if (mAccount.min_withdraw_money == 0)
-            et_money.setHint("请输入提现金额");
-        else
-            et_money.setHint("不少于" + String.valueOf(mAccount.min_withdraw_money / 100));
-        tv_alipay.setText(mAccount.alipay);
-        tv_bank_card.setText(mAccount.bank.card_no);
+//        if (mAccount.min_withdraw_money == 0)
+//            et_money.setHint("请输入提现金额");
+//        else
+//            et_money.setHint("不少于" + String.valueOf(mAccount.min_withdraw_money / 100));
+//        tv_alipay.setText(mAccount.alipay);
+//        tv_bank_card.setText(mAccount.bank.card_no);
         tv_title.setText("提现");
     }
 
@@ -125,12 +126,12 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
                     return;
                 }
 
-                if (method.equals("alipay") && TextUtils.isEmpty(mAccount.alipay)) {
+                if (method.equals("alipay") && null == shopInfo.getAlipay()) {
                     UIUtil.showToast(R.string.err_no_alipay);
                     return;
                 }
 
-                if (method.equals("bank") && TextUtils.isEmpty(mAccount.bank.card_no)) {
+                if (method.equals("bank") && null == shopInfo.getBank()) {
                     UIUtil.showToast(R.string.err_no_bankcard);
                     return;
                 }
@@ -152,19 +153,19 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
      * @param money
      */
     private void submitWithdraw(final String method, final int money) {
-        if (money > mAccount.balance) {
-            UIUtil.showToast(R.string.err_over_balance);
-            return;
-        }
-        if (money <= 0) {
-            UIUtil.showToast(R.string.err_withdraw_num);
-            return;
-        }
-        if (money < mAccount.min_withdraw_money / 100) {
-            UIUtil.showToast("提现金额不少于"
-                    + String.valueOf(mAccount.min_withdraw_money / 100));
-            return;
-        }
+//        if (money > mAccount.balance) {
+//            UIUtil.showToast(R.string.err_over_balance);
+//            return;
+//        }
+//        if (money <= 0) {
+//            UIUtil.showToast(R.string.err_withdraw_num);
+//            return;
+//        }
+//        if (money < mAccount.min_withdraw_money / 100) {
+//            UIUtil.showToast("提现金额不少于"
+//                    + String.valueOf(mAccount.min_withdraw_money / 100));
+//            return;
+//        }
 
         mPresenter.withdraw(method, money);
     }

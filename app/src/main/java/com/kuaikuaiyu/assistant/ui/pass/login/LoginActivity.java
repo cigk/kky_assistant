@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.home.login;
+package com.kuaikuaiyu.assistant.ui.pass.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.home.HomeActivity;
-import com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity;
+import com.kuaikuaiyu.assistant.ui.pass.signup.SignUpActivity;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
@@ -21,9 +21,9 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-import static com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity.LAUNCH_TYPE;
-import static com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity.RESET_PWD;
-import static com.kuaikuaiyu.assistant.ui.home.signup.SignUpActivity.SIGN_UP;
+import static com.kuaikuaiyu.assistant.ui.pass.signup.SignUpActivity.LAUNCH_TYPE;
+import static com.kuaikuaiyu.assistant.ui.pass.signup.SignUpActivity.RESET_PWD;
+import static com.kuaikuaiyu.assistant.ui.pass.signup.SignUpActivity.SIGN_UP;
 
 /**
  * 登录页面

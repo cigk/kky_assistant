@@ -13,7 +13,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.kuaikuaiyu.assistant.ui.home.splash.SplashActivity;
+import com.kuaikuaiyu.assistant.ui.pass.splash.SplashActivity;
 import com.kuaikuaiyu.assistant.sys.ActivityManager;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 

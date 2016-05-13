@@ -11,9 +11,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.Account;
 import com.kuaikuaiyu.assistant.modle.domain.VerifyData;
-import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
@@ -102,9 +100,9 @@ public class BindAlipayFragment extends BaseFragment implements BindAlipayView {
                 tv_info.setVisibility(View.GONE);
                 tv_info.setText(R.string.success_alipay_verify);
                 mActivity.setResult(Activity.RESULT_OK);
-                Account mAccount = ConfigUtil.getAccountInfo();
-                mAccount.alipay = mVerifyData.verify_data.alipay;
-                ConfigUtil.saveAccountInfo(mAccount);
+//                Account mAccount = ConfigUtil.getAccountInfo();
+//                mAccount.alipay = mVerifyData.verify_data.alipay;
+//                ConfigUtil.saveAccountInfo(mAccount);
                 break;
         }
         et_account.setText(mVerifyData.verify_data.alipay);

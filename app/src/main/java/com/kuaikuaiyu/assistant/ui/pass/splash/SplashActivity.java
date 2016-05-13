@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.home.splash;
+package com.kuaikuaiyu.assistant.ui.pass.splash;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,7 +8,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.home.HomeActivity;
-import com.kuaikuaiyu.assistant.ui.home.login.LoginActivity;
+import com.kuaikuaiyu.assistant.ui.pass.login.LoginActivity;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 

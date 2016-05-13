@@ -1,5 +1,14 @@
 package com.kuaikuaiyu.assistant.net;
 
+/**
+ * {
+ * "code": 0,
+ * "data": {},
+ * "message": ""
+ * }
+ * <p>
+ * Http Status Code 为 200 并且返回内容的code不为0时 抛出APIException
+ */
 public class ApiException extends RuntimeException {
 
     /**
@@ -18,12 +27,24 @@ public class ApiException extends RuntimeException {
     public static final int ERROR_CODE_OLD_PASSWORD_EQUAL_NEW_PASSWORD = 161;//new password could not equal the old one
     public static final int ERROR_CODE_INVALID_AUTHENTICATION_TOKEN = 170;//invalid authentication
 
+    private int code;
+
     public ApiException(int code, String message) {
         this(getApiExceptionMessage(code, message));
+        this.code = code;
     }
 
     public ApiException(String detailMessage) {
         super(detailMessage);
+    }
+
+    /**
+     * 获取异常代码
+     *
+     * @return
+     */
+    public int code() {
+        return this.code;
     }
 
     /**
