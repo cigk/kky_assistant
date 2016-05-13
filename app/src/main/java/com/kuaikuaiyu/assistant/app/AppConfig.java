@@ -31,6 +31,11 @@ public class AppConfig {
     /*---------- Balance Module Url End---------- */
 
 
+    /*---------- Income Module UrlBegin---------- */
+    public static final String URL_INCOME_ACCOUNT = "/REST/QRCodeOrder";
+    /*---------- Income Module Url End---------- */
+
+
     /**
      * ********************** RequestCode *****************************
      */

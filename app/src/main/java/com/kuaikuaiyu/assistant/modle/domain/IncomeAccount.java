@@ -10,4 +10,15 @@ import java.util.List;
  */
 public class IncomeAccount {
 
+    public List<Order> order_list;
+
+    public static class Order {
+        public int id;
+        public long amount;
+        public String status;
+        public String account_type;
+        public String account_type_to_text;
+        public String created_time;
+        public String pay_account;
+    }
 }

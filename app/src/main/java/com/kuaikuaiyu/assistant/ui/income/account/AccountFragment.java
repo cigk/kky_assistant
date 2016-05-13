@@ -6,21 +6,14 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
-import com.kuaikuaiyu.assistant.rx.SchedulersCompat;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
+import com.kuaikuaiyu.assistant.ui.widgets.LoadingPage;
 import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
 import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;
-import com.kuaikuaiyu.assistant.utils.UIUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import rx.Observable;
-import rx.Subscriber;
 
 /**
  * Created by binlly
@@ -59,37 +52,12 @@ public class AccountFragment extends BaseFragment implements AccountView {
     protected void setListener() {
         mpf.setRefreshingListener(rv_account);
         mpf.setMaterialPtrHandler(frame -> {
-            UIUtil.showToast("刷新ing...");
-
             mPresenter.getIncomeAccount();
-
-            Observable.just(false).delay(3, TimeUnit.SECONDS).compose(SchedulersCompat
-                    .applyIoSchedulers()).subscribe(new Subscriber<Boolean>() {
-                @Override
-                public void onCompleted() {
-                    if (mpf != null) {
-                        mpf.complete();
-                    }
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    if (mpf != null) {
-                        mpf.complete();
-                    }
-                }
-
-                @Override
-                public void onNext(Boolean aBoolean) {
-                    UIUtil.showToast("ok");
-                }
-            });
         });
     }
 
     @Override
     protected void initData() throws Exception {
-        mLoadingPage.setSucceed();
         mPresenter.getIncomeAccount();
     }
 
@@ -98,20 +66,27 @@ public class AccountFragment extends BaseFragment implements AccountView {
         mPresenter.getIncomeAccount();
     }
 
-    private List<String> mList = new ArrayList<>();
-
     @Override
     public void fillData(IncomeAccount incomeAccount) {
-        for (int i = 0; i < 5; i++) {
-            mList.add(String.valueOf(i));
-        }
         if (mAdapter == null) {
-            mAdapter = new AccountAdapter(mActivity, R.layout.item_income_account, mList,
-                    mPresenter);
+            mAdapter = new AccountAdapter(mActivity, R.layout.item_income_account, incomeAccount
+                    .order_list);
             rv_account.setLayoutManager(new LinearLayoutManager(mActivity));
             rv_account.setAdapter(mAdapter);
         } else {
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void refreshComplete() {
+        if (mpf != null) {
+            mpf.complete();
+        }
+    }
+
+    @Override
+    public LoadingPage getLoadingPage() {
+        return mLoadingPage;
     }
 }

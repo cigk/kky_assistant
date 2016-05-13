@@ -12,7 +12,9 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.kuaikuaiyu.assistant.base.BasePresenter;
+import com.kuaikuaiyu.assistant.modle.domain.QRCode;
 import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.rx.SchedulersCompat;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
@@ -35,6 +37,7 @@ import rx.Subscriber;
 public class QrcodePresenter implements BasePresenter {
     private IncomeService service;
     private QrcodeView mView;
+    private RxSubscriber<QRCode> mSubscriber;
 
     private static final String IMAGE_PREFIX = "qrcode_";
     private static final String IMAGE_SUFFIX = ".jpg";
@@ -53,7 +56,7 @@ public class QrcodePresenter implements BasePresenter {
      * @return
      */
     public Bitmap createViewBitmap(View v) {
-        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.RGB_565);
         Canvas canvas = new Canvas(bitmap);
         v.draw(canvas);
         return bitmap;
@@ -71,11 +74,6 @@ public class QrcodePresenter implements BasePresenter {
         for (File f : dir.listFiles()) {
             if (f.getName().startsWith(prefix)) {
                 f.delete();
-                //                context.getContentResolver().delete(MediaStore.Images.Media
-                // .EXTERNAL_CONTENT_URI,
-                //                        MediaStore.Images.ImageColumns.DATA + "=?", new String[]{f
-                //                                .getAbsolutePath()});
-
                 MediaScannerConnection.scanFile(context, new String[]{f.getAbsolutePath()}, new
                         String[]{"image/*"}, null);
             }
@@ -151,9 +149,9 @@ public class QrcodePresenter implements BasePresenter {
         });
     }
 
-    private void showTipDialog(Context context, String path, String msg) {
-        new AlertDialog.Builder(context).setMessage(msg).setPositiveButton("确定", (dialog, which)
-                -> {
+    private void showTipDialog(Context context, String path, String title) {
+        new AlertDialog.Builder(context).setTitle(title).setMessage(path).setPositiveButton("确定",
+                (dialog, which) -> {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.parse("file://" + path), "image/*");
@@ -166,6 +164,8 @@ public class QrcodePresenter implements BasePresenter {
 
     @Override
     public void clean() {
-
+        if (mSubscriber != null) {
+            mSubscriber.cancel();
+        }
     }
 }

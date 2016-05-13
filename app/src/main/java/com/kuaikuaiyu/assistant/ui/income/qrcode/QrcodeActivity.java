@@ -62,8 +62,8 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        Bitmap bitmap = QRCodeUtil.createImage("http://www.jianshu.com/p/3141d4e46240", 1000,
-                1000, null);
+        Bitmap bitmap = QRCodeUtil.createImage("http://www.jianshu.com/p/3141d4e46240", 800, 800,
+                null);
         iv_qrcode.setImageBitmap(bitmap);
     }
 
