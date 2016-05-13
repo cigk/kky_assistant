@@ -46,7 +46,7 @@
 
     <!--账户相关模块-->
     <string name="account_not_bind">还没有绑定提现账号，需要先绑定提现账号才能提现</string>
-    <string name="withdraw_limit_info">每天最多提现一次，累计提现超过5000元，最低提现提升至500元</string>
+    <string name="withdraw_limit_info">备注:支付宝最低提现100元</string>
     <string name="err_no_alipay">您未绑定支付宝账号</string>
     <string name="err_no_bankcard">您未绑定银行卡</string>
     <string name="err_withdraw_num">请输入正确的提现金额</string>

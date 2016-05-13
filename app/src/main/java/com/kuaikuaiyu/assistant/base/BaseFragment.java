@@ -185,7 +185,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 设置数据
      */
-    protected abstract void initData() throws Exception;
+    protected abstract void initData();
 
     /**
      * 加载失败时重新加载

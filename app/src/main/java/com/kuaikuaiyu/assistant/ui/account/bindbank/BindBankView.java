@@ -10,7 +10,12 @@ import com.kuaikuaiyu.assistant.base.BaseView;
  */
 public interface BindBankView extends BaseView {
     /**
-     * 成功提交审核
+     * 绑定成功
      */
     void bindSucceed();
+
+    /**
+     * 绑定失败
+     */
+    void bindFail();
 }

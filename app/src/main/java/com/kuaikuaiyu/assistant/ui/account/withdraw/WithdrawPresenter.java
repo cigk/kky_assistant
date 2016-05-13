@@ -1,7 +1,12 @@
 package com.kuaikuaiyu.assistant.ui.account.withdraw;
 
+import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.service.AccountService;
+import com.kuaikuaiyu.assistant.net.ReqParams;
+import com.kuaikuaiyu.assistant.rx.IoTransformer;
+import com.kuaikuaiyu.assistant.rx.RxSubscriber;
+import com.kuaikuaiyu.assistant.utils.DigestUtil;
 
 import javax.inject.Inject;
 
@@ -15,6 +20,7 @@ public class WithdrawPresenter implements BasePresenter {
 
     private WithdrawView withdrawView;
     private AccountService service;
+    private RxSubscriber subscriber;
 
     @Inject
     public WithdrawPresenter(WithdrawView withdrawView, AccountService service) {
@@ -24,17 +30,30 @@ public class WithdrawPresenter implements BasePresenter {
 
     @Override
     public void clean() {
-
+        if (null != subscriber) subscriber.cancel();
     }
 
     /**
      * 提现
      *
-     * @param method
      * @param money
      */
-    public void withdraw(String method, int money) {
+    public void withdraw(int id, int money, String pwd) {
+        subscriber = new RxSubscriber(withdrawView) {
+            @Override
+            public void onNext(Object o) {
+                withdrawView.withdrawSucceed();
+            }
+        };
 
+        ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_WITHDRAW);
+        params.addParam("amount", money);
+        params.addParam("withdraw_account_id", id);
+        params.addParam("password", DigestUtil.getMd5(pwd.getBytes()));
+
+        service.withdraw(params.getQueryMap(), params.getFieldMap())
+                .compose(new IoTransformer())
+                .subscribe(subscriber);
     }
 
     /**

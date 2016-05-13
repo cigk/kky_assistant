@@ -28,8 +28,9 @@ public class AppConfig {
 
     /*---------- Balance Module Url Begin---------- */
     public static final String URL_BIND_ALIPAY = "/REST/WithdrawBindAlipay";
-    public static final String URL_BIND_BANK = "/REST//WithdrawBindBank";
+    public static final String URL_BIND_BANK = "/REST/WithdrawBindBank";
     public static final String URL_SHOP_INFO = "/REST/ShopInfo";
+    public static final String URL_WITHDRAW = "/REST/DoWithdraw";
     /*---------- Balance Module Url End---------- */
 
 

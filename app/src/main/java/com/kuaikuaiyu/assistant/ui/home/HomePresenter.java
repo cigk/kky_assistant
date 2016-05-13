@@ -9,8 +9,11 @@ import com.kuaikuaiyu.assistant.modle.service.PassService;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
+import com.kuaikuaiyu.assistant.sys.event.ShopInfoUpdated;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -36,25 +39,27 @@ public class HomePresenter implements BasePresenter {
 
     @Override
     public void clean() {
-
+        if (null != subscriber) subscriber.cancel();
     }
-
 
     /**
      * 获取店铺信息
+     *
+     * @param needHandleView true 回调View的 loadSucceed/loadFail, false不回调，只更新数据并发送事件
      */
-    public void getShopInfo() {
+    public void getShopInfo(boolean needHandleView) {
         subscriber = new RxSubscriber<ShopInfo>(null) {
             @Override
             public void onNext(ShopInfo info) {
                 ConfigUtil.setShopInfo(info);
-                homeView.loadSucceed();
+                EventBus.getDefault().post(new ShopInfoUpdated());
+                if (needHandleView) homeView.loadSucceed();
             }
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                homeView.loadFail();
+                if (needHandleView) homeView.loadFail();
             }
         };
         ReqParams params = new ReqParams(ReqParams.GET, AppConfig.URL_SHOP_INFO);
