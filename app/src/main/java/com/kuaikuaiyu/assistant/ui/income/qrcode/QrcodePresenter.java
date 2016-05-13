@@ -1,9 +1,11 @@
 package com.kuaikuaiyu.assistant.ui.income.qrcode;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -61,13 +63,22 @@ public class QrcodePresenter implements BasePresenter {
      * 清空指定文件夹的指定图片
      * 需要获取[WRITE_EXTERNAL_STORAGE]权限
      *
+     * @param context
      * @param dirPath
      */
-    private void clearQrcodeImages(String dirPath, String prefix) {
+    private void clearQrcodeImages(Context context, String dirPath, String prefix) {
         File dir = new File(dirPath);
         for (File f : dir.listFiles()) {
-            if (f.getName().startsWith(prefix))
+            if (f.getName().startsWith(prefix)) {
                 f.delete();
+                //                context.getContentResolver().delete(MediaStore.Images.Media
+                // .EXTERNAL_CONTENT_URI,
+                //                        MediaStore.Images.ImageColumns.DATA + "=?", new String[]{f
+                //                                .getAbsolutePath()});
+
+                MediaScannerConnection.scanFile(context, new String[]{f.getAbsolutePath()}, new
+                        String[]{"image/*"}, null);
+            }
         }
     }
 
@@ -75,17 +86,18 @@ public class QrcodePresenter implements BasePresenter {
      * 保存图片
      * 需要获取[WRITE_EXTERNAL_STORAGE]权限
      *
+     * @param context
      * @param bitmap
      * @return
      */
-    private String storeImage(Bitmap bitmap) {
+    private String storeImage(Context context, Bitmap bitmap) {
         File storeDir = new File(Environment.getExternalStorageDirectory(), IMAGE_STORE_DIR);
         if (!storeDir.exists()) {
             storeDir.mkdir();
         }
 
         //清空原来图片
-        clearQrcodeImages(storeDir.getAbsolutePath(), IMAGE_PREFIX);
+        clearQrcodeImages(context, storeDir.getAbsolutePath(), IMAGE_PREFIX);
 
         String fileName = IMAGE_PREFIX + System.currentTimeMillis() + IMAGE_SUFFIX;
         File file = new File(storeDir, fileName);
@@ -113,7 +125,7 @@ public class QrcodePresenter implements BasePresenter {
      * @param view
      */
     synchronized public void saveView(Context context, View view) {
-        Observable.just(storeImage(createViewBitmap(view))).compose(SchedulersCompat
+        Observable.just(storeImage(context, createViewBitmap(view))).compose(SchedulersCompat
                 .applyIoSchedulers()).subscribe(new Subscriber<String>() {
             @Override
             public void onNext(String s) {
@@ -122,6 +134,7 @@ public class QrcodePresenter implements BasePresenter {
                     // 通知图库更新
                     context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri
                             .parse("file://" + s)));
+                    showTipDialog(context, s, "保存成功是否前往查看?");
                 } else {
                     UIUtil.showToast("保存失败 请重试");
                 }
@@ -136,6 +149,19 @@ public class QrcodePresenter implements BasePresenter {
             public void onCompleted() {
             }
         });
+    }
+
+    private void showTipDialog(Context context, String path, String msg) {
+        new AlertDialog.Builder(context).setMessage(msg).setPositiveButton("确定", (dialog, which)
+                -> {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse("file://" + path), "image/*");
+            context.startActivity(intent);
+            dialog.dismiss();
+        }).setNegativeButton("取消", (dialog, which) -> {
+            dialog.dismiss();
+        }).show();
     }
 
     @Override
