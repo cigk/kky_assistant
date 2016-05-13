@@ -55,14 +55,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      */
     protected abstract void initComponent();
 
-
-    /**
-     * findViewById
-     * 用于ButterKnife有时候空指针异常的问题
-     */
-    //    protected void getElement() {
-    //
-    //    }
     @Override
     protected void onDestroy() {
         if (loadingDia != null)
