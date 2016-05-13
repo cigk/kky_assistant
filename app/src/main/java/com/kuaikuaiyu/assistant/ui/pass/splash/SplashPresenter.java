@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.home.splash;
+package com.kuaikuaiyu.assistant.ui.pass.splash;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;

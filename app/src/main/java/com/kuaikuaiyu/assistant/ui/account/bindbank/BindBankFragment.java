@@ -14,11 +14,9 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.Account;
 import com.kuaikuaiyu.assistant.modle.domain.VerifyData;
 import com.kuaikuaiyu.assistant.ui.widgets.PlainEditText;
 import com.kuaikuaiyu.assistant.utils.CityUtil;
-import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.DialogUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
@@ -68,7 +66,9 @@ public class BindBankFragment extends BaseFragment implements BindBankView, View
 
     @Override
     protected void initComponent() {
-
+        DaggerBindBankComponent.builder()
+                .bindBankModule(new BindBankModule(this))
+                .build().inject(this);
     }
 
     @Override
@@ -169,13 +169,13 @@ public class BindBankFragment extends BaseFragment implements BindBankView, View
                 tv_info.setVisibility(View.GONE);
                 tv_info.setText(R.string.success_bankaccount_verify);
                 mActivity.setResult(Activity.RESULT_OK);
-                Account mAccount = ConfigUtil.getAccountInfo();
-                mAccount.bank.name = mVerifyData.verify_data.bank.name;
-                mAccount.bank.province = mVerifyData.verify_data.bank.province;
-                mAccount.bank.city = mVerifyData.verify_data.bank.city;
-                mAccount.bank.card_no = mVerifyData.verify_data.bank.card_no;
-                mAccount.bank.owner = mVerifyData.verify_data.bank.owner;
-                ConfigUtil.saveAccountInfo(mAccount);
+//                Account mAccount = ConfigUtil.getAccountInfo();
+//                mAccount.bank.name = mVerifyData.verify_data.bank.name;
+//                mAccount.bank.province = mVerifyData.verify_data.bank.province;
+//                mAccount.bank.city = mVerifyData.verify_data.bank.city;
+//                mAccount.bank.card_no = mVerifyData.verify_data.bank.card_no;
+//                mAccount.bank.owner = mVerifyData.verify_data.bank.owner;
+//                ConfigUtil.saveAccountInfo(mAccount);
                 break;
 
             default:

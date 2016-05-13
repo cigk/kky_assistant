@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.home.signup;
+package com.kuaikuaiyu.assistant.ui.pass.login;
 
 import com.kuaikuaiyu.assistant.modle.service.PassService;
 import com.kuaikuaiyu.assistant.net.NetUtil;
@@ -14,23 +14,23 @@ import dagger.Provides;
  * Desc:    启动页Module
  */
 @Module
-public class SignUpModule {
+public class LoginModule {
 
-    private SignUpView signUpView;
+    private LoginView loginView;
 
-    public SignUpModule(SignUpView signUpView) {
-        this.signUpView = signUpView;
+    public LoginModule(LoginView loginView) {
+        this.loginView = loginView;
     }
 
     @PerActivity
     @Provides
-    SignUpView getSignUpView() {
-        return signUpView;
+    LoginView getView() {
+        return loginView;
     }
 
     @PerActivity
     @Provides
-    PassService getPassService() {
+    PassService getService() {
         return NetUtil.createForPass(PassService.class);
     }
 }

@@ -1,8 +1,14 @@
 package com.kuaikuaiyu.assistant.utils;
 
 import android.text.TextUtils;
+import android.util.Base64;
 
-import com.kuaikuaiyu.assistant.modle.domain.Account;
+import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Author:  Gavin
@@ -17,11 +23,13 @@ public class ConfigUtil {
     public static final String LOGIN_PHONE = "login_phone";
     public static final String SHOP_NAME = "shop_name";
     public static final String SHOP_MOBILE = "shop_moble";
+    public static final String SHOP_INFO = "shop_info";
 
     public static String uuid;
     public static String authToken;
     public static String shopName;
     public static String shopMobile;
+    public static ShopInfo shopInfo;
 
     /**
      * 获取Device Uuid
@@ -132,21 +140,66 @@ public class ConfigUtil {
     }
 
     /**
-     * 获取账户信息
+     * 获取ShopInfo
      *
      * @return
      */
-    public static Account getAccountInfo() {
-        //TODO need implementation
-        return new Account();
+    public static ShopInfo getShopInfo() {
+        if (null == shopInfo) {
+            shopInfo = getBeanFromSp(SHOP_INFO, ShopInfo.class);
+        }
+        return shopInfo;
     }
 
     /**
-     * 保存账户信息
+     * 保存ShopInfo
      *
      * @param info
      */
-    public static void saveAccountInfo(Account info) {
+    public static void setShopInfo(ShopInfo info) {
+        shopInfo = info;
+        saveBeanToSp(shopInfo, SHOP_INFO);
+    }
 
+    /**
+     * 保存对象到SharedPreference
+     *
+     * @param obj
+     */
+    public static void saveBeanToSp(Object obj, String key) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos;
+        try {
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 将Product对象转换成byte数组，并将其进行base64编码
+        String objStr = Base64.encodeToString(baos.toByteArray(), Base64.URL_SAFE);
+        SpUtil.save(key, objStr);
+    }
+
+    /**
+     * 从SharedPreference取出对象
+     *
+     * @return
+     */
+    public static <T> T getBeanFromSp(String key, Class<T> clazz) {
+        String str = SpUtil.get(key, null);
+        if (null == str) return null;
+        T obj = null;
+        // 对Base64格式的字符串进行解码
+        byte[] base64Bytes = Base64.decode(str.getBytes(), Base64.URL_SAFE);
+        ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
+        ObjectInputStream ois;
+        try {
+            ois = new ObjectInputStream(bais);
+            obj = (T) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 从ObjectInputStream中读取Product对象
+        return obj;
     }
 }

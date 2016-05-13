@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.home.signup;
+package com.kuaikuaiyu.assistant.ui.pass.signup;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
