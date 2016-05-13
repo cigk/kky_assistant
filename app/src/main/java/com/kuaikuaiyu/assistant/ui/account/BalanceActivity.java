@@ -42,10 +42,11 @@ public class BalanceActivity extends BaseActivity {
     @Override
     protected void initData(Bundle savedInstanceState) {
         topBar.setTitle("余额");
-        topBar.setRightText("账单记录");
+        topBar.setRightText(getString(R.string.account_balance_records_title));
         topBar.setRightTextVisibility(View.VISIBLE);
         BaseFragment fragment = new BalanceFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, fragment)
+                .commit();
     }
 
     @Override
@@ -57,6 +58,7 @@ public class BalanceActivity extends BaseActivity {
      * 提现记录页面
      */
     public void records() {
-        CommonActivity.start(this, CommonActivity.DISPLAY_WITHDRAW_RECORDS, "提现记录", null);
+        CommonActivity.start(this, CommonActivity.DISPLAY_WITHDRAW_RECORDS, getString(R.string
+                .account_balance_records_title), null);
     }
 }

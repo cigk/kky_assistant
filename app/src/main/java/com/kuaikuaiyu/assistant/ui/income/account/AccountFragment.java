@@ -7,7 +7,6 @@ import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
-import com.kuaikuaiyu.assistant.ui.widgets.LoadingPage;
 import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
 import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;
 
@@ -51,9 +50,7 @@ public class AccountFragment extends BaseFragment implements AccountView {
     @Override
     protected void setListener() {
         mpf.setRefreshingListener(rv_account);
-        mpf.setMaterialPtrHandler(frame -> {
-            mPresenter.getIncomeAccount();
-        });
+        mpf.setMaterialPtrHandler(frame -> mPresenter.getIncomeAccount());
     }
 
     @Override
@@ -67,7 +64,7 @@ public class AccountFragment extends BaseFragment implements AccountView {
     }
 
     @Override
-    public void fillData(IncomeAccount incomeAccount) {
+    public void loadSucceed(IncomeAccount incomeAccount) {
         if (mAdapter == null) {
             mAdapter = new AccountAdapter(mActivity, R.layout.item_income_account, incomeAccount
                     .order_list);
@@ -76,6 +73,17 @@ public class AccountFragment extends BaseFragment implements AccountView {
         } else {
             mAdapter.notifyDataSetChanged();
         }
+        mLoadingPage.setSucceed();
+    }
+
+    @Override
+    public void loadEmpty() {
+        mLoadingPage.setEmpty();
+    }
+
+    @Override
+    public void loadError() {
+        mLoadingPage.setError();
     }
 
     @Override
@@ -83,10 +91,5 @@ public class AccountFragment extends BaseFragment implements AccountView {
         if (mpf != null) {
             mpf.complete();
         }
-    }
-
-    @Override
-    public LoadingPage getLoadingPage() {
-        return mLoadingPage;
     }
 }

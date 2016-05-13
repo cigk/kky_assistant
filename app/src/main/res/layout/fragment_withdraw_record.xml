@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout
-    android:id="@+id/mptr"
+    android:id="@+id/mpf"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"

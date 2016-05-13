@@ -1,7 +1,5 @@
 package com.kuaikuaiyu.assistant.ui.income.qrcode;
 
-import android.graphics.Bitmap;
-
 import com.kuaikuaiyu.assistant.base.BaseView;
 
 /**

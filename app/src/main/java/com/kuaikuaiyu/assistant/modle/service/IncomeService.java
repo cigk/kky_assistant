@@ -18,6 +18,12 @@ import rx.Observable;
  */
 public interface IncomeService {
 
+    /**
+     * 请求收款流水记录
+     *
+     * @param queryMap
+     * @return
+     */
     @GET(AppConfig.URL_INCOME_ACCOUNT)
     Observable<HttpResult<IncomeAccount>> getIncomeAccount(@QueryMap Map<String, String> queryMap);
 }

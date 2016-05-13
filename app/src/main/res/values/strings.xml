@@ -64,5 +64,6 @@
     <string name="enter_bank_number">请输入银行账号</string>
     <string name="enter_bank_owner_name">请输入户名</string>
     <string name="success_bankaccount_verify">银行卡信息审核成功</string>
+    <string name="account_balance_records_title">账单记录</string>
 
 </resources>

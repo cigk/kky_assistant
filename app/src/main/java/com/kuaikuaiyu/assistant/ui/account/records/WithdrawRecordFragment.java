@@ -5,38 +5,30 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.WithdrawItem;
-import com.kuaikuaiyu.assistant.ui.account.withdraw.WithdrawAdapter;
+import com.kuaikuaiyu.assistant.modle.domain.BillRecord;
 import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
 import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class WithdrawRecordFragment extends BaseFragment implements WithdrawRecordView {
 
-
     @Bind(R.id.rv_withdraw)
-    PtrRecyclerView rvWithdraw;
-    @Bind(R.id.mptr)
-    MaterialPtrFramelayout mptr;
+    PtrRecyclerView rv_withdraw;
+    @Bind(R.id.mpf)
+    MaterialPtrFramelayout mpf;
 
-    private WithdrawAdapter mAdapter;
+    private WithdrawRecordAdapter mAdapter;
 
     @Inject
     WithdrawRecordPresenter mPresenter;
 
-    private List<WithdrawItem> mWithdrawItem = new ArrayList<>();
-
     @Override
     protected void initComponent() {
-        DaggerWithdrawRecordComponent.builder()
-                .withdrawRecordModule(new WithdrawRecordModule(this)).build().inject(this);
+        DaggerWithdrawRecordComponent.builder().withdrawRecordModule(new WithdrawRecordModule
+                (this)).build().inject(this);
     }
 
     @Override
@@ -51,33 +43,30 @@ public class WithdrawRecordFragment extends BaseFragment implements WithdrawReco
 
     @Override
     protected void setListener() {
-        mptr.setMaterialPtrHandler(new MaterialPtrFramelayout.PtrMaterialHandler() {
-            @Override
-            public void onBegin(PtrFrameLayout frame) {
-                refresh();
-            }
-        });
+        mpf.setRefreshingListener(rv_withdraw);
+        mpf.setMaterialPtrHandler(frame -> mPresenter.getBillRecords());
     }
 
     @Override
     protected void initData() throws Exception {
-        mPresenter.getRecords();
+        mPresenter.getBillRecords();
     }
 
     @Override
     protected void refresh() {
-        mPresenter.getRecords();
+        mPresenter.getBillRecords();
     }
 
     @Override
-    public void loadSucceed(List<WithdrawItem> data) {
-        //TODO setAdapter
+    public void loadSucceed(BillRecord bill) {
         if (null == mAdapter) {
-            mAdapter = new WithdrawAdapter(mActivity, R.layout.list_item_withdraw_record, data);
-            rvWithdraw.setAdapter(mAdapter);
-            rvWithdraw.setLayoutManager(new LinearLayoutManager(mActivity));
+            mAdapter = new WithdrawRecordAdapter(mActivity, R.layout.list_item_withdraw_record,
+                    bill.bill_list);
+            rv_withdraw.setAdapter(mAdapter);
+            rv_withdraw.setLayoutManager(new LinearLayoutManager(mActivity));
+        } else {
+            mAdapter.notifyDataSetChanged();
         }
-        mAdapter.notifyDataSetChanged();
         mLoadingPage.setSucceed();
     }
 
@@ -89,5 +78,12 @@ public class WithdrawRecordFragment extends BaseFragment implements WithdrawReco
     @Override
     public void loadError() {
         mLoadingPage.setError();
+    }
+
+    @Override
+    public void refreshComplete() {
+        if (mpf != null) {
+            mpf.complete();
+        }
     }
 }

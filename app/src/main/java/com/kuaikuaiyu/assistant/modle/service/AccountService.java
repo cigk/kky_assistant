@@ -1,6 +1,7 @@
 package com.kuaikuaiyu.assistant.modle.service;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
+import com.kuaikuaiyu.assistant.modle.domain.BillRecord;
 import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
 import com.kuaikuaiyu.assistant.net.HttpResult;
 
@@ -28,7 +29,8 @@ public interface AccountService {
     @FormUrlEncoded
     @PUT(AppConfig.URL_BIND_BANK)
     Observable<HttpResult> bindBankCard(@QueryMap Map<String, String> queryMap,
-                                        @FieldMap Map<String, String> fieldMap);
+            @FieldMap Map<String, String> fieldMap);
+
 
     /**
      * 获取商店信息
@@ -38,4 +40,12 @@ public interface AccountService {
      */
     @GET(AppConfig.URL_SHOP_INFO)
     Observable<HttpResult<ShopInfo>> getShopInfo(@QueryMap Map<String, String> queryMap);
+
+
+    /**
+     * @param queryMap
+     * @return
+     */
+    @GET(AppConfig.URL_BILL_RECORD)
+    Observable<HttpResult<BillRecord>> getBillRecords(@QueryMap Map<String, String> queryMap);
 }

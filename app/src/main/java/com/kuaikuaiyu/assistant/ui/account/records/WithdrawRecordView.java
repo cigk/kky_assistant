@@ -1,7 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.account.records;
 
 import com.kuaikuaiyu.assistant.base.BaseView;
-import com.kuaikuaiyu.assistant.modle.domain.WithdrawItem;
+import com.kuaikuaiyu.assistant.modle.domain.BillRecord;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface WithdrawRecordView extends BaseView {
     /**
      * 数据加载成功
      */
-    void loadSucceed(List<WithdrawItem> data);
+    void loadSucceed(BillRecord bill);
 
     /**
      * 加载数据为空
@@ -27,5 +27,10 @@ public interface WithdrawRecordView extends BaseView {
      * 加载数据失败
      */
     void loadError();
+
+    /**
+     * 刷新完成(有可能是失败 有可能是成功)
+     */
+    void refreshComplete();
 
 }

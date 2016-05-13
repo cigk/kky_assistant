@@ -27,20 +27,24 @@ public class AccountPresenter implements BasePresenter {
         mView = view;
     }
 
+    /**
+     * 获取收款流水记录
+     */
     public void getIncomeAccount() {
         mSubscriber = new RxSubscriber<IncomeAccount>(null) {
             @Override
             public void onNext(IncomeAccount incomeAccount) {
                 if (incomeAccount != null && incomeAccount.order_list != null) {
-                    mView.fillData(incomeAccount);
-                    mView.getLoadingPage().setSucceed();
+                    mView.loadSucceed(incomeAccount);
+                } else {
+                    mView.loadError();
                 }
             }
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mView.getLoadingPage().setError();
+                mView.loadError();
             }
 
             @Override
@@ -49,8 +53,10 @@ public class AccountPresenter implements BasePresenter {
                 mView.refreshComplete();
             }
         };
+
         ReqParams params = new ReqParams(ReqParams.GET, AppConfig.URL_INCOME_ACCOUNT);
         params.addQuery("offset", 0);
+        // TODO: 2016/5/13 limit 加载更多
         params.addQuery("limit", 10000);
         mService.getIncomeAccount(params.getQueryMap()).compose(new IoTransformer<>()).subscribe
                 (mSubscriber);
