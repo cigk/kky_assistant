@@ -1,6 +1,5 @@
 package com.kuaikuaiyu.assistant.ui.income.qrcode;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
@@ -13,7 +12,6 @@ import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 import com.kuaikuaiyu.assistant.utils.PermissionUtil;
-import com.kuaikuaiyu.assistant.utils.QRCodeUtil;
 
 import javax.inject.Inject;
 
@@ -62,9 +60,7 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        Bitmap bitmap = QRCodeUtil.createImage("http://www.jianshu.com/p/3141d4e46240", 800, 800,
-                null);
-        iv_qrcode.setImageBitmap(bitmap);
+        iv_qrcode.setImageBitmap(mPresenter.createQRCodeBitmap());
     }
 
     @Override
@@ -77,7 +73,7 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
             @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (PermissionUtil.checkPermissionRequestResult(QrcodeActivity.this, grantResults,
-                "需要获取访问存储权限才能保存照片", requestCode)) {
+                "需要存储权限才能保存照片", requestCode)) {
             mPresenter.saveView(QrcodeActivity.this, rl_qrcode_root);
         }
     }

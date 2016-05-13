@@ -46,11 +46,8 @@ public class NetUtil {
 //        SSLSocketFactory socketFactory = getSocketFactory();
         File cacheFile = new File(UIUtil.getContext().getCacheDir(), "okhttp_cache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb缓存
-        HttpLoggingInterceptor headerInterceptor = new HttpLoggingInterceptor();
         CacheControlInterceptor cacheControlInterceptor = new CacheControlInterceptor();
-        headerInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .addInterceptor(headerInterceptor)
                 .addInterceptor(cacheControlInterceptor)
                 .cache(cache)
                 .followRedirects(true);

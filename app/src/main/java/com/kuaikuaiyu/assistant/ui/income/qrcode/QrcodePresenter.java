@@ -13,9 +13,12 @@ import android.view.View;
 
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.QRCode;
+import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
 import com.kuaikuaiyu.assistant.modle.service.IncomeService;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.rx.SchedulersCompat;
+import com.kuaikuaiyu.assistant.utils.ConfigUtil;
+import com.kuaikuaiyu.assistant.utils.QRCodeUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import java.io.File;
@@ -60,6 +63,20 @@ public class QrcodePresenter implements BasePresenter {
         Canvas canvas = new Canvas(bitmap);
         v.draw(canvas);
         return bitmap;
+    }
+
+    /**
+     * 创建QRCodeBitmap
+     *
+     * @return
+     */
+    public Bitmap createQRCodeBitmap() {
+        ShopInfo shopInfo = ConfigUtil.getShopInfo();
+        if (shopInfo != null) {
+            return QRCodeUtil.createImage(shopInfo.getPay_url(), 800, 800, null);
+        }else {
+            return null;
+        }
     }
 
     /**
@@ -149,6 +166,13 @@ public class QrcodePresenter implements BasePresenter {
         });
     }
 
+    /**
+     * 保存截图成功之后显示前往查看对话框
+     *
+     * @param context
+     * @param path
+     * @param title
+     */
     private void showTipDialog(Context context, String path, String title) {
         new AlertDialog.Builder(context).setTitle(title).setMessage(path).setPositiveButton("确定",
                 (dialog, which) -> {

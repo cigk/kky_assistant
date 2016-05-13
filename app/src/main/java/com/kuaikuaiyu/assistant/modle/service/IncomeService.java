@@ -18,9 +18,6 @@ import rx.Observable;
  */
 public interface IncomeService {
 
-    //    @GET("/REST/QRCodeOrder")
-    //    Observable<HttpResult<QRCode>> getQRCodeData(@QueryMap Map<String, Integer> queryMap);
-
     @GET(AppConfig.URL_INCOME_ACCOUNT)
     Observable<HttpResult<IncomeAccount>> getIncomeAccount(@QueryMap Map<String, String> queryMap);
 }

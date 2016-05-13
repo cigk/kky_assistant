@@ -1,5 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.income.qrcode;
 
+import android.graphics.Bitmap;
+
 import com.kuaikuaiyu.assistant.base.BaseView;
 
 /**
@@ -9,4 +11,5 @@ import com.kuaikuaiyu.assistant.base.BaseView;
  * desc:
  */
 public interface QrcodeView extends BaseView {
+
 }
