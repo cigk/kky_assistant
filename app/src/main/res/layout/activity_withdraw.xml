@@ -18,8 +18,8 @@
         <TextView
             android:id="@+id/tv_alipay"
             style="@style/BaseTextViewStyle"
-            android:layout_weight="1"
             android:layout_width="0dp"
+            android:layout_weight="1"
             android:paddingLeft="@dimen/distance8"/>
 
         <RadioButton
@@ -40,9 +40,9 @@
             android:text="提现到银行卡"/>
 
         <TextView
-            android:layout_width="0dp"
             android:id="@+id/tv_bank_card"
             style="@style/BaseTextViewStyle"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingLeft="@dimen/distance8"/>
 
@@ -63,35 +63,60 @@
 
         <com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText
             android:id="@+id/et_money"
-            android:layout_height="match_parent"
+            style="@style/BaseEditTextStyle"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            style="@style/BaseEditTextStyle"/>
+            android:hint="请输入提现金额"/>
+
+
+    </LinearLayout>
+
+    <View style="@style/Divider"/>
+
+    <LinearLayout style="@style/BaseItemLayoutWhite">
+
+        <TextView
+            style="@style/BaseTextViewStyle"
+            android:layout_width="90dp"
+            android:text="提现密码:"/>
+
+        <EditText
+            android:id="@+id/et_pwd"
+            style="@style/BaseEditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:hint="请输入登录密码"
+            android:inputType="textPassword"/>
+
 
     </LinearLayout>
 
     <View style="@style/Divider"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/distance16"
         android:paddingLeft="@dimen/distance32"
         android:paddingRight="@dimen/distance32"
         android:paddingTop="@dimen/distance16"
         android:text="@string/withdraw_limit_info"
         android:textColor="@color/text_hint_color"
-        android:textSize="@dimen/font14"/>
+        android:textSize="@dimen/font12"/>
 
     <Button
-        android:layout_margin="@dimen/distance32"
         android:id="@+id/btn_submit"
         style="@style/ButtonStyle"
+        android:layout_margin="@dimen/distance32"
         android:layout_marginTop="@dimen/distance16"
         android:text="提现"/>
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/tv_withdraw_management"
         style="@style/BaseItemTitle"
         android:layout_width="wrap_content"
@@ -100,6 +125,7 @@
         android:layout_marginTop="@dimen/distance64"
         android:padding="@dimen/distance16"
         android:text="管理提现账号>"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary"
+        android:visibility="gone"/>
 
 </LinearLayout>

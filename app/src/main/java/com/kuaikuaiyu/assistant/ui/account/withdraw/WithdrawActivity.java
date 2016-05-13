@@ -1,9 +1,9 @@
 package com.kuaikuaiyu.assistant.ui.account.withdraw;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -13,9 +13,13 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
+import com.kuaikuaiyu.assistant.sys.event.UpdateShopInfo;
 import com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText;
+import com.kuaikuaiyu.assistant.utils.CommonUtil;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -23,36 +27,37 @@ import butterknife.Bind;
 
 public class WithdrawActivity extends BaseActivity implements WithdrawView, View.OnClickListener {
 
+    private static final String METHOD_ALIPAY = "alipay";
+    private static final String METHOD_BANK = "bank";
+
+
     @Bind(R.id.tv_alipay)
-    TextView tv_alipay;
+    TextView tvAlipay;
     @Bind(R.id.tv_bank_card)
-    TextView tv_bank_card;
+    TextView tvBankCard;
     @Bind(R.id.et_money)
-    MoneyEditText et_money;
+    MoneyEditText etMoney;
     @Bind(R.id.btn_submit)
-    Button btn_submit;
+    Button btnSubmit;
     @Bind(R.id.ll_alipay)
-    LinearLayout ll_alipay;
+    LinearLayout llAlipay;
     @Bind(R.id.rb_alipay)
-    RadioButton rb_alipay;
+    RadioButton rbAlipay;
     @Bind(R.id.rb_bank)
-    RadioButton rb_bank;
+    RadioButton rbBank;
     @Bind(R.id.ll_bank)
-    LinearLayout ll_bank;
+    LinearLayout llBank;
     @Bind(R.id.ib_back)
-    ImageButton ib_back;
+    ImageButton ibBack;
     @Bind(R.id.tv_title)
-    TextView tv_title;
-    @Bind(R.id.tv_withdraw_management)
-    TextView tv_withdraw_management;
-    @Bind(R.id.tv_right)
-    TextView tv_right;
+    TextView tvTitle;
+    @Bind(R.id.et_pwd)
+    EditText etPwd;
 
     @Inject
     WithdrawPresenter mPresenter;
 
-    private boolean withdrawFlag = false;
-    private String method = "alipay";
+    private String method = METHOD_ALIPAY;
     private ShopInfo shopInfo;
 
     @Override
@@ -69,17 +74,16 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
 
     @Override
     protected void setListener() {
-        ib_back.setOnClickListener(this);
-        btn_submit.setOnClickListener(this);
-        ll_bank.setOnClickListener(this);
-        ll_alipay.setOnClickListener(this);
-        tv_withdraw_management.setOnClickListener(this);
-        tv_right.setOnClickListener(this);
+        ibBack.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
+        llBank.setOnClickListener(this);
+        llAlipay.setOnClickListener(this);
 
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        tvTitle.setText("提现");
         mPresenter.updateAccountInfo();
     }
 
@@ -88,44 +92,26 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
         return mPresenter;
     }
 
-    /**
-     * 提现时需要更新账户信息
-     */
-    private void initView() {
-//        if (mAccount.min_withdraw_money == 0)
-//            et_money.setHint("请输入提现金额");
-//        else
-//            et_money.setHint("不少于" + String.valueOf(mAccount.min_withdraw_money / 100));
-//        tv_alipay.setText(mAccount.alipay);
-//        tv_bank_card.setText(mAccount.bank.card_no);
-        tv_title.setText("提现");
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back:
-                finish();
+                onBackPressed();
                 break;
 
             case R.id.ll_alipay:
-                method = "alipay";
-                rb_alipay.setChecked(true);
-                rb_bank.setChecked(false);
+                method = METHOD_ALIPAY;
+                rbAlipay.setChecked(true);
+                rbBank.setChecked(false);
                 break;
 
             case R.id.ll_bank:
-                method = "bank";
-                rb_bank.setChecked(true);
-                rb_alipay.setChecked(false);
+                method = METHOD_BANK;
+                rbBank.setChecked(true);
+                rbAlipay.setChecked(false);
                 break;
 
             case R.id.btn_submit:
-                if (TextUtils.isEmpty(et_money.getText())) {
-                    UIUtil.showToast(R.string.err_withdraw_num);
-                    return;
-                }
-
                 if (method.equals("alipay") && null == shopInfo.getAlipay()) {
                     UIUtil.showToast(R.string.err_no_alipay);
                     return;
@@ -135,10 +121,7 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
                     UIUtil.showToast(R.string.err_no_bankcard);
                     return;
                 }
-                submitWithdraw(method, et_money.getMoney());
-                break;
-
-            case R.id.tv_withdraw_management:
+                submit();
                 break;
 
             default:
@@ -148,26 +131,31 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
 
     /**
      * 提交提现请求
-     *
-     * @param method
-     * @param money
      */
-    private void submitWithdraw(final String method, final int money) {
-//        if (money > mAccount.balance) {
-//            UIUtil.showToast(R.string.err_over_balance);
-//            return;
-//        }
-//        if (money <= 0) {
-//            UIUtil.showToast(R.string.err_withdraw_num);
-//            return;
-//        }
+    private void submit() {
+        String moneyStr = etMoney.getText().toString().trim();
+        String pwd = etPwd.getText().toString().trim();
+        if (CommonUtil.checkEmpty(moneyStr, R.string.err_withdraw_num)) return;
+        if (CommonUtil.checkEmpty(pwd, "密码不能为空")) return;
+        int money = etMoney.getMoney();
+        if (money > shopInfo.getBalance()) {
+            UIUtil.showToast(R.string.err_over_balance);
+            return;
+        }
+        if (money <= 0) {
+            UIUtil.showToast(R.string.err_withdraw_num);
+            return;
+        }
+
+        int id = METHOD_ALIPAY.equals(method) ?
+                shopInfo.getAlipay().getId() : shopInfo.getBank().getId();
 //        if (money < mAccount.min_withdraw_money / 100) {
 //            UIUtil.showToast("提现金额不少于"
 //                    + String.valueOf(mAccount.min_withdraw_money / 100));
 //            return;
 //        }
 
-        mPresenter.withdraw(method, money);
+        mPresenter.withdraw(id, money, pwd);
     }
 
     @Override
@@ -178,6 +166,8 @@ public class WithdrawActivity extends BaseActivity implements WithdrawView, View
 
     @Override
     public void withdrawSucceed() {
-
+        UIUtil.showToast("提现申请提交成功");
+        UIUtil.postDelayed(() -> onBackPressed(), 1000);
+        EventBus.getDefault().post(new UpdateShopInfo());
     }
 }

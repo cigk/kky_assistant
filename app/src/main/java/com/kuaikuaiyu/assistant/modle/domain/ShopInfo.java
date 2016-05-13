@@ -88,9 +88,9 @@ public class ShopInfo implements Serializable {
         this.bank = bank;
     }
 
-    public static class AlipayBean {
+    public static class AlipayBean implements Serializable {
         private int id;
-        private String account_name;
+        private String account;
         private String real_name;
 
         public int getId() {
@@ -101,12 +101,12 @@ public class ShopInfo implements Serializable {
             this.id = id;
         }
 
-        public String getAccount_name() {
-            return account_name;
+        public String getAccount() {
+            return account;
         }
 
-        public void setAccount_name(String account_name) {
-            this.account_name = account_name;
+        public void setAccount(String account) {
+            this.account = account;
         }
 
         public String getReal_name() {
@@ -118,9 +118,9 @@ public class ShopInfo implements Serializable {
         }
     }
 
-    public static class BankBean {
+    public static class BankBean implements Serializable {
         private int id;
-        private String account_name;
+        private String account;
         private String real_name;
         private String bank_name;
 
@@ -132,12 +132,12 @@ public class ShopInfo implements Serializable {
             this.id = id;
         }
 
-        public String getAccount_name() {
-            return account_name;
+        public String getAccount() {
+            return account;
         }
 
-        public void setAccount_name(String account_name) {
-            this.account_name = account_name;
+        public void setAccount(String account) {
+            this.account = account;
         }
 
         public String getReal_name() {

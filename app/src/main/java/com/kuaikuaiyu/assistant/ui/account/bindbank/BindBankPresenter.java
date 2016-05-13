@@ -3,11 +3,10 @@ package com.kuaikuaiyu.assistant.ui.account.bindbank;
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.service.AccountService;
-import com.kuaikuaiyu.assistant.net.HttpResult;
 import com.kuaikuaiyu.assistant.net.ReqParams;
+import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
-import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import javax.inject.Inject;
 
@@ -21,7 +20,7 @@ public class BindBankPresenter implements BasePresenter {
 
     private BindBankView bindBankView;
     private AccountService service;
-    private RxSubscriber<HttpResult> subscriber;
+    private RxSubscriber subscriber;
 
     @Inject
     public BindBankPresenter(BindBankView bindBankView, AccountService service) {
@@ -35,27 +34,35 @@ public class BindBankPresenter implements BasePresenter {
      * @param bankName
      * @param cardNum
      * @param name
-     * @param province
-     * @param city
      */
-    public void bindBank(String bankName, String cardNum, String name, String province,
-                         String city) {
-        subscriber = new RxSubscriber<HttpResult>(bindBankView) {
+    public void bindBank(String bankName, String cardNum, String name) {
+        subscriber = new RxSubscriber(bindBankView) {
             @Override
-            public void onNext(HttpResult httpResult) {
-                UIUtil.showToast("绑定审核已经提交，请耐心等待…");
+            public void onNext(Object object) {
+                bindBankView.bindSucceed();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                bindBankView.bindFail();
             }
         };
 
         ReqParams params = new ReqParams(ReqParams.PUT, AppConfig.URL_BIND_BANK);
-        params.addParam("last_account_id", ConfigUtil.getShopInfo().getBank().getId());
+        if (null != ConfigUtil.getShopInfo().getBank())
+            params.addParam("last_account_id", ConfigUtil.getShopInfo().getBank().getId());
         params.addParam("bank_name", bankName);
         params.addParam("bank_no", cardNum);
         params.addParam("real_name", name);
+
+        service.bindBankCard(params.getQueryMap(), params.getFieldMap())
+                .compose(new IoTransformer())
+                .subscribe(subscriber);
     }
 
     @Override
     public void clean() {
-
+        if (null != subscriber) subscriber.cancel();
     }
 }

@@ -1,5 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.home;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -8,11 +10,15 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
+import com.kuaikuaiyu.assistant.sys.event.UpdateShopInfo;
 import com.kuaikuaiyu.assistant.ui.account.BalanceActivity;
 import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
 import com.kuaikuaiyu.assistant.ui.income.IncomeActivity;
 import com.kuaikuaiyu.assistant.ui.setting.SettingActivity;
 import com.kuaikuaiyu.assistant.utils.CommonUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
@@ -66,14 +72,14 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
     }
 
     @Override
-    protected void initData() throws Exception {
+    protected void initData() {
         mPresenter.updatePushId();
-        mPresenter.getShopInfo();
+        mPresenter.getShopInfo(true);
     }
 
     @Override
     protected void refresh() {
-        mPresenter.getShopInfo();
+        mPresenter.getShopInfo(true);
     }
 
     @Override
@@ -114,5 +120,27 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
     @Override
     public void loadFail() {
         mLoadingPage.setError();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    /**
+     * 接受更新店铺信息的事件
+     *
+     * @param event
+     */
+    @Subscribe
+    public void onEvent(UpdateShopInfo event) {
+        mPresenter.getShopInfo(false);
     }
 }

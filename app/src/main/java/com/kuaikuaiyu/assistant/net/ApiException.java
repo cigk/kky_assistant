@@ -26,6 +26,8 @@ public class ApiException extends RuntimeException {
     public static final int ERROR_CODE_INVALID_PASSWORD = 160;//invalid password
     public static final int ERROR_CODE_OLD_PASSWORD_EQUAL_NEW_PASSWORD = 161;//new password could not equal the old one
     public static final int ERROR_CODE_INVALID_AUTHENTICATION_TOKEN = 170;//invalid authentication
+    public static final int ERROR_CODE_BALANCE_INSUFFICIENT = 3;//提现余额不足
+
 
     private int code;
 
@@ -103,6 +105,10 @@ public class ApiException extends RuntimeException {
 
             case ERROR_CODE_INVALID_AUTHENTICATION_TOKEN:
                 message = "授权失败";
+                break;
+
+            case ERROR_CODE_BALANCE_INSUFFICIENT:
+                message = "余额不足";
                 break;
 
             default:
