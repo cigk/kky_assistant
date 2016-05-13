@@ -30,6 +30,7 @@ public class AppConfig {
     public static final String URL_BIND_ALIPAY = "/REST/WithdrawBindAlipay";
     public static final String URL_BIND_BANK = "/REST/WithdrawBindBank";
     public static final String URL_SHOP_INFO = "/REST/ShopInfo";
+    public static final String URL_WITHDRAW = "/REST/DoWithdraw";
     public static final String URL_BILL_RECORD = "/REST/Bill";
     /*---------- Balance Url End---------- */
 
@@ -37,8 +38,6 @@ public class AppConfig {
     /*---------- Income Url Begin-------- */
     public static final String URL_INCOME_ACCOUNT = "/REST/QRCodeOrder";
     /*---------- Income Url End---------- */
-    public static final String URL_WITHDRAW = "/REST/DoWithdraw";
-    /*---------- Balance Module Url End---------- */
 
 
     /**

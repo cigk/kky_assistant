@@ -74,7 +74,7 @@ public class QrcodePresenter implements BasePresenter {
         ShopInfo shopInfo = ConfigUtil.getShopInfo();
         if (shopInfo != null) {
             return QRCodeUtil.createImage(shopInfo.getPay_url(), 800, 800, null);
-        }else {
+        } else {
             return null;
         }
     }
@@ -171,11 +171,11 @@ public class QrcodePresenter implements BasePresenter {
      *
      * @param context
      * @param path
-     * @param title
+     * @param msg
      */
-    private void showTipDialog(Context context, String path, String title) {
-        new AlertDialog.Builder(context).setTitle(title).setMessage(path).setPositiveButton("确定",
-                (dialog, which) -> {
+    private void showTipDialog(Context context, String path, String msg) {
+        new AlertDialog.Builder(context).setMessage(msg).setPositiveButton("确定", (dialog, which)
+                -> {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.parse("file://" + path), "image/*");

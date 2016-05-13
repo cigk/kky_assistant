@@ -43,7 +43,7 @@ public interface AccountService {
     @FormUrlEncoded
     @PUT(AppConfig.URL_BIND_ALIPAY)
     Observable<HttpResult> bindAlipay(@QueryMap Map<String, String> queryMap,
-                                      @FieldMap Map<String, String> fieldMap);
+            @FieldMap Map<String, String> fieldMap);
 
     /**
      * 获取商店信息
@@ -56,6 +56,8 @@ public interface AccountService {
 
 
     /**
+     * 获取账单记录
+     *
      * @param queryMap
      * @return
      */
@@ -71,5 +73,5 @@ public interface AccountService {
     @FormUrlEncoded
     @POST(AppConfig.URL_WITHDRAW)
     Observable<HttpResult<ShopInfo>> withdraw(@QueryMap Map<String, String> queryMap,
-                                              @FieldMap Map<String, String> fieldMap);
+            @FieldMap Map<String, String> fieldMap);
 }

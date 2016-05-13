@@ -48,7 +48,7 @@ public class WithdrawRecordFragment extends BaseFragment implements WithdrawReco
     }
 
     @Override
-    protected void initData() throws Exception {
+    protected void initData() {
         mPresenter.getBillRecords();
     }
 

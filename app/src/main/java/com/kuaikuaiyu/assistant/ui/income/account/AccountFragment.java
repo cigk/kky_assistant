@@ -54,7 +54,7 @@ public class AccountFragment extends BaseFragment implements AccountView {
     }
 
     @Override
-    protected void initData() throws Exception {
+    protected void initData() {
         mPresenter.getIncomeAccount();
     }
 
