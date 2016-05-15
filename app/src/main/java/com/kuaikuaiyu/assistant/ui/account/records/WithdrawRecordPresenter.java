@@ -36,7 +36,11 @@ public class WithdrawRecordPresenter implements BasePresenter {
             @Override
             public void onNext(BillRecord billRecord) {
                 if (billRecord != null && billRecord.bill_list != null) {
-                    mView.loadSucceed(billRecord);
+                    if (billRecord.bill_list.size() == 0) {
+                        mView.loadEmpty();
+                    } else {
+                        mView.loadSucceed(billRecord);
+                    }
                 } else {
                     mView.loadError();
                 }

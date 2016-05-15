@@ -4,7 +4,6 @@ import com.kuaikuaiyu.assistant.modle.service.AccountService;
 import com.kuaikuaiyu.assistant.modle.service.PassService;
 import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.rx.PerFragment;
-import com.kuaikuaiyu.assistant.ui.home.HomeView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -40,5 +39,11 @@ public class HomeModule {
     @Provides
     PassService getPassService() {
         return NetUtil.createForPass(PassService.class);
+    }
+
+    @PerFragment
+    @Provides
+    HomePresenter getPresenter(AccountService service, HomeView homeView, PassService passService) {
+        return new HomePresenterImpl(service, homeView, passService);
     }
 }

@@ -3,6 +3,7 @@ package com.kuaikuaiyu.assistant.rx;
 
 import android.content.Intent;
 
+import com.kuaikuaiyu.assistant.BuildConfig;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BaseView;
 import com.kuaikuaiyu.assistant.net.ApiException;
@@ -48,7 +49,8 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
-        e.printStackTrace();
+        if (BuildConfig.DEBUG_MODE)
+            e.printStackTrace();
         //有网的情况下需要提示用户出错了，没网的时候提示网络不给力
 //        if (NetUtil.isNetAvailable(UIUtil.getContext())) {
 //            UIUtil.showToast(e.getMessage());
@@ -63,7 +65,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
             ApiException exception = (ApiException) e;
             handleApiException(exception);
         }
-        // Java中的Subscriber执行onError后并不会执行onComplete,所以这里要调用一下
+        // RxJava中的Subscriber执行onError后并不会执行onComplete,所以这里要调用一下
         onCompleted();
     }
 
@@ -82,6 +84,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
 
     /**
      * 根据不同的Http异常做出相应的处理并给用户相应的提示
+     * 目前只对部分常见异常做出了处理，后续会继续完善
      *
      * @param e
      */
@@ -115,13 +118,12 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
     private void handleAuthFail() {
         UIUtil.showToast("授权超时，请重新登录");
         UIUtil.postDelayed(() -> {
-                    ConfigUtil.setAuthToken("");
-                    BaseActivity activity = ActivityManager.currentActivity();
-                    Intent intent = new Intent(activity, LoginActivity.class);
-                    activity.startActivity(intent);
-                    ActivityManager.finishOtherActivities(LoginActivity.class);
-                }, 1000
-        );
+            ConfigUtil.setAuthToken("");
+            BaseActivity activity = ActivityManager.currentActivity();
+            Intent intent = new Intent(activity, LoginActivity.class);
+            activity.startActivity(intent);
+            ActivityManager.finishOtherActivities(LoginActivity.class);
+        }, 1000);
     }
 
     /**

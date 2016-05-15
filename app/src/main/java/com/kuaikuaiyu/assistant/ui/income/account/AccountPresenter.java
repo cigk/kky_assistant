@@ -35,7 +35,11 @@ public class AccountPresenter implements BasePresenter {
             @Override
             public void onNext(IncomeAccount incomeAccount) {
                 if (incomeAccount != null && incomeAccount.order_list != null) {
-                    mView.loadSucceed(incomeAccount);
+                    if (incomeAccount.order_list.size() == 0) {
+                        mView.loadEmpty();
+                    } else {
+                        mView.loadSucceed(incomeAccount);
+                    }
                 } else {
                     mView.loadError();
                 }
