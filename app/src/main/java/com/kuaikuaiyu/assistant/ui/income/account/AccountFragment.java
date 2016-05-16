@@ -9,6 +9,7 @@ import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
 import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
 import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;
+import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
 import javax.inject.Inject;
 
@@ -24,7 +25,7 @@ public class AccountFragment extends BaseFragment implements AccountView {
     @Bind(R.id.mpf)
     MaterialPtrFramelayout mpf;
     @Bind(R.id.rv_account)
-    PtrRecyclerView rv_account;
+    PtrRecyclerView rvAccount;
 
     @Inject
     AccountPresenter mPresenter;
@@ -49,7 +50,7 @@ public class AccountFragment extends BaseFragment implements AccountView {
 
     @Override
     protected void setListener() {
-        mpf.setRefreshingListener(rv_account);
+        mpf.setRefreshingListener(rvAccount);
         mpf.setMaterialPtrHandler(frame -> mPresenter.getIncomeAccount());
     }
 
@@ -68,8 +69,10 @@ public class AccountFragment extends BaseFragment implements AccountView {
         if (mAdapter == null) {
             mAdapter = new AccountAdapter(mActivity, R.layout.item_income_account, incomeAccount
                     .order_list);
-            rv_account.setLayoutManager(new LinearLayoutManager(mActivity));
-            rv_account.setAdapter(mAdapter);
+            rvAccount.setLayoutManager(new LinearLayoutManager(mActivity));
+            rvAccount.setAdapter(mAdapter);
+            rvAccount.addItemDecoration(new DividerItemDecoration(mActivity,
+                    DividerItemDecoration.VERTICAL_LIST));
         } else {
             mAdapter.notifyDataSetChanged();
         }
