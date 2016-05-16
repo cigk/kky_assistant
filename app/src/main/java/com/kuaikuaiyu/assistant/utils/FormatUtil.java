@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 /**
@@ -97,7 +98,7 @@ public class FormatUtil {
      * @param date
      * @return str
      */
-    public static String dateToStr(Date date) {
+    public static String date2Str(Date date) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String str = format.format(date);
@@ -111,7 +112,7 @@ public class FormatUtil {
      * @param date
      * @return str
      */
-    public static String dateToStr(Long date) {
+    public static String date2Str(Long date) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String str = format.format(date);
@@ -124,7 +125,7 @@ public class FormatUtil {
      * @param date
      * @return str
      */
-    public static String dateToDateStr(Date date) {
+    public static String date2DateStr(Date date) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String str = format.format(date);
@@ -137,7 +138,7 @@ public class FormatUtil {
      * @param date
      * @return str
      */
-    public static String dateToDateStr(long date) {
+    public static String date2DateStr(long date) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String str = format.format(date);
@@ -183,7 +184,7 @@ public class FormatUtil {
      * @param str
      * @return date
      */
-    public static Date strToDate(String str) {
+    public static Date str2Date(String str) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date date = null;
@@ -225,5 +226,29 @@ public class FormatUtil {
 
     public static boolean isToday(Long date) {
         return getDayOfDate(date).equals(getDayOfDate(new Date().getTime()));
+    }
+
+
+    /**
+     * UTC事件转化为本地事件
+     *
+     * @param utcTime
+     * @param localTimePatten
+     * @return
+     */
+    public static String utc2Local(String utcTime, String utcTimePatten,
+                                   String localTimePatten) {
+        SimpleDateFormat utcFormater = new SimpleDateFormat(utcTimePatten);
+        utcFormater.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date gpsUTCDate = null;
+        try {
+            gpsUTCDate = utcFormater.parse(utcTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat localFormater = new SimpleDateFormat(localTimePatten);
+        localFormater.setTimeZone(TimeZone.getDefault());
+        String localTime = localFormater.format(gpsUTCDate.getTime());
+        return localTime;
     }
 }
