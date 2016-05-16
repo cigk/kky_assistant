@@ -5,8 +5,7 @@ import android.content.Context;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.utils.DateUtil;
-import com.kuaikuaiyu.assistant.utils.FormatUtil;
-import com.kuaikuaiyu.assistant.utils.MoneyFormatUtil;
+import com.kuaikuaiyu.assistant.utils.MoneyUtil;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
 
@@ -31,6 +30,6 @@ public class AccountAdapter extends CommonAdapter<IncomeAccount.Order> {
         String payTime = DateUtil.utc2Local(data.created_time, "yyyy-MM-dd'T'HH:mm:ssZ",
                 "yyyy-MM-dd HH:mm:ss");
         holder.setText(R.id.tv_pay_date, payTime);
-        holder.setText(R.id.tv_income_money, MoneyFormatUtil.format(data.amount));
+        holder.setText(R.id.tv_income_money, MoneyUtil.format(data.amount));
     }
 }

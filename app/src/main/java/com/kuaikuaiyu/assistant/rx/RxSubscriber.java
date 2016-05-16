@@ -107,6 +107,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
                 break;
 
             default:
+//                UIUtil.showToast(e.getMessage() + e.code());
                 break;
 
         }

@@ -146,7 +146,7 @@ public class ConfigUtil {
      */
     public static ShopInfo getShopInfo() {
         if (null == shopInfo) {
-            shopInfo = getBeanFromSp(SHOP_INFO, ShopInfo.class);
+            shopInfo = getBeanFromSp(SHOP_INFO);
         }
         return shopInfo;
     }
@@ -185,7 +185,7 @@ public class ConfigUtil {
      *
      * @return
      */
-    public static <T> T getBeanFromSp(String key, Class<T> clazz) {
+    public static <T> T getBeanFromSp(String key) {
         String str = SpUtil.get(key, null);
         if (null == str) return null;
         T obj = null;

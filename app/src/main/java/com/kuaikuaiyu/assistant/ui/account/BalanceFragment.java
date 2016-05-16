@@ -12,7 +12,7 @@ import com.kuaikuaiyu.assistant.sys.event.ShopInfoUpdated;
 import com.kuaikuaiyu.assistant.ui.account.withdraw.WithdrawActivity;
 import com.kuaikuaiyu.assistant.ui.common.CommonActivity;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
-import com.kuaikuaiyu.assistant.utils.MoneyFormatUtil;
+import com.kuaikuaiyu.assistant.utils.MoneyUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -67,7 +67,7 @@ public class BalanceFragment extends BaseFragment implements BalanceView {
 
     @Override
     protected void initData() {
-        tvBalance.setText(MoneyFormatUtil.format(shopInfo.getBalance()));
+        tvBalance.setText(MoneyUtil.format(shopInfo.getBalance()));
         tvBankCard.setText(null != shopInfo.getBank() ? "换绑银行卡" : "绑定银行卡");
         tvAlipay.setText(null != shopInfo.getAlipay() ? "换绑支付宝" : "绑定支付宝");
         mLoadingPage.setSucceed();

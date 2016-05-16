@@ -5,7 +5,7 @@ import android.content.Context;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.modle.domain.BillRecord;
 import com.kuaikuaiyu.assistant.utils.DateUtil;
-import com.kuaikuaiyu.assistant.utils.MoneyFormatUtil;
+import com.kuaikuaiyu.assistant.utils.MoneyUtil;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
 
@@ -30,6 +30,6 @@ public class WithdrawRecordAdapter extends CommonAdapter<BillRecord.Bill> {
         String payTime = DateUtil.utc2Local(data.created_time, "yyyy-MM-dd'T'HH:mm:ssZ",
                 "yyyy-MM-dd HH:mm:ss");
         holder.setText(R.id.tv_pay_date, payTime);
-        holder.setText(R.id.tv_withdraw_cash, "已提现 " + MoneyFormatUtil.format(data.amount));
+        holder.setText(R.id.tv_withdraw_cash, "已提现 " + MoneyUtil.format(data.amount));
     }
 }

@@ -9,7 +9,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-import com.kuaikuaiyu.assistant.utils.MoneyFormatUtil;
+import com.kuaikuaiyu.assistant.utils.MoneyUtil;
 
 
 /**
@@ -46,11 +46,11 @@ public class MoneyEditText extends EditText implements TextWatcher {
 
 
     public int getMoney(){
-        return MoneyFormatUtil.formatToSend(this.getText().toString());
+        return MoneyUtil.buck2Cent(this.getText().toString());
     }
 
     public void setMoney(int money){
-        setText(MoneyFormatUtil.format(money));
+        setText(MoneyUtil.format(money));
     }
 
     @Override

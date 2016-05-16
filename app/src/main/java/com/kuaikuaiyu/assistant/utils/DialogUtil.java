@@ -16,6 +16,7 @@ public class DialogUtil {
 
     /***
      * 获取一个dialog
+     *
      * @param context
      * @return
      */
@@ -26,6 +27,7 @@ public class DialogUtil {
 
     /***
      * 获取一个耗时等待对话框
+     *
      * @param context
      * @param message
      * @return
@@ -40,12 +42,14 @@ public class DialogUtil {
 
     /***
      * 获取一个信息对话框，注意需要自己手动调用show方法显示
+     *
      * @param context
      * @param message
      * @param onClickListener
      * @return
      */
-    public static AlertDialog.Builder getMessageDialog(Context context, String message, DialogInterface.OnClickListener onClickListener) {
+    public static AlertDialog.Builder getMessageDialog(Context context, String message,
+                                                       DialogInterface.OnClickListener onClickListener) {
         AlertDialog.Builder builder = getDialog(context);
         builder.setMessage(message);
         builder.setPositiveButton("确定", onClickListener);
@@ -56,7 +60,16 @@ public class DialogUtil {
         return getMessageDialog(context, message, null);
     }
 
-    public static AlertDialog.Builder getConfirmDialog(Context context, String message, DialogInterface.OnClickListener onClickListener) {
+    /**
+     * 确认对话框
+     *
+     * @param context
+     * @param message
+     * @param onClickListener
+     * @return
+     */
+    public static AlertDialog.Builder getConfirmDialog(Context context, String message,
+                                                       DialogInterface.OnClickListener onClickListener) {
         AlertDialog.Builder builder = getDialog(context);
         builder.setMessage(Html.fromHtml(message));
         builder.setPositiveButton("确定", onClickListener);
@@ -64,7 +77,9 @@ public class DialogUtil {
         return builder;
     }
 
-    public static AlertDialog.Builder getConfirmDialog(Context context, String message, DialogInterface.OnClickListener onOkClickListener, DialogInterface.OnClickListener onCancleClickListener) {
+    public static AlertDialog.Builder getConfirmDialog(Context context, String message,
+                                                       DialogInterface.OnClickListener onOkClickListener,
+                                                       DialogInterface.OnClickListener onCancleClickListener) {
         AlertDialog.Builder builder = getDialog(context);
         builder.setMessage(message);
         builder.setPositiveButton("确定", onOkClickListener);
@@ -72,7 +87,8 @@ public class DialogUtil {
         return builder;
     }
 
-    public static AlertDialog.Builder getSelectDialog(Context context, String title, String[] arrays, DialogInterface.OnClickListener onClickListener) {
+    public static AlertDialog.Builder getSelectDialog(Context context, String title, String[] arrays,
+                                                      DialogInterface.OnClickListener onClickListener) {
         AlertDialog.Builder builder = getDialog(context);
         builder.setItems(arrays, onClickListener);
         if (!TextUtils.isEmpty(title)) {
@@ -82,20 +98,44 @@ public class DialogUtil {
         return builder;
     }
 
-    public static AlertDialog.Builder getSelectDialog(Context context, String title, List<String> list, DialogInterface.OnClickListener onClickListener) {
-        String[] arrays=list.toArray(new String[list.size()]);
-        return getSelectDialog(context,title, arrays, onClickListener);
+    public static AlertDialog.Builder getSelectDialog(Context context, String title, List<String> list,
+                                                      DialogInterface.OnClickListener onClickListener) {
+        String[] arrays = list.toArray(new String[list.size()]);
+        return getSelectDialog(context, title, arrays, onClickListener);
     }
-    public static AlertDialog.Builder getSelectDialog(Context context, String[] arrays, DialogInterface.OnClickListener onClickListener) {
+
+    /**
+     * 多选对话框
+     *
+     * @param context
+     * @param arrays
+     * @param onClickListener
+     * @return
+     */
+    public static AlertDialog.Builder getSelectDialog(Context context, String[] arrays,
+                                                      DialogInterface.OnClickListener onClickListener) {
         return getSelectDialog(context, "", arrays, onClickListener);
     }
 
 
-    public static AlertDialog.Builder getSelectDialog(Context context, List<String> list, DialogInterface.OnClickListener onClickListener) {
-        return getSelectDialog(context, "",list, onClickListener);
+    public static AlertDialog.Builder getSelectDialog(Context context, List<String> list,
+                                                      DialogInterface.OnClickListener onClickListener) {
+        return getSelectDialog(context, "", list, onClickListener);
     }
 
-    public static AlertDialog.Builder getSingleChoiceDialog(Context context, String title, String[] arrays, int selectIndex, DialogInterface.OnClickListener onClickListener) {
+    /**
+     * 单选对话框
+     *
+     * @param context
+     * @param title
+     * @param arrays
+     * @param selectIndex
+     * @param onClickListener
+     * @return
+     */
+    public static AlertDialog.Builder getSingleChoiceDialog(Context context, String title,
+                                                            String[] arrays, int selectIndex,
+                                                            DialogInterface.OnClickListener onClickListener) {
         AlertDialog.Builder builder = getDialog(context);
         builder.setSingleChoiceItems(arrays, selectIndex, null);
         if (!TextUtils.isEmpty(title)) {
@@ -106,10 +146,10 @@ public class DialogUtil {
         return builder;
     }
 
-    public static AlertDialog.Builder getSingleChoiceDialog(Context context, String[] arrays, int selectIndex, DialogInterface.OnClickListener onClickListener) {
+    public static AlertDialog.Builder getSingleChoiceDialog(Context context, String[] arrays, int selectIndex,
+                                                            DialogInterface.OnClickListener onClickListener) {
         return getSingleChoiceDialog(context, "", arrays, selectIndex, onClickListener);
     }
-
 
 
 }

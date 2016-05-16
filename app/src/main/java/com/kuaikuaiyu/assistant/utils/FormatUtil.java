@@ -78,7 +78,7 @@ public class FormatUtil {
      * @return
      */
     public static boolean isMobile(String phoneNum) {
-        return Pattern.matches("^((1[358][0-9])|(14[57])|(17[0678]))\\d{8}$", phoneNum);
+        return Pattern.matches("^(1[34578][0-9])\\d{8}$", phoneNum);
     }
 
     /**
