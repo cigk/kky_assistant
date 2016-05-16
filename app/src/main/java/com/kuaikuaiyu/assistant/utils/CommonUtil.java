@@ -40,4 +40,18 @@ public class CommonUtil {
         }
         return false;
     }
+
+    /**
+     * @param target 字符串
+     * @param msg    提示信息String资源id
+     * @return
+     */
+
+    public static boolean checkEmpty(String target, int msg) {
+        if (TextUtils.isEmpty(target)) {
+            UIUtil.showToast(UIUtil.getString(msg));
+            return true;
+        }
+        return false;
+    }
 }

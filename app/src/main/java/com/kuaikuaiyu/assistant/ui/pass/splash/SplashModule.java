@@ -1,8 +1,8 @@
-package com.kuaikuaiyu.assistant.ui.home.login;
+package com.kuaikuaiyu.assistant.ui.pass.splash;
 
 import com.kuaikuaiyu.assistant.modle.service.PassService;
-import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.rx.PerActivity;
+import com.kuaikuaiyu.assistant.net.NetUtil;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,23 +14,23 @@ import dagger.Provides;
  * Desc:    启动页Module
  */
 @Module
-public class LoginModule {
+public class SplashModule {
 
-    private LoginView loginView;
+    private SplashView splashView;
 
-    public LoginModule(LoginView loginView) {
-        this.loginView = loginView;
+    public SplashModule(SplashView splashView) {
+        this.splashView = splashView;
     }
 
     @PerActivity
     @Provides
-    LoginView getView() {
-        return loginView;
+    SplashView getSplashView() {
+        return  splashView;
     }
 
     @PerActivity
     @Provides
-    PassService getService() {
+    PassService getPassService() {
         return NetUtil.createForPass(PassService.class);
     }
 }

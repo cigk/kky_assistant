@@ -22,8 +22,8 @@ public class MyProgressDialog extends Dialog {
     private void initView() {
         View view = View.inflate(context, R.layout.dialog_progress, null);
         this.info = (TextView) view.findViewById(R.id.progress_info);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(UIUtil.dip2px(100),
-                UIUtil.dip2px(100));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(UIUtil.dp2px(100),
+                UIUtil.dp2px(100));
         this.setContentView(view, params);
     }
 

@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.home.signup;
+package com.kuaikuaiyu.assistant.ui.pass.signup;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.ui.home.login.LoginActivity;
+import com.kuaikuaiyu.assistant.ui.pass.login.LoginActivity;
 import com.kuaikuaiyu.assistant.utils.CommonUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
@@ -171,7 +171,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
     @OnClick(R.id.ib_back)
     public void back() {
-        finish();
+        onBackPressed();
     }
 
     /**

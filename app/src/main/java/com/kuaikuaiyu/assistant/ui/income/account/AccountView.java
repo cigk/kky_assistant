@@ -10,5 +10,23 @@ import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
  * desc:
  */
 public interface AccountView extends BaseView {
-    void fillData(IncomeAccount incomeAccount);
+    /**
+     * 数据加载成功
+     */
+    void loadSucceed(IncomeAccount incomeAccount);
+
+    /**
+     * 加载数据为空
+     */
+    void loadEmpty();
+
+    /**
+     * 加载数据失败
+     */
+    void loadError();
+
+    /**
+     * 刷新完成(有可能是失败 有可能是成功)
+     */
+    void refreshComplete();
 }

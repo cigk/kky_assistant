@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 /**
@@ -77,7 +78,7 @@ public class FormatUtil {
      * @return
      */
     public static boolean isMobile(String phoneNum) {
-        return Pattern.matches("^((1[358][0-9])|(14[57])|(17[0678]))\\d{8}$", phoneNum);
+        return Pattern.matches("^(1[34578][0-9])\\d{8}$", phoneNum);
     }
 
     /**
@@ -89,141 +90,5 @@ public class FormatUtil {
     public static boolean isEmail(String email) {
         return Pattern.matches("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$",
                 email);
-    }
-
-    /**
-     * 日期转换成字符串
-     *
-     * @param date
-     * @return str
-     */
-    public static String dateToStr(Date date) {
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        String str = format.format(date);
-        return str;
-    }
-
-
-    /**
-     * 日期转换成字符串
-     *
-     * @param date
-     * @return str
-     */
-    public static String dateToStr(Long date) {
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        String str = format.format(date);
-        return str;
-    }
-
-    /**
-     * 日期转换成字符串(只保留日期)
-     *
-     * @param date
-     * @return str
-     */
-    public static String dateToDateStr(Date date) {
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String str = format.format(date);
-        return str;
-    }
-
-    /**
-     * 日期转换成字符串(只保留日期)
-     *
-     * @param date
-     * @return str
-     */
-    public static String dateToDateStr(long date) {
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String str = format.format(date);
-        return str;
-    }
-
-    /**
-     * 获取日
-     *
-     * @param date
-     * @return such as 21 when date is 16/01/21
-     */
-    public static String getDayOfDate(Long date) {
-        SimpleDateFormat format = new SimpleDateFormat("dd", Locale.getDefault());
-        return format.format(date);
-    }
-
-    /**
-     * 获取短日期
-     *
-     * @param date
-     * @return such as 11-20
-     */
-    public static String getShortDate(Long date) {
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd", Locale.getDefault());
-        return format.format(date);
-    }
-
-    /**
-     * 获取小时和分钟
-     *
-     * @param date
-     * @return such as 15:51
-     */
-    public static String getShortTimeOfDate(Long date) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
-        return format.format(date);
-    }
-
-    /**
-     * 字符串转换成日期
-     *
-     * @param str
-     * @return date
-     */
-    public static Date strToDate(String str) {
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        Date date = null;
-        try {
-            date = format.parse(str);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
-
-    /**
-     * 获取周几
-     *
-     * @param date
-     * @return
-     */
-
-    //根据日期取得星期几
-    public static String getWeekday(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.getDefault());
-        String weekday = sdf.format(date);
-        return weekday;
-    }
-
-    /**
-     * 获取周几
-     *
-     * @param date
-     * @return
-     */
-
-    //根据日期取得星期几
-    public static String getWeekday(Long date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.getDefault());
-        String weekday = sdf.format(date);
-        return weekday;
-    }
-
-    public static boolean isToday(Long date) {
-        return getDayOfDate(date).equals(getDayOfDate(new Date().getTime()));
     }
 }

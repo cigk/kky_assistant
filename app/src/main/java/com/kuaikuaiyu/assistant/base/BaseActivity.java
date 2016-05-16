@@ -3,9 +3,12 @@ package com.kuaikuaiyu.assistant.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
+import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.sys.ActivityManager;
 import com.kuaikuaiyu.assistant.ui.widgets.MyProgressDialog;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
@@ -26,6 +29,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        //        getWindow().setEnterTransition(new Fade());
+        //        getWindow().setReenterTransition(new Fade());
+        //        getWindow().setEnterTransition(new Slide(Gravity.BOTTOM));
+        //        getWindow().setReenterTransition(new Slide(Gravity.TOP));
         super.onCreate(savedInstanceState);
         initComponent();
         mContext = this;
@@ -44,21 +52,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      */
     protected abstract void initComponent();
 
-
-    /**
-     * findViewById
-     * 用于ButterKnife有时候空指针异常的问题
-     */
-//    protected void getElement() {
-//
-//    }
     @Override
     protected void onDestroy() {
         if (loadingDia != null)
             loadingDia.dismiss();
         loadingDia = null;
         BasePresenter presenter = getPresenter();
-        if (null != presenter) presenter.clean();
+        if (null != presenter)
+            presenter.clean();
         ButterKnife.unbind(this);
         super.onDestroy();
         ActivityManager.removeActivity(this);
@@ -67,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     /**
      * setContentView前预初始化
      */
-//    protected abstract void init();
+    //    protected abstract void init();
 
     /**
      * 获取布局id
@@ -124,8 +125,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void hideLoading() {
         try {
-            if (this.isFinishing()) return;
-            if (loadingDia != null && loadingDia.isShowing()) loadingDia.hide();
+            if (this.isFinishing())
+                return;
+            if (loadingDia != null && loadingDia.isShowing())
+                loadingDia.hide();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,15 +147,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onResume() {
         super.onResume();
-//        MobclickAgent.onPageStart(this.getClass().getName());
-//        MobclickAgent.onResume(this);
+        //        MobclickAgent.onPageStart(this.getClass().getName());
+        //        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        MobclickAgent.onPageEnd(this.getClass().getName());
-//        MobclickAgent.onPause(this);
+        //        MobclickAgent.onPageEnd(this.getClass().getName());
+        //        MobclickAgent.onPause(this);
     }
 
     /**
@@ -161,9 +164,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * @param act
      */
     protected void goActivityAndFinish(final Class<?> act) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, act);
-        startActivity(intent);
-        finish();
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+        onBackPressed();
     }
 
     /**
@@ -172,7 +176,30 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * @param act
      */
     protected void goActivity(final Class<?> act) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, act);
-        startActivity(intent);
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    /**
+     * 跳转到其他Activity但不finish当前的Activity
+     *
+     * @param act
+     */
+    protected void goActivityAndFinishTransition(final Class<?> act) {
+        Intent intent = new Intent(this, act);
+        ActivityCompat.startActivity(this, intent, null);
+        finish();
+        overridePendingTransition(R.anim.fade_scanle_in, R.anim.fade_scanle_out);
+    }
+
+    /**
+     * 跳转到其他Activity但不finish当前的Activity
+     *
+     * @param intent
+     */
+    protected void goActivity(Intent intent) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 }

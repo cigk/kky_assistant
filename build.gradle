@@ -32,9 +32,9 @@ allprojects {
         maven {
             url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"
         }
-        maven {
-            url "http://dl.bintray.com/jjhesk/maven"
-        }
+//        maven {
+//            url "http://dl.bintray.com/jjhesk/maven"
+//        }
     }
 }
 

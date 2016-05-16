@@ -13,4 +13,10 @@ public interface BindAlipayView extends BaseView {
      * 成功提交审核
      */
     void bindSucceed();
+
+
+    /**
+     * 绑定失败
+     */
+    void bindFail();
 }

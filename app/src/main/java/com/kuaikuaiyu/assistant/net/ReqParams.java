@@ -2,7 +2,6 @@ package com.kuaikuaiyu.assistant.net;
 
 import android.text.TextUtils;
 
-import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.JniUtil;
 
@@ -77,6 +76,13 @@ public class ReqParams {
      * @param key
      * @param value
      */
+
+    public void addQuery(String key, Number value) {
+        if (value != null) {
+            addQuery(key, value.toString());
+        }
+    }
+
     public void addQuery(String key, String value) {
         if (!TextUtils.isEmpty(value)) {
             value = value.trim();
@@ -119,8 +125,8 @@ public class ReqParams {
         StringBuilder sb = new StringBuilder();
         sb.append(method).append("&").append(url);
         for (int i = 0; i < infoIds.size(); i++) {
-            sb.append("&").append(infoIds.get(i).getKey())
-                    .append("=").append(infoIds.get(i).getValue());
+            sb.append("&").append(infoIds.get(i).getKey()).append("=").append(infoIds.get(i)
+                    .getValue());
         }
 
         Timber.d("sig = %s", sb.toString());
@@ -144,9 +150,8 @@ public class ReqParams {
     }
 
     private String byteToHexString(byte ib) {
-        char[] Digit = {
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-        };
+        char[] Digit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
+                'e', 'f'};
         char[] ob = new char[2];
         ob[0] = Digit[(ib >>> 4) & 0X0f];
         ob[1] = Digit[ib & 0X0F];

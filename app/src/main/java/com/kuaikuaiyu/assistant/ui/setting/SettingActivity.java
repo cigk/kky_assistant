@@ -14,7 +14,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.sys.ActivityManager;
-import com.kuaikuaiyu.assistant.ui.home.login.LoginActivity;
+import com.kuaikuaiyu.assistant.ui.pass.login.LoginActivity;
 import com.kuaikuaiyu.assistant.ui.setting.pwd.ChangePwdActivity;
 import com.kuaikuaiyu.assistant.utils.CommonUtil;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
@@ -111,7 +111,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
 
             case R.id.ib_back:
-                finish();
+                onBackPressed();
                 break;
 
             default:

@@ -85,7 +85,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_income_money"
+            android:id="@+id/tv_withdraw_cash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/distance16"

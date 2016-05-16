@@ -44,9 +44,9 @@ public class DeviceUtil {
                     .getSystemService(Context.TELEPHONY_SERVICE);
             sDeviceId = tm.getDeviceId();//865931025340712
         }
-        WifiManager wifi = (WifiManager) UIUtil.getContext().getSystemService(Context.WIFI_SERVICE);
-        String mac = wifi.getConnectionInfo().getMacAddress();
         if (TextUtils.isEmpty(sDeviceId)) {
+            WifiManager wifi = (WifiManager) UIUtil.getContext().getSystemService(Context.WIFI_SERVICE);
+            String mac = wifi.getConnectionInfo().getMacAddress();
             sDeviceId = mac;//02:00:00:00:00:00
         }
         if (TextUtils.isEmpty(sDeviceId)) {

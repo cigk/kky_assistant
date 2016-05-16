@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
@@ -113,13 +115,14 @@ public class CommonActivity extends BaseActivity {
      * @param bundle
      * @param title
      */
-    public static void start(@NonNull Context context, @NonNull int displayType,
+    public static void start(@NonNull Activity context, @NonNull int displayType,
                              @NonNull String title, Bundle bundle) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(context);
         Intent intent = new Intent(context, CommonActivity.class);
         intent.putExtra(DISPLAY_TYPE, displayType);
         intent.putExtra(TITLE, title);
         intent.putExtra(BUNDLE, bundle);
-        context.startActivity(intent);
+        ActivityCompat.startActivity(context, intent, options.toBundle());
     }
 
     /**

@@ -13,8 +13,8 @@ android {
         applicationId "com.kuaikuaiyu.assistant"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 102
-        versionName "1.0.2"
+        versionCode 1
+        versionName "1.0.1"
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         buildConfigField "String", "AppName", "\"kky/assistant\""
 
@@ -57,26 +57,23 @@ android {
         debug {
             minifyEnabled false
             buildConfigField "String", "PASS_SERVRE", "\"dev-matrixpassport.kuaikuaiyu.com\""
-            buildConfigField "String", "SERVER_URL", "\"dev-shop.kuaikuaiyu.com\""
-            buildConfigField "String", "INVITE_USER_URL", "\"https://dw-shop.kuaikuaiyu.com/api.invite.user\""
+            buildConfigField "String", "SERVER_URL", "\"dev-matrixservice.kuaikuaiyu.com\""
             signingConfig signingConfigs.releasekeystore
             buildConfigField "Boolean", "DEBUG_MODE", "true"
             debuggable true
         }
         alpha {
-            minifyEnabled false
+            minifyEnabled true
             buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
-            buildConfigField "String", "SERVER_URL", "\"shop.kuaikuaiyu.com\""
-            buildConfigField "String", "INVITE_USER_URL", "\"https://aw-shop.kuaikuaiyu.com/api.invite.user\""
+            buildConfigField "String", "SERVER_URL", "\"matrixservice.kuaikuaiyu.com\""
             signingConfig signingConfigs.releasekeystore
             buildConfigField "Boolean", "DEBUG_MODE", "false"
-            debuggable true
+            debuggable false
         }
         release {
             minifyEnabled true
             buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
-            buildConfigField "String", "SERVER_URL", "\"shop.kuaikuaiyu.com\""
-            buildConfigField "String", "INVITE_USER_URL", "\"https://w-shop.kuaikuaiyu.com/api.invite.user\""
+            buildConfigField "String", "SERVER_URL", "\"matrixservice.kuaikuaiyu.com\""
             signingConfig signingConfigs.releasekeystore
             buildConfigField "Boolean", "DEBUG_MODE", "false"
             debuggable false
@@ -105,7 +102,7 @@ dependencies {
 
     //support
     compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:support-v4:23.3.0'
+//    compile 'com.android.support:support-v4:23.3.0'
 //    compile 'com.android.support:design:23.3.0'
 
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -134,9 +131,9 @@ dependencies {
     compile "com.squareup.okhttp3:logging-interceptor:$ext.okhttp_version"
 
     //leakcanary dependencies
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+//    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 
     //个推
     compile 'com.getui:sdk:2.8.1.0'

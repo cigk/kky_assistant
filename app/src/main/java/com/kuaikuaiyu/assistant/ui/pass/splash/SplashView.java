@@ -1,14 +1,14 @@
-package com.kuaikuaiyu.assistant.ui.home.login;
+package com.kuaikuaiyu.assistant.ui.pass.splash;
 
 import com.kuaikuaiyu.assistant.base.BaseView;
 
 /**
  * Author:  Gavin
  * Email:   gavinking@163.com
- * Date:    2016/5/4
- * Desc:
+ * Date:    2016/4/30
+ * Desc:    启动页的View
  */
-public interface LoginView extends BaseView{
+public interface SplashView extends BaseView {
     /**
      * 跳转到其他页面
      */

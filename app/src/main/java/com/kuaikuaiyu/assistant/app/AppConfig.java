@@ -14,7 +14,7 @@ public class AppConfig {
     public static final String URL_ASSISTANT = "http://kuaikuaiyu.com/";
     public static final String URL_SCHOOL = "http://kuaikuaiyu.com/";
 
-    /*---------- Pass Url Begin---------- */
+    /*---------- Pass Url Begin-------- */
     public static final String URL_INFO = "/v1/info";
     public static final String URL_SIGN_UP_SMS = "/v1/signup_sms";
     public static final String URL_SIGN_UP = "/v1/signup";
@@ -24,6 +24,21 @@ public class AppConfig {
     public static final String URL_RESET_PWD = "/v1/reset_password";
     public static final String URL_UPDATE_PUSH_ID = "/v1/lazy_update";
     /*---------- Pass Url End---------- */
+
+
+    /*---------- Balance Url Begin-------- */
+    public static final String URL_BIND_ALIPAY = "/REST/WithdrawBindAlipay";
+    public static final String URL_BIND_BANK = "/REST/WithdrawBindBank";
+    public static final String URL_SHOP_INFO = "/REST/ShopInfo";
+    public static final String URL_WITHDRAW = "/REST/DoWithdraw";
+    public static final String URL_BILL_RECORD = "/REST/Bill";
+    /*---------- Balance Url End---------- */
+
+
+    /*---------- Income Url Begin-------- */
+    public static final String URL_INCOME_ACCOUNT = "/REST/QRCodeOrder";
+    /*---------- Income Url End---------- */
+
 
     /**
      * ********************** RequestCode *****************************

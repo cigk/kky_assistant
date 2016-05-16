@@ -46,7 +46,7 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
     protected void setListener() {
         top_bar.onBackClick(v -> onBackPressed());
 
-        top_bar.onRightClick(v -> {
+        top_bar.onRightImageClick(v -> {
             // TODO: 2016/5/9           
         });
 

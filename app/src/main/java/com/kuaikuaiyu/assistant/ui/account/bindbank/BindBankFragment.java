@@ -3,7 +3,6 @@ package com.kuaikuaiyu.assistant.ui.account.bindbank;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,14 +13,17 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.Account;
-import com.kuaikuaiyu.assistant.modle.domain.VerifyData;
+import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
+import com.kuaikuaiyu.assistant.sys.event.UpdateShopInfo;
 import com.kuaikuaiyu.assistant.ui.widgets.PlainEditText;
 import com.kuaikuaiyu.assistant.utils.CityUtil;
+import com.kuaikuaiyu.assistant.utils.CommonUtil;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.DialogUtil;
 import com.kuaikuaiyu.assistant.utils.FormatUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -37,38 +39,30 @@ import butterknife.Bind;
  */
 public class BindBankFragment extends BaseFragment implements BindBankView, View.OnClickListener {
 
-    @Bind(R.id.tv_info)
-    TextView tv_info;
     @Bind(R.id.tv_bank_name)
-    TextView tv_bank_name;
-    @Bind(R.id.tv_province)
-    TextView tv_province;
-    @Bind(R.id.tv_city)
-    TextView tv_city;
+    TextView tvBankName;
     @Bind(R.id.et_card_num)
-    EditText et_card_num;
+    EditText etCardNum;
     @Bind(R.id.et_card_name)
-    PlainEditText et_card_name;
+    PlainEditText etCardName;
     @Bind(R.id.ll_choose_bank)
-    LinearLayout ll_choose_bank;
+    LinearLayout llChooseBank;
     @Bind(R.id.ll_choose_city)
-    LinearLayout ll_choose_city;
+    LinearLayout llChooseCity;
     @Bind(R.id.btn_submit)
-    Button btn_submit;
+    Button btnSubmit;
 
     @Inject
     BindBankPresenter mPresenter;
 
-    private String cardNum;
-    private String cardName;
-    private String province;
-    private String city;
-    private String bankName;
-    private VerifyData mVerifyData;
+    private ShopInfo shopInfo;
 
     @Override
     protected void initComponent() {
-
+        DaggerBindBankComponent.builder()
+                .bindBankModule(new BindBankModule(this))
+                .build().inject(this);
+        shopInfo = ConfigUtil.getShopInfo();
     }
 
     @Override
@@ -83,16 +77,16 @@ public class BindBankFragment extends BaseFragment implements BindBankView, View
 
     @Override
     protected void setListener() {
-        ll_choose_bank.setOnClickListener(this);
-        ll_choose_city.setOnClickListener(this);
-        btn_submit.setOnClickListener(this);
+        llChooseBank.setOnClickListener(this);
+        llChooseCity.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
     }
 
     @Override
-    protected void initData() throws Exception {
-        mLoadingPage.setSucceed();
-        if (mVerifyData != null)
+    protected void initData() {
+        if (null != shopInfo.getBank())
             initView();
+        mLoadingPage.setSucceed();
     }
 
     @Override
@@ -109,7 +103,7 @@ public class BindBankFragment extends BaseFragment implements BindBankView, View
                         banksList, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                tv_bank_name.setText(banksList.get(i));
+                                tvBankName.setText(banksList.get(i));
                             }
                         }).show();
                 break;
@@ -134,8 +128,8 @@ public class BindBankFragment extends BaseFragment implements BindBankView, View
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case AppConfig.REQUEST_CODE_CHOOSE_CITY:
-                    tv_province.setText(data.getStringExtra("province"));
-                    tv_city.setText(data.getStringExtra("city"));
+//                    tv_province.setText(data.getStringExtra("province"));
+//                    tv_city.setText(data.getStringExtra("city"));
                     break;
 
                 default:
@@ -148,81 +142,40 @@ public class BindBankFragment extends BaseFragment implements BindBankView, View
      * 根据当前的审核状态设置View
      */
     private void initView() {
-        switch (mVerifyData.status) {
-            case AppConfig.VERIFYSTATUS_VERIFING:
-                btn_submit.setVisibility(View.GONE);
-                tv_info.setVisibility(View.VISIBLE);
-                tv_info.setText(R.string.waitting_bankaccount_verify);
-                ll_choose_bank.setEnabled(false);
-                ll_choose_city.setEnabled(false);
-                btn_submit.setEnabled(false);
-                et_card_num.setEnabled(false);
-                et_card_name.setEnabled(false);
-                break;
-
-            case AppConfig.VERIFYSTATUS_FAILED:
-                tv_info.setVisibility(View.VISIBLE);
-                tv_info.setText(R.string.err_bankaccount_verify);
-                break;
-
-            case AppConfig.VERIFYSTATUS_VERIFIED:
-                tv_info.setVisibility(View.GONE);
-                tv_info.setText(R.string.success_bankaccount_verify);
-                mActivity.setResult(Activity.RESULT_OK);
-                Account mAccount = ConfigUtil.getAccountInfo();
-                mAccount.bank.name = mVerifyData.verify_data.bank.name;
-                mAccount.bank.province = mVerifyData.verify_data.bank.province;
-                mAccount.bank.city = mVerifyData.verify_data.bank.city;
-                mAccount.bank.card_no = mVerifyData.verify_data.bank.card_no;
-                mAccount.bank.owner = mVerifyData.verify_data.bank.owner;
-                ConfigUtil.saveAccountInfo(mAccount);
-                break;
-
-            default:
-                break;
-        }
-        tv_bank_name.setText(mVerifyData.verify_data.bank.name);
-        tv_province.setText(mVerifyData.verify_data.bank.province);
-        tv_city.setText(mVerifyData.verify_data.bank.city);
-        et_card_num.setText(mVerifyData.verify_data.bank.card_no);
-        et_card_name.setText(mVerifyData.verify_data.bank.owner);
+        tvBankName.setText(shopInfo.getBank().getBank_name());
+        etCardNum.setText(shopInfo.getBank().getAccount());
+        etCardName.setText(shopInfo.getBank().getReal_name());
     }
 
     /**
      * 提交银行账户信息
      */
     private void submitBankInfo() {
-        bankName = tv_bank_name.getText().toString();
-        province = tv_province.getText().toString();
-        city = tv_city.getText().toString();
-        cardNum = et_card_num.getText().toString();
-        cardName = et_card_name.getText().toString();
-        if (TextUtils.isEmpty(bankName)) {
-            UIUtil.showToast(R.string.choose_bank);
-            return;
-        }
-        if (TextUtils.isEmpty(province) || TextUtils.isEmpty(city)) {
-            UIUtil.showToast(R.string.choose_province_and_city);
-            return;
-        }
-        if (TextUtils.isEmpty(cardNum)) {
-            UIUtil.showToast(R.string.enter_bank_number);
-            return;
-        }
-        if (TextUtils.isEmpty(cardName)) {
-            UIUtil.showToast(R.string.enter_bank_owner_name);
-            return;
-        }
+        String bankName = tvBankName.getText().toString();
+        String cardNum = etCardNum.getText().toString();
+        String cardName = etCardName.getText().toString();
+
+        if (CommonUtil.checkEmpty(bankName, R.string.choose_bank)) return;
+        if (CommonUtil.checkEmpty(cardNum, R.string.enter_bank_number)) return;
+        if (CommonUtil.checkEmpty(cardName, R.string.enter_bank_owner_name)) return;
+
         if (!FormatUtil.checkNameChinese(cardName)) {
             UIUtil.showToast(R.string.owner_name_be_chinese);
             return;
         }
-        mPresenter.bindBank(bankName, cardNum, cardName, province, city);
+        mPresenter.bindBank(bankName, cardNum, cardName);
 
     }
 
     @Override
     public void bindSucceed() {
+        UIUtil.showToast("绑定成功啦,可以去提现喽…");
+        UIUtil.postDelayed(() -> mActivity.onBackPressed(), 500);
+        EventBus.getDefault().post(new UpdateShopInfo());
+    }
 
+    @Override
+    public void bindFail() {
+        UIUtil.showToast("绑定失败，请重新试下吧…");
     }
 }
