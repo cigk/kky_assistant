@@ -8,6 +8,7 @@ import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.BillRecord;
 import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
 import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;
+import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
 import javax.inject.Inject;
 
@@ -16,7 +17,7 @@ import butterknife.Bind;
 public class WithdrawRecordFragment extends BaseFragment implements WithdrawRecordView {
 
     @Bind(R.id.rv_withdraw)
-    PtrRecyclerView rv_withdraw;
+    PtrRecyclerView rvWithdraw;
     @Bind(R.id.mpf)
     MaterialPtrFramelayout mpf;
 
@@ -43,7 +44,7 @@ public class WithdrawRecordFragment extends BaseFragment implements WithdrawReco
 
     @Override
     protected void setListener() {
-        mpf.setRefreshingListener(rv_withdraw);
+        mpf.setRefreshingListener(rvWithdraw);
         mpf.setMaterialPtrHandler(frame -> mPresenter.getBillRecords());
     }
 
@@ -62,8 +63,10 @@ public class WithdrawRecordFragment extends BaseFragment implements WithdrawReco
         if (null == mAdapter) {
             mAdapter = new WithdrawRecordAdapter(mActivity, R.layout.list_item_withdraw_record,
                     bill.bill_list);
-            rv_withdraw.setAdapter(mAdapter);
-            rv_withdraw.setLayoutManager(new LinearLayoutManager(mActivity));
+            rvWithdraw.setAdapter(mAdapter);
+            rvWithdraw.setLayoutManager(new LinearLayoutManager(mActivity));
+            rvWithdraw.addItemDecoration(new DividerItemDecoration(mActivity,
+                    DividerItemDecoration.VERTICAL_LIST));
         } else {
             mAdapter.notifyDataSetChanged();
         }
