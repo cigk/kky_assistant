@@ -3,7 +3,6 @@ package com.kuaikuaiyu.assistant.net;
 import android.text.TextUtils;
 
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
-import com.kuaikuaiyu.assistant.utils.DeviceUtil;
 import com.kuaikuaiyu.assistant.utils.JniUtil;
 
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class ReqParams {
         signMap = new HashMap<>();
         addQuery("at", ConfigUtil.getAuthToken());
         addQuery("t", String.valueOf((int) (System.currentTimeMillis() / 1000)));
-        addQuery("uuid", DeviceUtil.getDeviceId());
+        addQuery("uuid", ConfigUtil.getUuid());
 
         fieldMap = new HashMap<>();
     }

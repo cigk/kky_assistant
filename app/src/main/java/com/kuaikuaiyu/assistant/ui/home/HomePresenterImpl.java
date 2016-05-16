@@ -65,7 +65,7 @@ public class HomePresenterImpl implements HomePresenter {
         String did = PushManager.getInstance().getClientid(UIUtil.getContext());
         ReqParams params = new ReqParams(ReqParams.POST, AppConfig.URL_UPDATE_PUSH_ID);
         params.addParam("duuid", ConfigUtil.getUuid());
-        params.addParam("device_push_id", did);
+        params.addParam("devicePushId", did);
         passService.updatePushId(params.getQueryMap(), params.getFieldMap()).compose(new
                 IoTransformer()).subscribe(new RxSubscriber(null) {
             @Override
