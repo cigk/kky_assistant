@@ -17,6 +17,7 @@ public class BillRecord {
         public String account_type;
         public String account_type_to_text;
         public String bill_type;
+        public String bill_type_to_text;
         public int amount;
         public String created_time;
     }

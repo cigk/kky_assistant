@@ -7,7 +7,6 @@ import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
-import com.kuaikuaiyu.assistant.ui.income.DaggerIncomeComponent;
 import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
 import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
@@ -46,7 +45,7 @@ public class IncomeRecordFragment extends BaseFragment implements IncomeRecordVi
 
     @Override
     protected int getRootViewId() {
-        return R.layout.fragment_income_account;
+        return R.layout.fragment_income_record;
     }
 
     @Override
@@ -68,7 +67,7 @@ public class IncomeRecordFragment extends BaseFragment implements IncomeRecordVi
     @Override
     public void loadSucceed(IncomeAccount incomeAccount) {
         if (mAdapter == null) {
-            mAdapter = new IncomeRecordAdapter(mActivity, R.layout.item_income_account, incomeAccount
+            mAdapter = new IncomeRecordAdapter(mActivity, R.layout.item_income_record, incomeAccount
                     .order_list);
             rvAccount.setLayoutManager(new LinearLayoutManager(mActivity));
             rvAccount.setAdapter(mAdapter);

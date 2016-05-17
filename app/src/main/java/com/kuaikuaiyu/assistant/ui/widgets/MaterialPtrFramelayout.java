@@ -2,6 +2,7 @@ package com.kuaikuaiyu.assistant.ui.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import com.kuaikuaiyu.assistant.R;
@@ -22,6 +23,19 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
 public class MaterialPtrFramelayout extends PtrClassicFrameLayout {
     private Context mContext;
     private OnRefreshingChangedListener mChangedListener;
+
+    /**
+     * 记录touch事件down时的y坐标
+     */
+    private float oldY;
+
+    /**
+     * 设置刷新头向下滑动的最大距离，这个是在下拉刷新位置基础之上的加值可以设置为任何大于0的数
+     * 只对内容保持不动的刷新风格生效
+     * 默认值 WindowHeight / 3.5f
+     */
+    private float DEFAULT_HEADER_DRAG_RATIO = 3.5f;
+    private float mHeaderDragDistance = UIUtil.getWindowHeight() / DEFAULT_HEADER_DRAG_RATIO;
 
     public MaterialPtrFramelayout(Context context) {
         super(context);
@@ -47,8 +61,8 @@ public class MaterialPtrFramelayout extends PtrClassicFrameLayout {
      * 结束刷新操作，同时恢复使能，可以接受新的操作
      */
     public void complete() {
-        refreshComplete();
         setEnabled(true);
+        refreshComplete();
         if (mChangedListener != null) {
             mChangedListener.onRefreshing(false);
         }
@@ -71,6 +85,53 @@ public class MaterialPtrFramelayout extends PtrClassicFrameLayout {
                 handler.onBegin(frame);
             }
         });
+    }
+
+    /**
+     * 设置刷新头向下滑动的最大距离，这个是在下拉刷新位置基础之上的加值可以设置为任何大于0的数
+     * 只对内容保持不动的刷新风格生效
+     *
+     * @param distance 像素值
+     */
+    public void setHeaderDragDistance(float distance) {
+        if (distance < 0) {
+            mHeaderDragDistance = UIUtil.getWindowHeight() / DEFAULT_HEADER_DRAG_RATIO;
+        }
+        mHeaderDragDistance = distance;
+    }
+
+    /**
+     * 根据屏幕比例设置刷新头向下滑动的最大距离
+     *
+     * @param ratio 大于1 其倒数表示所占屏幕高度的比例，eg: (ratio = 2) => (mHeaderDragDistance = WindowHeight/2)
+     * @see MaterialPtrFramelayout#setHeaderDragDistance(float)
+     */
+    public void setHeaderDragRatio(float ratio) {
+        if (ratio < 1) {
+            mHeaderDragDistance = UIUtil.getWindowHeight() / DEFAULT_HEADER_DRAG_RATIO;
+        }
+        mHeaderDragDistance = UIUtil.getWindowHeight() / ratio;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent e) {
+        switch (e.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            oldY = e.getRawY();
+            break;
+
+        case MotionEvent.ACTION_MOVE:
+            if (isPinContent())
+                if (e.getRawY() - oldY > getHeaderHeight() * getRatioOfHeaderToHeightRefresh() +
+                        mHeaderDragDistance) {
+                    return dispatchTouchEventSupper(e);
+                }
+            break;
+
+        default:
+            break;
+        }
+        return super.dispatchTouchEvent(e);
     }
 
     /**
