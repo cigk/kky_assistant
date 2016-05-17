@@ -17,7 +17,7 @@ import javax.inject.Inject;
 public class SplashActivity extends BaseActivity implements SplashView {
 
     @Inject
-    SplashPresenter splashPresenter;
+    SplashPresenter mPresenter;
 
     @Override
     protected int getRootView() {
@@ -31,7 +31,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @Override
     protected void initData(Bundle savedInstanceState) {
         if (TextUtils.isEmpty(ConfigUtil.getUuid())) {
-            splashPresenter.getUuid();
+            mPresenter.getUuid();
         } else {
             jump();
         }
@@ -45,7 +45,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     protected BasePresenter getPresenter() {
-        return this.splashPresenter;
+        return this.mPresenter;
     }
 
     @Override

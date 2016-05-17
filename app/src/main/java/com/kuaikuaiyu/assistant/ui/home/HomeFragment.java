@@ -135,7 +135,7 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
     }
 
     /**
-     * 接受更新店铺信息的事件
+     * 接收更新店铺信息的事件
      *
      * @param event
      */

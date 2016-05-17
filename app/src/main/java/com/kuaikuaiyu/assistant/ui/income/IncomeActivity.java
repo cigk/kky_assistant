@@ -1,12 +1,14 @@
 package com.kuaikuaiyu.assistant.ui.income;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.common.CommonActivity;
+import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
 import com.kuaikuaiyu.assistant.ui.income.qrcode.QrcodeActivity;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 
@@ -21,12 +23,16 @@ import butterknife.Bind;
  * desc:
  */
 public class IncomeActivity extends BaseActivity implements IncomeView {
+
+    public static final String URL_CASH_DESK_INSTRUCTION =
+            "file:///android_asset/cash_desk_instruction.html";
+
     @Bind(R.id.top_bar)
-    CommonTitleBar top_bar;
+    CommonTitleBar topBar;
     @Bind(R.id.ll_income_qrcode)
-    LinearLayout ll_income_qrcode;
+    LinearLayout llIncomeQrcode;
     @Bind(R.id.ll_income_account)
-    LinearLayout ll_income_account;
+    LinearLayout llIncomeAccount;
 
     @Inject
     IncomePresenter mPresenter;
@@ -44,21 +50,18 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
 
     @Override
     protected void setListener() {
-        top_bar.onBackClick(v -> onBackPressed());
+        topBar.onBackClick(v -> onBackPressed());
 
-        top_bar.onRightImageClick(v -> {
-            // TODO: 2016/5/9           
-        });
-
-        ll_income_qrcode.setOnClickListener(v -> goActivity(QrcodeActivity.class));
-
-        ll_income_account.setOnClickListener(v -> CommonActivity.start(this, CommonActivity
+        topBar.onRightImageClick(v -> WebViewActivity.start(this, URL_CASH_DESK_INSTRUCTION, "说明"));
+        llIncomeQrcode.setOnClickListener(v -> goActivity(QrcodeActivity.class));
+        llIncomeAccount.setOnClickListener(v -> CommonActivity.start(this, CommonActivity
                 .DISPLAY_INCOME_ACCOUNT, getString(R.string.income_account_title), null));
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-
+        topBar.setRightImgVisibility(View.VISIBLE);
+        topBar.setRightImage(R.mipmap.ic_notification);
     }
 
     @Override

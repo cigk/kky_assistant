@@ -45,7 +45,6 @@ public class LoginPresenter implements BasePresenter {
                 loginView.jump();
             }
         };
-
         subscribe(mobile, pwd);
     }
 
