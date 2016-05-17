@@ -31,7 +31,7 @@
     <string name="change_pwd">修改密码</string>
     <string name="feedback">帮助反馈</string>
     <string name="about">关于</string>
-    <string name="income_qrcode">店铺收款码</string>
+    <string name="income_qrcode">微信收款</string>
     <string name="income_account">查看流水</string>
     <string name="income_account_pay_account">支付账户:&#160;</string>
     <string name="income_account_pay_type">支付方式:&#160;</string>

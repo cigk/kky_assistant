@@ -7,15 +7,42 @@
     android:orientation="vertical">
 
     <com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar
-        android:id="@+id/top_bar"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
-        android:inputType="numberDecimal"
-        android:id="@+id/et_money"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_primary_normal_rect"
+            android:gravity="center_horizontal"
+            android:inputType="numberDecimal"
+            android:text="￥0.00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font32"/>
+
+        <com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText
+            android:id="@+id/et_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_primary_normal_rect"
+            android:gravity="center_horizontal"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font32"
+            android:visibility="gone"/>
+    </FrameLayout>
+
 
     <com.kuaikuaiyu.assistant.ui.widgets.KeyboardView
         android:id="@+id/keyboard"
@@ -23,9 +50,13 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:text="生成"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_commit"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_commit"/>
+        android:layout_gravity="center_horizontal"
+        android:width="@dimen/distance150"
+        android:background="@drawable/selector_btn_common"
+        android:text="生成"
+        android:textColor="@color/white"/>
 
 </LinearLayout>

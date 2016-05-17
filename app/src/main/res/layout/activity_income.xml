@@ -29,7 +29,7 @@
             android:layout_weight="1"
             android:background="@drawable/selector_white_gray_corner"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="50dp"
@@ -55,7 +55,7 @@
             android:layout_weight="1"
             android:background="@drawable/selector_white_gray_corner"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="50dp"
@@ -81,7 +81,7 @@
             android:layout_weight="1"
             android:background="@drawable/selector_white_gray_corner"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="50dp"
