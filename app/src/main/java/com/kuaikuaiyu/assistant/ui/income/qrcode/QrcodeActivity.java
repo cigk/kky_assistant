@@ -2,6 +2,7 @@ package com.kuaikuaiyu.assistant.ui.income.qrcode;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
+import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 import com.kuaikuaiyu.assistant.utils.PermissionUtil;
@@ -24,6 +26,10 @@ import butterknife.Bind;
  * desc:
  */
 public class QrcodeActivity extends BaseActivity implements QrcodeView {
+
+    public static final String URL_CASH_DESK_INSTRUCTION =
+            "file:///android_asset/cash_desk_instruction.html";
+
     @Bind(R.id.top_bar)
     CommonTitleBar top_bar;
     @Bind(R.id.rl_qrcode_root)
@@ -56,10 +62,13 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
                 mPresenter.saveView(QrcodeActivity.this, rl_qrcode_root);
             }
         });
+        top_bar.onRightImageClick(v -> WebViewActivity.start(this, URL_CASH_DESK_INSTRUCTION, "说明"));
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        top_bar.setRightImgVisibility(View.VISIBLE);
+        top_bar.setRightImage(R.mipmap.ic_notification);
         iv_qrcode.setImageBitmap(mPresenter.createQRCodeBitmap());
     }
 
@@ -70,7 +79,7 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (PermissionUtil.checkPermissionRequestResult(QrcodeActivity.this, grantResults,
                 "需要存储权限才能保存照片", requestCode)) {
