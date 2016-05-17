@@ -8,8 +8,9 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.common.WebViewActivity;
-import com.kuaikuaiyu.assistant.ui.income.record.IncomeRecordActivity;
+import com.kuaikuaiyu.assistant.ui.income.alipay.AlipayActivity;
 import com.kuaikuaiyu.assistant.ui.income.qrcode.QrcodeActivity;
+import com.kuaikuaiyu.assistant.ui.income.record.IncomeRecordActivity;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 
 import javax.inject.Inject;
@@ -33,6 +34,8 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
     LinearLayout llIncomeQrcode;
     @Bind(R.id.ll_income_account)
     LinearLayout llIncomeAccount;
+    @Bind(R.id.ll_alipay)
+    LinearLayout llAlipay;
 
     @Inject
     IncomePresenter mPresenter;
@@ -55,6 +58,7 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
         topBar.onRightImageClick(v -> WebViewActivity.start(this, URL_CASH_DESK_INSTRUCTION, "说明"));
         llIncomeQrcode.setOnClickListener(v -> goActivity(QrcodeActivity.class));
         llIncomeAccount.setOnClickListener(v -> goActivity(IncomeRecordActivity.class));
+        llAlipay.setOnClickListener(v -> goActivity(AlipayActivity.class));
     }
 
     @Override

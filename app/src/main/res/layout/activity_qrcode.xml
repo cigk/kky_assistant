@@ -86,7 +86,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/distance8"
-                        android:text="@string/income_weixin_pay"
+                        android:text="@string/income_wechat_pay"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font14"/>
 
@@ -115,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/distance8"
-                        android:text="@string/income_zhifubao_pay"
+                        android:text="@string/income_alipay"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font14"/>
 

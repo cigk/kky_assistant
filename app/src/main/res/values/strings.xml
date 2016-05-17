@@ -39,8 +39,8 @@
     <string name="income_account_title">流水记录</string>
     <string name="income_qrcode_pay_title">在此扫码付款</string>
     <string name="income_qrcode_label_bottom">快店助手 钱包</string>
-    <string name="income_weixin_pay">微信支付</string>
-    <string name="income_zhifubao_pay">支付宝</string>
+    <string name="income_wechat_pay">微信支付</string>
+    <string name="income_alipay">支付宝</string>
     <string name="income_qrcode_title">店铺收款码</string>
     <string name="income_qrcode_save">保存到相册</string>
 
