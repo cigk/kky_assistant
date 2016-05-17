@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.income.account;
+package com.kuaikuaiyu.assistant.ui.income.record;
 
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -7,6 +7,7 @@ import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
+import com.kuaikuaiyu.assistant.ui.income.DaggerIncomeComponent;
 import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
 import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
@@ -21,21 +22,21 @@ import butterknife.Bind;
  * date: 2016/5/10 16:04
  * desc:
  */
-public class AccountFragment extends BaseFragment implements AccountView {
+public class IncomeRecordFragment extends BaseFragment implements IncomeRecordView {
     @Bind(R.id.mpf)
     MaterialPtrFramelayout mpf;
     @Bind(R.id.rv_account)
     PtrRecyclerView rvAccount;
 
     @Inject
-    AccountPresenter mPresenter;
+    IncomeRecordPresenter mPresenter;
 
-    private AccountAdapter mAdapter;
+    private IncomeRecordAdapter mAdapter;
 
     @Override
     protected void initComponent() {
-        DaggerAccountComponent.builder().commonModule(new CommonModule()).accountModule(new
-                AccountModule(this)).build().inject(this);
+        DaggerIncomeRecordComponent.builder().commonModule(new CommonModule())
+                .incomeRecordModule(new IncomeRecordModule(this)).build().inject(this);
     }
 
     @Override
@@ -67,7 +68,7 @@ public class AccountFragment extends BaseFragment implements AccountView {
     @Override
     public void loadSucceed(IncomeAccount incomeAccount) {
         if (mAdapter == null) {
-            mAdapter = new AccountAdapter(mActivity, R.layout.item_income_account, incomeAccount
+            mAdapter = new IncomeRecordAdapter(mActivity, R.layout.item_income_account, incomeAccount
                     .order_list);
             rvAccount.setLayoutManager(new LinearLayoutManager(mActivity));
             rvAccount.setAdapter(mAdapter);

@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.income.account;
+package com.kuaikuaiyu.assistant.ui.income.record;
 
 import com.kuaikuaiyu.assistant.rx.PerActivity;
 
@@ -12,16 +12,16 @@ import dagger.Provides;
  * desc:
  */
 @Module
-public class AccountModule {
-    private AccountView mView;
+public class IncomeRecordModule {
+    private IncomeRecordView mView;
 
-    public AccountModule(AccountView accountView) {
+    public IncomeRecordModule(IncomeRecordView accountView) {
         this.mView = accountView;
     }
 
     @PerActivity
     @Provides
-    AccountView getAccountView() {
+    IncomeRecordView getAccountView() {
         return mView;
     }
 }

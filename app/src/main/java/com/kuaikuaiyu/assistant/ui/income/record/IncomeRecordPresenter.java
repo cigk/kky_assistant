@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.income.account;
+package com.kuaikuaiyu.assistant.ui.income.record;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
@@ -16,13 +16,13 @@ import javax.inject.Inject;
  * date: 2016/5/9 18:04
  * desc:
  */
-public class AccountPresenter implements BasePresenter {
-    private AccountView mView;
+public class IncomeRecordPresenter implements BasePresenter {
+    private IncomeRecordView mView;
     private IncomeService mService;
     private RxSubscriber<IncomeAccount> mSubscriber;
 
     @Inject
-    public AccountPresenter(IncomeService service, AccountView view) {
+    public IncomeRecordPresenter(IncomeService service, IncomeRecordView view) {
         mService = service;
         mView = view;
     }

@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.income.account;
+package com.kuaikuaiyu.assistant.ui.income.record;
 
 import com.kuaikuaiyu.assistant.base.BaseView;
 import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
@@ -9,7 +9,7 @@ import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
  * date: 2016/5/9 18:05
  * desc:
  */
-public interface AccountView extends BaseView {
+public interface IncomeRecordView extends BaseView {
     /**
      * 数据加载成功
      */

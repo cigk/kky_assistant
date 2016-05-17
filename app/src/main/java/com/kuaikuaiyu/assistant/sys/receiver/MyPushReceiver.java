@@ -14,7 +14,9 @@ import com.igexin.sdk.PushConsts;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.modle.domain.PushItem;
 import com.kuaikuaiyu.assistant.sys.event.UpdateShopInfo;
+import com.kuaikuaiyu.assistant.ui.income.record.IncomeRecordActivity;
 import com.kuaikuaiyu.assistant.utils.GsonUitl;
+import com.kuaikuaiyu.assistant.utils.MediaPlayerUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -32,9 +34,7 @@ public class MyPushReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        EventBus.getDefault().post(new UpdateShopInfo());
         Bundle mBundle = intent.getExtras();
-
         switch (mBundle.getInt(PushConsts.CMD_ACTION)) {
             case PushConsts.GET_MSG_DATA:
                 byte[] payload = mBundle.getByteArray("payload");
@@ -42,7 +42,12 @@ public class MyPushReceiver extends BroadcastReceiver {
                     String data = new String(payload);
                     pushItem = GsonUitl.parse(data, PushItem.class);
                     if (pushItem != null && pushItem.getType() != null) {
-
+                        if ("qrcode_order".equals(pushItem.getType())) {
+                            sendNotification("收款到账提醒", "收款到账提醒",
+                                    "您有一笔新的收款已到账，点击查看详情。", IncomeRecordActivity.class, null);
+                            EventBus.getDefault().post(new UpdateShopInfo());
+                            MediaPlayerUtil.play(R.raw.notification);
+                        }
                     }
                 }
                 break;

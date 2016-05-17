@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.ui.income.account;
+package com.kuaikuaiyu.assistant.ui.income.record;
 
 import android.content.Context;
 
@@ -17,9 +17,9 @@ import java.util.List;
  * date: 2016/5/10 10:38
  * desc:
  */
-public class AccountAdapter extends CommonAdapter<IncomeAccount.Order> {
+public class IncomeRecordAdapter extends CommonAdapter<IncomeAccount.Order> {
 
-    public AccountAdapter(Context context, int layoutId, List<IncomeAccount.Order> list) {
+    public IncomeRecordAdapter(Context context, int layoutId, List<IncomeAccount.Order> list) {
         super(context, layoutId, list);
     }
 
