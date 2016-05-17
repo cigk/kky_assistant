@@ -32,6 +32,8 @@ public class PtrRecyclerView extends RecyclerView implements
     public boolean onTouchEvent(MotionEvent e) {
         if (refreshing) {
             requestDisallowInterceptTouchEvent(true);
+        } else {
+            requestDisallowInterceptTouchEvent(false);
         }
         return super.onTouchEvent(e);
     }
