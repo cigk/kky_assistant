@@ -1,5 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.income;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import com.kuaikuaiyu.assistant.ui.income.alipay.AlipayActivity;
 import com.kuaikuaiyu.assistant.ui.income.qrcode.QrcodeActivity;
 import com.kuaikuaiyu.assistant.ui.income.record.IncomeRecordActivity;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
+import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 
 import javax.inject.Inject;
 
@@ -56,7 +58,12 @@ public class IncomeActivity extends BaseActivity implements IncomeView {
         topBar.onBackClick(v -> onBackPressed());
 
         topBar.onRightImageClick(v -> WebViewActivity.start(this, URL_CASH_DESK_INSTRUCTION, "说明"));
-        llIncomeQrcode.setOnClickListener(v -> goActivity(QrcodeActivity.class));
+        llIncomeQrcode.setOnClickListener(v -> {
+            Intent intent = new Intent(this, QrcodeActivity.class);
+            intent.putExtra(QrcodeActivity.PAY_TYEP, QrcodeActivity.TYPE_WECHAT);
+            intent.putExtra(QrcodeActivity.PAY_URL, ConfigUtil.getShopInfo().getPay_url());
+            goActivity(intent);
+        });
         llIncomeAccount.setOnClickListener(v -> goActivity(IncomeRecordActivity.class));
         llAlipay.setOnClickListener(v -> goActivity(AlipayActivity.class));
     }
