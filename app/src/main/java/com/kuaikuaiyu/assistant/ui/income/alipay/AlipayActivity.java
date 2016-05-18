@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +19,6 @@ import com.kuaikuaiyu.assistant.ui.income.qrcode.QrcodeActivity;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 import com.kuaikuaiyu.assistant.ui.widgets.KeyboardView;
 import com.kuaikuaiyu.assistant.utils.MoneyUtil;
-import com.kuaikuaiyu.assistant.utils.UIUtil;
 
 import java.math.BigDecimal;
 
@@ -124,7 +125,8 @@ public class AlipayActivity extends BaseActivity implements AlipayView, TextWatc
      * 金额为0时处理
      */
     private void handleZero() {
-        //TODO 抖动效果
-        UIUtil.showToast("金额不能为零");
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.shake_horizontal);
+        tvMoney.startAnimation(anim);
+//        UIUtil.showToast("金额不能为零");
     }
 }

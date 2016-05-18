@@ -29,7 +29,7 @@
             android:inputType="numberDecimal"
             android:text="￥0.00"
             android:textColor="@color/white"
-            android:textSize="@dimen/font32"/>
+            android:textSize="@dimen/font48"/>
 
         <com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText
             android:id="@+id/et_money"
@@ -39,7 +39,6 @@
             android:background="@drawable/shape_primary_normal_rect"
             android:gravity="center_horizontal"
             android:inputType="numberDecimal"
-            android:maxLength="6"
             android:textColor="@color/white"
             android:textSize="@dimen/font32"
             android:visibility="gone"/>
@@ -58,7 +57,7 @@
         android:layout_gravity="center_horizontal"
         android:width="@dimen/distance150"
         android:background="@drawable/selector_btn_common"
-        android:text="生成"
+        android:text="生成支付宝收款码"
         android:textColor="@color/white"/>
 
 </LinearLayout>

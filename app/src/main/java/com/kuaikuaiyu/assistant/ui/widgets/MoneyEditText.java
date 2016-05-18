@@ -3,6 +3,7 @@ package com.kuaikuaiyu.assistant.ui.widgets;
 import android.content.Context;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.EditText;
@@ -58,9 +59,19 @@ public class MoneyEditText extends EditText implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable edt) {
-        String temp = edt.toString();
+        //删除字符串前面的0
+        while (!TextUtils.isEmpty(edt) && '0' == (edt.charAt(0))) {
+            edt.delete(0, 1);
+        }
+        String temp = edt.toString().trim();
         int posDot = temp.indexOf(".");
-        if (posDot < 0) return;//没有小数点时不处理
+        if (posDot < 0) {
+            if (temp.length() > 6) {
+                edt.delete(edt.length() - 1, edt.length());
+            }
+            return;//没有小数点时不处理
+        }
+
         if (temp.length() - posDot - 1 > 2) {
             edt.delete(posDot + 3, edt.length());
         }
