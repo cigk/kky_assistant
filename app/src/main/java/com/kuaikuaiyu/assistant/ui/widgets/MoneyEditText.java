@@ -60,23 +60,31 @@ public class MoneyEditText extends EditText implements TextWatcher {
     @Override
     public void afterTextChanged(Editable edt) {
         //删除字符串前面的0
-        while (!TextUtils.isEmpty(edt) && '0' == (edt.charAt(0))) {
+        while (!TextUtils.isEmpty(edt) && '0' == (edt.charAt(0)) && edt.length() >= 2 && '.' != (edt.charAt(1))) {
             edt.delete(0, 1);
         }
-        String temp = edt.toString().trim();
-        int posDot = temp.indexOf(".");
+        String str = edt.toString();
+        int posDot = str.indexOf(".");
         if (posDot < 0) {
-            if (temp.length() > 6) {
+            //整数位最长为6位
+            if (edt.length() > 6) {
                 edt.delete(edt.length() - 1, edt.length());
             }
-            return;//没有小数点时不处理
+            //没有小数点时不进行后续处理
+            return;
         }
 
-        if (temp.length() - posDot - 1 == 2 && edt.charAt(edt.length() - 1) == '0') {
+        //第一位是小数点是前面加0
+        if (posDot == 0) {
+            edt.insert(0, "0");
+        }
+        //只保留两位小数
+        if (str.length() - posDot - 1 == 2 && edt.charAt(edt.length() - 1) == '0') {
             edt.delete(edt.length() - 1, edt.length());
         }
 
-        if (temp.length() - posDot - 1 > 2) {
+        //小数最后一位为0时可以重新输入
+        if (str.length() - posDot - 1 > 2) {
             edt.delete(posDot + 3, edt.length());
         }
     }

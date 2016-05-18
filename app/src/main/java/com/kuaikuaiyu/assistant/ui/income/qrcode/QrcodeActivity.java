@@ -2,6 +2,7 @@ package com.kuaikuaiyu.assistant.ui.income.qrcode;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -71,6 +72,7 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        tvSaveQrcode.setVisibility(TYEP_ALIPAY.equals(payType) ? View.GONE : View.VISIBLE);
         ivQrcode.setImageBitmap(mPresenter.createQRCodeBitmap(payUrl));
     }
 

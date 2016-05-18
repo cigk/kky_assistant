@@ -11,39 +11,96 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical"
         android:background="@color/colorPrimary">
 
-        <TextView
-            android:id="@+id/tv_money"
+        <FrameLayout
+            android:id="@+id/fl_shop_inof"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/distance16"
+            android:background="@drawable/shape_gray_corner_xlarge">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape_ovl"
+                android:padding="8dp"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingLeft="@dimen/distance50"
+                android:paddingRight="@dimen/distance50"
+                android:singleLine="true"
+                android:text="lalaladdddddddddlall"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_shop_instruction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/shape_primary_normal_rect"
-            android:gravity="center_horizontal"
+            android:layout_below="@id/fl_shop_inof"
+            android:layout_marginTop="@dimen/distance16"
+            android:gravity="center_vertical">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/distance16"
+                android:layout_marginRight="@dimen/distance16"
+                android:layout_weight="1"
+                android:background="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="快快助手合作商家"
+                android:textColor="@color/white"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/distance16"
+                android:layout_marginRight="@dimen/distance16"
+                android:layout_weight="1"
+                android:background="@color/white"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="@dimen/distance16"
+            android:layout_below="@id/ll_shop_instruction"
+            android:id="@+id/tv_money"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginLeft="@dimen/distance16"
+            android:layout_marginRight="@dimen/distance16"
+            android:background="@drawable/shape_white_corner_middle"
+            android:cursorVisible="false"
+            android:gravity="center"
             android:inputType="numberDecimal"
             android:text="￥0.00"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font48"/>
+            android:textColor="@color/black"
+            android:textSize="@dimen/font32"/>
 
         <com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText
             android:id="@+id/et_money"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/shape_primary_normal_rect"
             android:gravity="center_horizontal"
             android:inputType="numberDecimal"
             android:textColor="@color/white"
-            android:textSize="@dimen/font32"
+            android:textSize="@dimen/font14"
             android:visibility="gone"/>
-    </LinearLayout>
-
+    </RelativeLayout>
 
     <com.kuaikuaiyu.assistant.ui.widgets.KeyboardView
         android:id="@+id/keyboard"
@@ -53,11 +110,11 @@
     <Button
         android:id="@+id/btn_commit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:layout_gravity="center_horizontal"
-        android:width="@dimen/distance150"
-        android:background="@drawable/selector_btn_common"
+        android:background="@drawable/selector_btn_common_rect"
         android:text="生成支付宝收款码"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="@dimen/font32"/>
 
 </LinearLayout>

@@ -18,6 +18,7 @@ import com.kuaikuaiyu.assistant.ui.income.CommonModule;
 import com.kuaikuaiyu.assistant.ui.income.qrcode.QrcodeActivity;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 import com.kuaikuaiyu.assistant.ui.widgets.KeyboardView;
+import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.MoneyUtil;
 
 import java.math.BigDecimal;
@@ -44,6 +45,8 @@ public class AlipayActivity extends BaseActivity implements AlipayView, TextWatc
     Button btnCommit;
     @Bind(R.id.tv_money)
     TextView tvMoney;
+    @Bind(R.id.tv_shop_name)
+    TextView tvShopName;
 
     @Inject
     AlipayPresenter mPresenter;
@@ -77,6 +80,7 @@ public class AlipayActivity extends BaseActivity implements AlipayView, TextWatc
     @Override
     protected void initData(Bundle savedInstanceState) {
         title.setTitle("支付宝收款");
+        tvShopName.setText(ConfigUtil.getShopName());
         keyboard.setView(etMoney);
     }
 
@@ -102,13 +106,7 @@ public class AlipayActivity extends BaseActivity implements AlipayView, TextWatc
             money = 0;
             return;
         }
-        String str = s.toString().trim();
-        int posDot = str.indexOf(".");
-        if (posDot == 0) {
-            str = new StringBuilder("0").append(str).toString();
-        }
-
-        money = new BigDecimal(str).multiply(new BigDecimal(100)).intValue();
+        money = new BigDecimal(s.toString().trim()).multiply(new BigDecimal(100)).intValue();
         tvMoney.setText("￥" + MoneyUtil.format(money));
     }
 
