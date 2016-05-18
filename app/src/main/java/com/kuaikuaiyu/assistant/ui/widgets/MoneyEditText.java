@@ -72,6 +72,10 @@ public class MoneyEditText extends EditText implements TextWatcher {
             return;//没有小数点时不处理
         }
 
+        if (temp.length() - posDot - 1 == 2 && edt.charAt(edt.length() - 1) == '0') {
+            edt.delete(edt.length() - 1, edt.length());
+        }
+
         if (temp.length() - posDot - 1 > 2) {
             edt.delete(posDot + 3, edt.length());
         }
