@@ -40,8 +40,7 @@
                 android:gravity="center"
                 android:paddingLeft="@dimen/distance50"
                 android:paddingRight="@dimen/distance50"
-                android:singleLine="true"
-                android:text="lalaladdddddddddlall"/>
+                android:singleLine="true"/>
         </FrameLayout>
 
         <LinearLayout
