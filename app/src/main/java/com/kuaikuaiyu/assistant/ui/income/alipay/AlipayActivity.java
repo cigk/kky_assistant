@@ -2,7 +2,6 @@ package com.kuaikuaiyu.assistant.ui.income.alipay;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.Button;
@@ -59,7 +58,6 @@ public class AlipayActivity extends BaseActivity implements TextWatcher {
     protected void initData(Bundle savedInstanceState) {
         title.setTitle("支付宝收款");
         keyboard.setView(etMoney);
-        etMoney.setInputType(InputType.TYPE_NULL);
     }
 
     @Override
@@ -79,8 +77,18 @@ public class AlipayActivity extends BaseActivity implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        tvMoney.setText(!TextUtils.isEmpty(s) ? "￥" + MoneyUtil.format((
-                (new BigDecimal(s.toString()).multiply(new BigDecimal(100)).intValue())))
-                : "￥0.00");
+        if (TextUtils.isEmpty(s)) {
+            tvMoney.setText("￥0.00");
+            return;
+        }
+        String str = s.toString().trim();
+        int posDot = str.indexOf(".");
+        if (posDot == 0) {
+            str = new StringBuilder("0").append(str).toString();
+        }
+
+        String money = MoneyUtil.format(new BigDecimal(str).multiply(new BigDecimal
+                (100)).intValue());
+        tvMoney.setText("￥" + money);
     }
 }

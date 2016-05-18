@@ -1,8 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.widgets;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -31,25 +29,20 @@ public class MoneyEditText extends EditText implements TextWatcher {
         super(context, attrs, defStyleAttr);
         init();
     }
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MoneyEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
 
 
-    private void init(){
+    private void init() {
         this.addTextChangedListener(this);
         setSingleLine(true);
         setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
 
-    public int getMoney(){
+    public int getMoney() {
         return MoneyUtil.buck2Cent(this.getText().toString());
     }
 
-    public void setMoney(int money){
+    public void setMoney(int money) {
         setText(MoneyUtil.format(money));
     }
 
@@ -60,14 +53,14 @@ public class MoneyEditText extends EditText implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        super.onTextChanged(s,start,before,count);
+        super.onTextChanged(s, start, before, count);
     }
 
     @Override
     public void afterTextChanged(Editable edt) {
         String temp = edt.toString();
         int posDot = temp.indexOf(".");
-        if (posDot < 0) return;
+        if (posDot < 0) return;//没有小数点时不处理
         if (temp.length() - posDot - 1 > 2) {
             edt.delete(posDot + 3, edt.length());
         }

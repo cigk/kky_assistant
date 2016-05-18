@@ -101,7 +101,8 @@ public class KeyboardView extends FrameLayout {
 
     @OnClick(R.id.btnDot)
     public void clickBtnDot() {
-        keyPressed(KeyEvent.KEYCODE_PERIOD);
+//        keyPressed(KeyEvent.KEYCODE_PERIOD);
+        keyPressed(KeyEvent.KEYCODE_NUMPAD_DOT);
     }
 
     @OnClick(R.id.btnDel)
