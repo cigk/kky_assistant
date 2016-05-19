@@ -71,6 +71,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_wechat"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -92,19 +93,14 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="@dimen/divider_width"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/distance16"
-                    android:layout_marginTop="@dimen/distance16"
-                    android:background="@color/white"/>
-
                 <LinearLayout
+                    android:id="@+id/ll_alipay"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="40dp"

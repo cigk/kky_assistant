@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,6 +40,10 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
     ImageView ivQrcode;
     @Bind(R.id.tv_save_qrcode)
     TextView tvSaveQrcode;
+    @Bind(R.id.ll_wechat)
+    LinearLayout llWechat;
+    @Bind(R.id.ll_alipay)
+    LinearLayout llAlipay;
 
     @Inject
     QrcodePresenter mPresenter;
@@ -73,6 +78,9 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
     @Override
     protected void initData(Bundle savedInstanceState) {
         tvSaveQrcode.setVisibility(TYEP_ALIPAY.equals(payType) ? View.GONE : View.VISIBLE);
+        llWechat.setVisibility(TYEP_ALIPAY.equals(payType) ? View.GONE : View.VISIBLE);
+        llAlipay.setVisibility(TYEP_ALIPAY.equals(payType) ? View.VISIBLE : View.GONE);
+
         ivQrcode.setImageBitmap(mPresenter.createQRCodeBitmap(payUrl));
     }
 
