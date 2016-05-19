@@ -22,6 +22,7 @@ import butterknife.Bind;
  * desc:
  */
 public class IncomeRecordFragment extends BaseFragment implements IncomeRecordView {
+
     @Bind(R.id.mpf)
     MaterialPtrFramelayout mpf;
     @Bind(R.id.rv_account)

@@ -17,9 +17,11 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="@dimen/distance16">
+            android:paddingLeft="@dimen/distance16"
+            android:paddingRight="@dimen/distance16">
 
             <LinearLayout
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -34,10 +36,10 @@
                     android:textSize="@dimen/font14"/>
 
                 <TextView
+                    android:gravity="center_vertical"
                     android:id="@+id/tv_pay_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="13911223344"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/font14"/>
 
