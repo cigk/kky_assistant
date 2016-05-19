@@ -54,6 +54,8 @@ android {
     }
 
     buildTypes {
+
+        //测试服的debug
         debug {
             minifyEnabled false
             buildConfigField "String", "PASS_SERVRE", "\"dev-matrixpassport.kuaikuaiyu.com\""
@@ -62,6 +64,17 @@ android {
             buildConfigField "Boolean", "DEBUG_MODE", "true"
             debuggable true
         }
+
+        //正式服的debug
+        debugRelease {
+            minifyEnabled false
+            buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
+            buildConfigField "String", "SERVER_URL", "\"matrixservice.kuaikuaiyu.com\""
+            signingConfig signingConfigs.releasekeystore
+            buildConfigField "Boolean", "DEBUG_MODE", "true"
+            debuggable true
+        }
+
         alpha {
             minifyEnabled true
             buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
@@ -70,6 +83,7 @@ android {
             buildConfigField "Boolean", "DEBUG_MODE", "false"
             debuggable false
         }
+
         release {
             minifyEnabled true
             buildConfigField "String", "PASS_SERVRE", "\"matrixpassport.kuaikuaiyu.com\""
@@ -94,7 +108,6 @@ android {
         }
     }
 
-//    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -141,6 +154,8 @@ dependencies {
 
     //友盟自动更新
     compile files('libs/umeng-update-v2.6.0.1.jar')
+    //二维码
+    compile files('libs/zxing.jar')
 
     //crash woodpecker
     //    debugCompile "me.drakeet.library:crashwoodpecker:$ext.crashwoodpecker_version"
@@ -148,6 +163,5 @@ dependencies {
     //    compile 'com.jakewharton.scalpel:scalpel:1.1.2'
 
     // test dependencies
-    compile files('libs/zxing.jar')
     testCompile 'junit:junit:4.12'
 }

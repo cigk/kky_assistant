@@ -47,4 +47,10 @@ public class IncomeRecordActivity extends BaseActivity {
     protected BasePresenter getPresenter() {
         return null;
     }
+
+    @Override
+    protected void onDestroy() {
+        startApp();
+        super.onDestroy();
+    }
 }

@@ -10,6 +10,8 @@ import android.view.Window;
 
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.sys.ActivityManager;
+import com.kuaikuaiyu.assistant.ui.home.HomeActivity;
+import com.kuaikuaiyu.assistant.ui.pass.splash.SplashActivity;
 import com.kuaikuaiyu.assistant.ui.widgets.MyProgressDialog;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
@@ -201,5 +203,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void goActivity(Intent intent) {
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+
+    /**
+     * 如果应用未启动则启动应用
+     */
+    protected void startApp() {
+        if (!ActivityManager.isActivityExist(HomeActivity.class)) {
+            Intent intent = new Intent(this, SplashActivity.class);
+            startActivity(intent);
+        }
     }
 }
