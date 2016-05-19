@@ -42,6 +42,7 @@ public class LoginPresenter implements BasePresenter {
                 ConfigUtil.setAuthToken(loginResp.at);
                 ConfigUtil.setShopName(loginResp.nickname);
                 ConfigUtil.setShopMobile(mobile);
+                ConfigUtil.setLoginPhone(mobile);
                 loginView.jump();
             }
         };
