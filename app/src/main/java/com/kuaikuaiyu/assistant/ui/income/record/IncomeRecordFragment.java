@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
+import com.kuaikuaiyu.assistant.model.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.ui.income.CommonModule;
 import com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout;
 import com.kuaikuaiyu.assistant.ui.widgets.PtrRecyclerView;

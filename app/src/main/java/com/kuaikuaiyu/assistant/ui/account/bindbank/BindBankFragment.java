@@ -13,7 +13,7 @@ import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
+import com.kuaikuaiyu.assistant.model.domain.ShopInfo;
 import com.kuaikuaiyu.assistant.sys.event.UpdateShopInfo;
 import com.kuaikuaiyu.assistant.ui.widgets.PlainEditText;
 import com.kuaikuaiyu.assistant.utils.CityUtil;

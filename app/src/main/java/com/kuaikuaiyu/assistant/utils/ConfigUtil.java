@@ -3,7 +3,7 @@ package com.kuaikuaiyu.assistant.utils;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
+import com.kuaikuaiyu.assistant.model.domain.ShopInfo;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

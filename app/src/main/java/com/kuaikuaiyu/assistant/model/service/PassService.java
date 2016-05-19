@@ -1,8 +1,8 @@
-package com.kuaikuaiyu.assistant.modle.service;
+package com.kuaikuaiyu.assistant.model.service;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
-import com.kuaikuaiyu.assistant.modle.domain.LoginResp;
-import com.kuaikuaiyu.assistant.modle.domain.Uuid;
+import com.kuaikuaiyu.assistant.model.domain.LoginResp;
+import com.kuaikuaiyu.assistant.model.domain.Uuid;
 import com.kuaikuaiyu.assistant.net.HttpResult;
 
 import java.util.Map;

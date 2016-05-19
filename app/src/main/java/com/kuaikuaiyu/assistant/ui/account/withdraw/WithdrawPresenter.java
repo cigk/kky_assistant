@@ -2,7 +2,7 @@ package com.kuaikuaiyu.assistant.ui.account.withdraw;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.service.AccountService;
+import com.kuaikuaiyu.assistant.model.service.AccountService;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;

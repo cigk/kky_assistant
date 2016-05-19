@@ -2,8 +2,8 @@ package com.kuaikuaiyu.assistant.ui.pass.login;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.LoginResp;
-import com.kuaikuaiyu.assistant.modle.service.PassService;
+import com.kuaikuaiyu.assistant.model.domain.LoginResp;
+import com.kuaikuaiyu.assistant.model.service.PassService;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;

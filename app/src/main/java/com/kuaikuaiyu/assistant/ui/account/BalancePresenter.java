@@ -1,7 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.account;
 
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.service.AccountService;
+import com.kuaikuaiyu.assistant.model.service.AccountService;
 
 import javax.inject.Inject;
 

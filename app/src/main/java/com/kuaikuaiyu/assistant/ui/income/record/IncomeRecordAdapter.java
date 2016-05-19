@@ -3,7 +3,7 @@ package com.kuaikuaiyu.assistant.ui.income.record;
 import android.content.Context;
 
 import com.kuaikuaiyu.assistant.R;
-import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
+import com.kuaikuaiyu.assistant.model.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.utils.DateUtil;
 import com.kuaikuaiyu.assistant.utils.MoneyUtil;
 import com.zhy.base.adapter.ViewHolder;

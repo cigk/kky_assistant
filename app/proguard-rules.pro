@@ -127,32 +127,27 @@ public static final int *;
 -keepattributes Signature
 -keepattributes *Annotation*
 -keep class sun.misc.Unsafe { *; }
--keep class com.kuaikuaiyu.merchant.domain.**{ *; }
+-keep class com.kuaikuaiyu.assistant.model.domain.*{ *; }
+##-keep class com.kuaikuaiyu.assistant.rx.**{ *; }
+-keep class com.kuaikuaiyu.assistant.net.HttpResult{ *; }
 ##
 
 ## eventbus begin
+-keepattributes *Annotation*
 -keepclassmembers class ** {
-    public void onEvent*(**);
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
 }
 ## eventbus end
 
-## APM begin
--dontwarn org.apache.commons.**
--keep class org.apache.http.impl.client.**
--dontwarn org.apache.commons.**
--keep class com.blueware.** { *; }
--dontwarn com.blueware.**
--keepattributes Exceptions, Signature, InnerClasses
-## APM end
-
-#FMAgent同盾反欺诈 begin
--dontwarn android.os.**
--dontwarn com.android.internal.**
--keepclasseswithmembers class cn.fraudmetrix.android.**
-#FMAgent同盾反欺诈 end
 
 ## webJsInterface begin
--keepclassmembers class com.kuaikuaiyu.merchant.ui.view.webview.AndroidJavaScript {
+-keepclassmembers class com.kuaikuaiyu.assistant.ui.common.JavaScriptInterface {
    public *;
 }
 ## webJsInterface  end
@@ -206,11 +201,6 @@ public static final int *;
 }
 ## 美洽  end
 
-## Retrofit  begin
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
-## Retrofit  end
-
 ## okhttp  begin
 -dontwarn okhttp3.**
 -keep class okhttp3.** { *; }
@@ -226,4 +216,31 @@ public static final int *;
 -keep class dagger.** { *; }
 ## rxjava  end
 
+########--------Retrofit + RxJava--------#########
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-dontwarn sun.misc.Unsafe
+-dontwarn com.octo.android.robospice.retrofit.RetrofitJackson**
+-dontwarn retrofit.appengine.UrlFetchClient
+-keepattributes Signature
+-keepattributes Exceptions
+-keepclasseswithmembers class * {
+    @retrofit.http.* <methods>;
+}
+-keep class com.google.gson.** { *; }
+-keep class com.google.inject.** { *; }
+-keep class org.apache.james.mime4j.** { *; }
+-keep class javax.inject.** { *; }
+
+-dontwarn sun.misc.**
+
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+   long producerIndex;
+   long consumerIndex;
+}
+
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+   long producerNode;
+   long consumerNode;
+}
 -dontnote **

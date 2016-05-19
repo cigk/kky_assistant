@@ -12,8 +12,8 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.QRCode;
-import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.model.domain.QRCode;
+import com.kuaikuaiyu.assistant.model.service.IncomeService;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.rx.SchedulersCompat;
 import com.kuaikuaiyu.assistant.utils.QRCodeUtil;

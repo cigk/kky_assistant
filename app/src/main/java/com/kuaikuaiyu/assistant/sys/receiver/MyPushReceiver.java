@@ -11,7 +11,7 @@ import android.text.TextUtils;
 
 import com.igexin.sdk.PushConsts;
 import com.kuaikuaiyu.assistant.R;
-import com.kuaikuaiyu.assistant.modle.domain.PushItem;
+import com.kuaikuaiyu.assistant.model.domain.PushItem;
 import com.kuaikuaiyu.assistant.sys.event.UpdateShopInfo;
 import com.kuaikuaiyu.assistant.ui.income.record.IncomeRecordActivity;
 import com.kuaikuaiyu.assistant.utils.GsonUitl;

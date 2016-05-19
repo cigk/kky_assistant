@@ -1,6 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.income.alipay;
 
-import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.model.service.IncomeService;
 import com.kuaikuaiyu.assistant.rx.PerActivity;
 
 import dagger.Module;

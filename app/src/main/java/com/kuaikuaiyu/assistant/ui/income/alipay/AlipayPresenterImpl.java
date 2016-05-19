@@ -1,8 +1,8 @@
 package com.kuaikuaiyu.assistant.ui.income.alipay;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
-import com.kuaikuaiyu.assistant.modle.domain.AlipayUrl;
-import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.model.domain.AlipayUrl;
+import com.kuaikuaiyu.assistant.model.service.IncomeService;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;

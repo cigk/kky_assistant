@@ -1,8 +1,8 @@
-package com.kuaikuaiyu.assistant.modle.service;
+package com.kuaikuaiyu.assistant.model.service;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
-import com.kuaikuaiyu.assistant.modle.domain.AlipayUrl;
-import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
+import com.kuaikuaiyu.assistant.model.domain.AlipayUrl;
+import com.kuaikuaiyu.assistant.model.domain.IncomeAccount;
 import com.kuaikuaiyu.assistant.net.HttpResult;
 
 import java.util.Map;

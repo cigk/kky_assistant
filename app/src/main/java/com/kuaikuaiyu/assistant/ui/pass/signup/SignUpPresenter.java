@@ -2,7 +2,7 @@ package com.kuaikuaiyu.assistant.ui.pass.signup;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.service.PassService;
+import com.kuaikuaiyu.assistant.model.service.PassService;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;

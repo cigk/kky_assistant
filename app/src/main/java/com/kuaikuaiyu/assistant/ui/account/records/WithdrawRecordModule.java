@@ -1,6 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.account.records;
 
-import com.kuaikuaiyu.assistant.modle.service.AccountService;
+import com.kuaikuaiyu.assistant.model.service.AccountService;
 import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.rx.PerFragment;
 

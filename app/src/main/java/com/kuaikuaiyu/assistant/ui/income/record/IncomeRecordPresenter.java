@@ -2,8 +2,8 @@ package com.kuaikuaiyu.assistant.ui.income.record;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
-import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.model.domain.IncomeAccount;
+import com.kuaikuaiyu.assistant.model.service.IncomeService;
 import com.kuaikuaiyu.assistant.net.ReqParams;
 import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;

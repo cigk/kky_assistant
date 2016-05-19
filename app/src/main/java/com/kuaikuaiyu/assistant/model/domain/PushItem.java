@@ -1,4 +1,4 @@
-package com.kuaikuaiyu.assistant.modle.domain;
+package com.kuaikuaiyu.assistant.model.domain;
 
 /**
  * 推送的item

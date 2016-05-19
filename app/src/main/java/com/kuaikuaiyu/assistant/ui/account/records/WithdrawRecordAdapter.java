@@ -3,7 +3,7 @@ package com.kuaikuaiyu.assistant.ui.account.records;
 import android.content.Context;
 
 import com.kuaikuaiyu.assistant.R;
-import com.kuaikuaiyu.assistant.modle.domain.BillRecord;
+import com.kuaikuaiyu.assistant.model.domain.BillRecord;
 import com.kuaikuaiyu.assistant.utils.DateUtil;
 import com.kuaikuaiyu.assistant.utils.MoneyUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;

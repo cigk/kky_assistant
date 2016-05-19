@@ -1,8 +1,8 @@
-package com.kuaikuaiyu.assistant.modle.service;
+package com.kuaikuaiyu.assistant.model.service;
 
 import com.kuaikuaiyu.assistant.app.AppConfig;
-import com.kuaikuaiyu.assistant.modle.domain.BillRecord;
-import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
+import com.kuaikuaiyu.assistant.model.domain.BillRecord;
+import com.kuaikuaiyu.assistant.model.domain.ShopInfo;
 import com.kuaikuaiyu.assistant.net.HttpResult;
 
 import java.util.Map;

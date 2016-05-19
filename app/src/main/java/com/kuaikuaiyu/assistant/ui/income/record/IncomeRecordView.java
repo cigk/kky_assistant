@@ -1,7 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.income.record;
 
 import com.kuaikuaiyu.assistant.base.BaseView;
-import com.kuaikuaiyu.assistant.modle.domain.IncomeAccount;
+import com.kuaikuaiyu.assistant.model.domain.IncomeAccount;
 
 /**
  * Created by binlly
