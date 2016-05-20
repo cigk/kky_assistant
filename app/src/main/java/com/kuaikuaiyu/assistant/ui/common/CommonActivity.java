@@ -1,7 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.common;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,7 +14,7 @@ import com.kuaikuaiyu.assistant.base.BasePresenter;
 import com.kuaikuaiyu.assistant.ui.account.bindalipay.BindAlipayFragment;
 import com.kuaikuaiyu.assistant.ui.account.bindbank.BindBankFragment;
 import com.kuaikuaiyu.assistant.ui.account.records.WithdrawRecordFragment;
-import com.kuaikuaiyu.assistant.ui.income.account.AccountFragment;
+import com.kuaikuaiyu.assistant.ui.income.record.IncomeRecordFragment;
 import com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar;
 
 import butterknife.Bind;
@@ -94,7 +93,7 @@ public class CommonActivity extends BaseActivity {
                 break;
 
             case DISPLAY_INCOME_ACCOUNT:
-                mFragment = new AccountFragment();
+                mFragment = new IncomeRecordFragment();
                 break;
 
             case DISPLAY_WITHDRAW_RECORDS:

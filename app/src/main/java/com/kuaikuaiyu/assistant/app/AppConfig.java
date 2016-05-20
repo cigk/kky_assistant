@@ -37,6 +37,7 @@ public class AppConfig {
 
     /*---------- Income Url Begin-------- */
     public static final String URL_INCOME_ACCOUNT = "/REST/QRCodeOrder";
+    public static final String URL_INCOME_ALIPAY = "/REST/QRCodeAlipay";
     /*---------- Income Url End---------- */
 
 

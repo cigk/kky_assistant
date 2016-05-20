@@ -2,7 +2,9 @@ package com.kuaikuaiyu.assistant.ui.income.qrcode;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,22 +26,37 @@ import butterknife.Bind;
  * desc:
  */
 public class QrcodeActivity extends BaseActivity implements QrcodeView {
+
+    public static final String PAY_URL = "pay_url";
+    public static final String PAY_TYEP = "pay_type";
+    public static final String TYEP_ALIPAY = "alipay";
+    public static final String TYPE_WECHAT = "wechat";
+
     @Bind(R.id.top_bar)
-    CommonTitleBar top_bar;
+    CommonTitleBar topBar;
     @Bind(R.id.rl_qrcode_root)
-    RelativeLayout rl_qrcode_root;
+    RelativeLayout rlQrcodeRoot;
     @Bind(R.id.iv_qrcode)
-    ImageView iv_qrcode;
+    ImageView ivQrcode;
     @Bind(R.id.tv_save_qrcode)
-    TextView tv_save_qrcode;
+    TextView tvSaveQrcode;
+    @Bind(R.id.ll_wechat)
+    LinearLayout llWechat;
+    @Bind(R.id.ll_alipay)
+    LinearLayout llAlipay;
 
     @Inject
     QrcodePresenter mPresenter;
+
+    private String payType;
+    private String payUrl;
 
     @Override
     protected void initComponent() {
         DaggerQrcodeComponent.builder().commonModule(new CommonModule()).qrcodeModule(new
                 QrcodeModule(this)).build().inject(this);
+        payType = getIntent().getStringExtra(PAY_TYEP);
+        payUrl = getIntent().getStringExtra(PAY_URL);
     }
 
     @Override
@@ -49,18 +66,22 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
 
     @Override
     protected void setListener() {
-        top_bar.onBackClick(v -> onBackPressed());
-        tv_save_qrcode.setOnClickListener(v -> {
+        topBar.onBackClick(v -> onBackPressed());
+        tvSaveQrcode.setOnClickListener(v -> {
             if (PermissionUtil.checkAndRequestPermission(QrcodeActivity.this, PermissionUtil
                     .PERMISSIONS_STORAGE)) {
-                mPresenter.saveView(QrcodeActivity.this, rl_qrcode_root);
+                mPresenter.saveView(QrcodeActivity.this, rlQrcodeRoot);
             }
         });
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        iv_qrcode.setImageBitmap(mPresenter.createQRCodeBitmap());
+        tvSaveQrcode.setVisibility(TYEP_ALIPAY.equals(payType) ? View.GONE : View.VISIBLE);
+        llWechat.setVisibility(TYEP_ALIPAY.equals(payType) ? View.GONE : View.VISIBLE);
+        llAlipay.setVisibility(TYEP_ALIPAY.equals(payType) ? View.VISIBLE : View.GONE);
+
+        ivQrcode.setImageBitmap(mPresenter.createQRCodeBitmap(payUrl));
     }
 
     @Override
@@ -70,11 +91,11 @@ public class QrcodeActivity extends BaseActivity implements QrcodeView {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (PermissionUtil.checkPermissionRequestResult(QrcodeActivity.this, grantResults,
                 "需要存储权限才能保存照片", requestCode)) {
-            mPresenter.saveView(QrcodeActivity.this, rl_qrcode_root);
+            mPresenter.saveView(QrcodeActivity.this, rlQrcodeRoot);
         }
     }
 }

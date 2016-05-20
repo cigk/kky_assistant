@@ -7,8 +7,9 @@ import android.widget.TextView;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseFragment;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
+import com.kuaikuaiyu.assistant.model.domain.ShopInfo;
 import com.kuaikuaiyu.assistant.sys.event.ShopInfoUpdated;
+import com.kuaikuaiyu.assistant.sys.event.UpdateShopInfo;
 import com.kuaikuaiyu.assistant.ui.account.withdraw.WithdrawActivity;
 import com.kuaikuaiyu.assistant.ui.common.CommonActivity;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
@@ -22,6 +23,9 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * Author:  Gavin
@@ -39,6 +43,8 @@ public class BalanceFragment extends BaseFragment implements BalanceView {
     TextView tvBankCard;
     @Bind(R.id.tv_alipay)
     TextView tvAlipay;
+    @Bind(R.id.mptrf)
+    PtrClassicFrameLayout  mptrf;
 
     @Inject
     BalancePresenter mPresenter;
@@ -62,7 +68,12 @@ public class BalanceFragment extends BaseFragment implements BalanceView {
 
     @Override
     protected void setListener() {
-
+        mptrf.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                EventBus.getDefault().post(new UpdateShopInfo());
+            }
+        });
     }
 
     @Override
@@ -71,6 +82,7 @@ public class BalanceFragment extends BaseFragment implements BalanceView {
         tvBankCard.setText(null != shopInfo.getBank() ? "换绑银行卡" : "绑定银行卡");
         tvAlipay.setText(null != shopInfo.getAlipay() ? "换绑支付宝" : "绑定支付宝");
         mLoadingPage.setSucceed();
+        mptrf.refreshComplete();
     }
 
     @Override

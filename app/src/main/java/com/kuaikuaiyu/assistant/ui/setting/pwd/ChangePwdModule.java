@@ -1,6 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.setting.pwd;
 
-import com.kuaikuaiyu.assistant.modle.service.PassService;
+import com.kuaikuaiyu.assistant.model.service.PassService;
 import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.rx.PerActivity;
 

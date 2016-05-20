@@ -1,7 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.income;
 
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.model.service.IncomeService;
 
 import javax.inject.Inject;
 

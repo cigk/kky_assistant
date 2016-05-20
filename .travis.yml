@@ -1,0 +1,15 @@
+language: android
+jdk: oraclejdk8
+sudo: true
+android:
+  components:
+  - build-tools-23.0.2
+  - android-23
+  - extra-android-support
+  - extra-android-m2repository
+script:
+- ./auto_archive_assistant.sh
+
+before_install:
+ - chmod +x gradlew
+ - chmod +x auto_archive_assistant.sh

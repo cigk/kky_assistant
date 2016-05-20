@@ -1,15 +1,16 @@
 package com.kuaikuaiyu.assistant.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
-import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.kuaikuaiyu.assistant.app.AssistantApp;
@@ -81,7 +82,6 @@ public class UIUtil {
      * 获取资源
      */
     public static Resources getResources() {
-
         return getContext().getResources();
     }
 
@@ -107,24 +107,38 @@ public class UIUtil {
     }
 
     /**
-     * 获取drawable
+     * 以兼容方式获取drawable
      */
-    public static Drawable getDrawable(int resId) {
-        return getResources().getDrawable(resId);
+    public static Drawable getDrawableCompatible(int resId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return getContext().getDrawable(resId);
+        } else {
+            return getResources().getDrawable(resId);
+        }
     }
 
     /**
-     * 获取颜色
+     * 以兼容方式获取颜色选择
      */
-    public static int getColor(int resId) {
-        return getResources().getColor(resId);
+    public static ColorStateList getColorStateListCompatible(int resId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return getContext().getColorStateList(resId);
+        } else {
+            return getResources().getColorStateList(resId);
+        }
     }
 
     /**
-     * 获取颜色选择
+     * 以兼容方式获取颜色资源
+     *
+     * @param color
+     * @return
      */
-    public static ColorStateList getColorStateList(int resId) {
-        return getResources().getColorStateList(resId);
+    public static int getColorCompatible(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            return getContext().getColor(color);
+        else
+            return getContext().getResources().getColor(color);
     }
 
     //判断当前的线程是不是在主线程
@@ -138,16 +152,6 @@ public class UIUtil {
         } else {
             post(runnable);
         }
-    }
-
-    public static void startActivity(Intent intent) {
-//		BaseActivity activity = BaseActivity.getForegroundActivity();
-//		if(activity != null){
-//			activity.startActivity(intent);
-//		}else{
-//			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//			getContext().startActivity(intent);
-//		}
     }
 
     /**
@@ -191,21 +195,48 @@ public class UIUtil {
         mLongTost.show();
     }
 
+    private static WindowManager wm;
+
     /**
-     * 获取手机屏幕宽度
+     * 获取屏幕宽度
+     *
+     * @return
      */
-    public final static int getWindowsWidth(Activity activity) {
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return dm.widthPixels;
+    public static int getWindowWidth() {
+        return getWindowSize().x;
     }
 
     /**
-     * 获取手机屏幕高度
+     * 获取屏幕高度
+     *
+     * @return
      */
-    public final static int getWindowsHeigh(Activity activity) {
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return dm.heightPixels;
+    public static int getWindowHeight() {
+        return getWindowSize().y;
+    }
+
+    private static Point getWindowSize() {
+        if (wm == null)
+            wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+
+        Display display = wm.getDefaultDisplay();
+        final Point size = new Point();
+        display.getSize(size);
+
+        return size;
+    }
+
+    /**
+     * 获取状态栏高度
+     *
+     * @return
+     */
+    public static int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }

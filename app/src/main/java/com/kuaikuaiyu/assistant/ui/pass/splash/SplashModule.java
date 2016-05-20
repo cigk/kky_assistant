@@ -1,6 +1,6 @@
 package com.kuaikuaiyu.assistant.ui.pass.splash;
 
-import com.kuaikuaiyu.assistant.modle.service.PassService;
+import com.kuaikuaiyu.assistant.model.service.PassService;
 import com.kuaikuaiyu.assistant.rx.PerActivity;
 import com.kuaikuaiyu.assistant.net.NetUtil;
 

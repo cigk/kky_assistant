@@ -1,10 +1,8 @@
 package com.kuaikuaiyu.assistant.ui.account.bindalipay;
 
-import com.kuaikuaiyu.assistant.modle.service.AccountService;
-import com.kuaikuaiyu.assistant.modle.service.PassService;
+import com.kuaikuaiyu.assistant.model.service.AccountService;
 import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.rx.PerFragment;
-import com.kuaikuaiyu.assistant.ui.account.bindbank.BindBankView;
 
 import dagger.Module;
 import dagger.Provides;

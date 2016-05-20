@@ -71,6 +71,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_wechat"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -86,25 +87,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/distance8"
-                        android:text="@string/income_weixin_pay"
+                        android:text="@string/income_wechat_pay"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font14"/>
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="@dimen/divider_width"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/distance16"
-                    android:layout_marginTop="@dimen/distance16"
-                    android:background="@color/white"/>
-
                 <LinearLayout
+                    android:id="@+id/ll_alipay"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -115,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/distance8"
-                        android:text="@string/income_zhifubao_pay"
+                        android:text="@string/income_alipay"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font14"/>
 

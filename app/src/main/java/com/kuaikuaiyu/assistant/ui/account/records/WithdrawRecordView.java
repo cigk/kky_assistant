@@ -1,9 +1,7 @@
 package com.kuaikuaiyu.assistant.ui.account.records;
 
 import com.kuaikuaiyu.assistant.base.BaseView;
-import com.kuaikuaiyu.assistant.modle.domain.BillRecord;
-
-import java.util.List;
+import com.kuaikuaiyu.assistant.model.domain.BillRecord;
 
 /**
  * Author:  Gavin

@@ -12,12 +12,10 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.kuaikuaiyu.assistant.base.BasePresenter;
-import com.kuaikuaiyu.assistant.modle.domain.QRCode;
-import com.kuaikuaiyu.assistant.modle.domain.ShopInfo;
-import com.kuaikuaiyu.assistant.modle.service.IncomeService;
+import com.kuaikuaiyu.assistant.model.domain.QRCode;
+import com.kuaikuaiyu.assistant.model.service.IncomeService;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.rx.SchedulersCompat;
-import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.QRCodeUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 
@@ -70,13 +68,8 @@ public class QrcodePresenter implements BasePresenter {
      *
      * @return
      */
-    public Bitmap createQRCodeBitmap() {
-        ShopInfo shopInfo = ConfigUtil.getShopInfo();
-        if (shopInfo != null) {
-            return QRCodeUtil.createImage(shopInfo.getPay_url(), 800, 800, null);
-        } else {
-            return null;
-        }
+    public Bitmap createQRCodeBitmap(String url) {
+        return QRCodeUtil.createImage(url, 800, 800, null);
     }
 
     /**

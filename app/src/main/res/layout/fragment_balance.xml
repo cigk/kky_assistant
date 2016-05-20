@@ -1,83 +1,97 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:clipToPadding="true"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+<com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout
+    android:id="@+id/mptrf"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    cube_ptr:ptr_duration_to_close="1000"
+    cube_ptr:ptr_duration_to_close_header="100"
+    cube_ptr:ptr_keep_header_when_refresh="true"
+    cube_ptr:ptr_pull_to_fresh="false"
+    cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+    cube_ptr:ptr_resistance="2">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/distance200"
-        android:layout_marginTop="1px"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10000.00"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font32"/>
-
-        <TextView
-            android:id="@+id/tv_withdraw"
-            android:layout_width="@dimen/distance100"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/distance16"
-            android:background="@drawable/selector_btn_withdraw"
-            android:clickable="true"
-            android:drawablePadding="@dimen/distance4"
-            android:drawableRight="@mipmap/arrow_right_white"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance200"
+            android:layout_marginTop="1px"
+            android:background="@color/colorPrimary"
             android:gravity="center"
-            android:paddingBottom="@dimen/distance8"
-            android:paddingLeft="@dimen/distance12"
-            android:paddingRight="@dimen/distance12"
-            android:paddingTop="@dimen/distance8"
-            android:text="提现"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font14"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10000.00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font32"/>
+
+            <TextView
+                android:id="@+id/tv_withdraw"
+                android:layout_width="@dimen/distance100"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance16"
+                android:background="@drawable/selector_btn_withdraw"
+                android:clickable="true"
+                android:drawablePadding="@dimen/distance4"
+                android:drawableRight="@mipmap/arrow_right_white"
+                android:gravity="center"
+                android:paddingBottom="@dimen/distance12"
+                android:paddingLeft="@dimen/distance16"
+                android:paddingRight="@dimen/distance16"
+                android:paddingTop="@dimen/distance12"
+                android:text="提现"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font14"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance100"
+            android:background="@color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_bank_card"
+                style="@style/BaseTextViewStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_item_bg"
+                android:clickable="true"
+                android:drawableTop="@mipmap/ic_bank_card"
+                android:gravity="center"
+                android:paddingTop="@dimen/distance24"
+                android:text="BankCard"/>
+
+            <View
+                style="@style/Divider"
+                android:layout_width="4px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/distance8"
+                android:layout_marginTop="@dimen/distance8"/>
+
+            <TextView
+                android:id="@+id/tv_alipay"
+                style="@style/BaseTextViewStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_item_bg"
+                android:clickable="true"
+                android:drawableTop="@mipmap/ic_alipay"
+                android:gravity="center"
+                android:paddingTop="@dimen/distance16"
+                android:text="Alipay"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/distance100"
-        android:background="@color/white"
-        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tv_bank_card"
-            style="@style/BaseTextViewStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_item_bg"
-            android:clickable="true"
-            android:drawableTop="@mipmap/ic_bank_card"
-            android:gravity="center"
-            android:paddingTop="@dimen/distance24"
-            android:text="BankCard"/>
-
-        <View
-            style="@style/Divider"
-            android:layout_width="4px"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/distance8"
-            android:layout_marginTop="@dimen/distance8"/>
-
-        <TextView
-            android:id="@+id/tv_alipay"
-            style="@style/BaseTextViewStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_item_bg"
-            android:clickable="true"
-            android:drawableTop="@mipmap/ic_alipay"
-            android:gravity="center"
-            android:paddingTop="@dimen/distance16"
-            android:text="Alipay"/>
-    </LinearLayout>
-
-</LinearLayout>
+</com.kuaikuaiyu.assistant.ui.widgets.MaterialPtrFramelayout>

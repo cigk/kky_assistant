@@ -57,7 +57,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     EditText etShopName;
 
     @Inject
-    SignUpPresenter signUpPresenter;
+    SignUpPresenter mPresenter;
 
     private int type;
 
@@ -87,7 +87,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
     @Override
     protected BasePresenter getPresenter() {
-        return signUpPresenter;
+        return mPresenter;
     }
 
     @Override
@@ -123,9 +123,9 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
             return;
         }
         if (type == SIGN_UP)
-            signUpPresenter.getSignUpVerifyCode(mobile);
+            mPresenter.getSignUpVerifyCode(mobile);
         else
-            signUpPresenter.getResetPwdCode(mobile);
+            mPresenter.getResetPwdCode(mobile);
     }
 
     /**
@@ -162,9 +162,9 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
         if (type == SIGN_UP) {
             if (CommonUtil.checkEmpty(shopName, "店铺名不能为空")) return;
-            signUpPresenter.signUp(mobile, pwd, verifyCode, shopName);
+            mPresenter.signUp(mobile, pwd, verifyCode, shopName);
         } else {
-            signUpPresenter.resetPwd(mobile, pwd, verifyCode);
+            mPresenter.resetPwd(mobile, pwd, verifyCode);
         }
 
     }

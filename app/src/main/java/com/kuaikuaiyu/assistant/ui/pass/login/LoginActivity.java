@@ -42,7 +42,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     TextView tvForgetPwd;
 
     @Inject
-    LoginPresenter loginPresenter;
+    LoginPresenter mPresenter;
 
     @Override
     protected void initComponent() {
@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
 
     @Override
     protected BasePresenter getPresenter() {
-        return loginPresenter;
+        return mPresenter;
     }
 
     @Override
@@ -130,6 +130,6 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
             return;
         }
 
-        loginPresenter.login(mobile, password);
+        mPresenter.login(mobile, password);
     }
 }

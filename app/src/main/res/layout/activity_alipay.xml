@@ -1,0 +1,107 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.kuaikuaiyu.assistant.ui.widgets.CommonTitleBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/pic_bg_shop_name"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingLeft="@dimen/distance50"
+            android:paddingRight="@dimen/distance50"
+            android:singleLine="true"
+            android:text="laaaaaal"/>
+
+        <LinearLayout
+            android:id="@+id/ll_shop_instruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/distance12"
+            android:gravity="center_vertical">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/distance16"
+                android:layout_marginRight="@dimen/distance16"
+                android:layout_weight="1"
+                android:background="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="快快助手合作商家"
+                android:textColor="@color/white"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/distance16"
+                android:layout_marginRight="@dimen/distance16"
+                android:layout_weight="1"
+                android:background="@color/white"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginLeft="@dimen/distance16"
+            android:layout_marginRight="@dimen/distance16"
+            android:layout_marginTop="@dimen/distance12"
+            android:background="@drawable/shape_white_corner_middle"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="￥0.00"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font32"/>
+
+        <com.kuaikuaiyu.assistant.ui.widgets.MoneyEditText
+            android:id="@+id/et_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:inputType="numberDecimal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font14"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <com.kuaikuaiyu.assistant.ui.widgets.KeyboardView
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/selector_btn_common_rect"
+        android:gravity="center"
+        android:text="生成支付宝收款码"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font28"/>
+
+</LinearLayout>

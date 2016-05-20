@@ -31,7 +31,7 @@
     <dimen name="distance150">150dp</dimen>
     <dimen name="distance200">200dp</dimen>
 
-    <dimen name="title_height">44dp</dimen>
+    <dimen name="title_height">48dp</dimen>
     <dimen name="button_height">44dp</dimen>
 
     <dimen name="height45">45dp</dimen>

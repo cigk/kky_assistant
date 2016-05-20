@@ -14,11 +14,38 @@
         android:layout_height="wrap_content"
         app:titleText="@string/income_title"/>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="132dp"
         android:orientation="horizontal"
         android:padding="@dimen/distance16">
+
+        <LinearLayout
+            android:id="@+id/ll_alipay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/distance2"
+            android:layout_weight="1"
+            android:background="@drawable/selector_white_gray_corner"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="@dimen/distance4"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_income_alipay"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/income_alipay"
+                android:textColor="@color/text_color"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_income_qrcode"
@@ -28,14 +55,14 @@
             android:layout_weight="1"
             android:background="@drawable/selector_white_gray_corner"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginRight="@dimen/distance4"
                 android:scaleType="centerInside"
-                android:src="@mipmap/income_qrcode"/>
+                android:src="@mipmap/ic_income_wechat"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -54,7 +81,7 @@
             android:layout_weight="1"
             android:background="@drawable/selector_white_gray_corner"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="50dp"

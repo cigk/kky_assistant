@@ -45,6 +45,7 @@ public class ReqParams {
         signMap = new HashMap<>();
         addQuery("at", ConfigUtil.getAuthToken());
         addQuery("t", String.valueOf((int) (System.currentTimeMillis() / 1000)));
+        addQuery("uuid", ConfigUtil.getUuid());
 
         fieldMap = new HashMap<>();
     }
