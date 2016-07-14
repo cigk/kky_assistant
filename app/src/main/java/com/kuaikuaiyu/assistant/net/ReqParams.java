@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.JniUtil;
+import com.kuaikuaiyu.assistant.utils.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,11 +12,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
-import timber.log.Timber;
 
 /**
  * Created by Gavin on 2015/7/14.
@@ -130,7 +126,7 @@ public class ReqParams {
                     .getValue());
         }
 
-        Timber.d("sig = %s", sb.toString());
+        Logger.d("sig = %s", sb.toString());
         mSignature = JniUtil.sign(sb.toString());
         //加密  _sig
 //        try {

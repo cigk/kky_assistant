@@ -9,6 +9,7 @@ import com.kuaikuaiyu.assistant.rx.IoTransformer;
 import com.kuaikuaiyu.assistant.rx.RxSubscriber;
 import com.kuaikuaiyu.assistant.utils.ConfigUtil;
 import com.kuaikuaiyu.assistant.utils.DeviceUtil;
+import com.kuaikuaiyu.assistant.utils.logger.Logger;
 
 import javax.inject.Inject;
 
@@ -40,7 +41,7 @@ public class SplashPresenter implements BasePresenter {
         uuidSubscriber = new RxSubscriber<Uuid>(null) {
             @Override
             public void onNext(Uuid uuid) {
-                Timber.d("Uuid = %s", uuid);
+                Logger.d("Uuid = %s", uuid);
                 ConfigUtil.setUuid(uuid.uuid);
                 splashView.jump();
             }
