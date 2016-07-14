@@ -6,6 +6,7 @@ import android.os.Looper;
 
 import com.kuaikuaiyu.assistant.BuildConfig;
 import com.kuaikuaiyu.assistant.utils.ImageUtil;
+import com.squareup.leakcanary.LeakCanary;
 
 import timber.log.Timber;
 
@@ -54,7 +55,7 @@ public class AssistantApp extends Application {
             Timber.plant(new Timber.DebugTree());
 
         //初始化LeakCanary
-//        LeakCanary.install(this);
+        LeakCanary.install(this);
 
         //初始化CrashWoodpecker
         //        CrashWoodpecker.init(this);
