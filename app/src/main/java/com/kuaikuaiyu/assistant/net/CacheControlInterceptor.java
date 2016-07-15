@@ -33,7 +33,7 @@ public class CacheControlInterceptor implements Interceptor {
             String cacheControl;
             if ("GET".equals(request.method())) {
                 //GET请求缓存5秒
-                cacheControl = "max-age=5";
+                cacheControl = "max-age=10";
             } else {
                 //读接口上的@Headers里的配置
                 cacheControl = request.cacheControl().toString();

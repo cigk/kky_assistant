@@ -1,6 +1,8 @@
 package com.kuaikuaiyu.assistant.utils.logger;
 
 import android.support.annotation.NonNull;
+import android.support.v4.text.TextUtilsCompat;
+import android.text.TextUtils;
 
 import timber.log.Timber;
 
@@ -10,6 +12,7 @@ import timber.log.Timber;
 public final class LogPrinter extends Timber.DebugTree {
 
     private static final int STACK_OFFSET = 8;
+    private static final int LINE_LENGTH = 1000;
 
     private static final String TOP_BORDER = "╔══════════════════════════════════════════════════════";
     private static final String BOTTOM_BORDER = "╚══════════════════════════════════════════════════════";
@@ -52,12 +55,25 @@ public final class LogPrinter extends Timber.DebugTree {
         super.log(priority, tag, PREFIX_BORDER + getTail(), null);
         super.log(priority, tag, MIDDLE_BORDER, null);
         for (int i = 0, length = lines.length; i < length; i++) {
-//            if (i == length - 1) {
-//                // last line
-//                super.log(priority, tag, PREFIX_BORDER + lines[i] + getTail(), null);
-//            } else {
-            super.log((priority), tag, PREFIX_BORDER + lines[i], null);
-//            }
+            if (lines[i].length() < LINE_LENGTH) {
+                super.log((priority), tag, PREFIX_BORDER + lines[i], null);
+            } else {//把数据分成多行显示
+                try {
+                    String tmpStr;
+                    int j = lines[i].length() / LINE_LENGTH;
+                    for (int k = 0; k < j; k++) {
+                        tmpStr = lines[i].substring(LINE_LENGTH * k, LINE_LENGTH * (k + 1));
+                        super.log((priority), tag, PREFIX_BORDER + tmpStr, null);
+                    }
+                    //打印最后一行
+                    tmpStr = lines[i].substring(LINE_LENGTH * j, lines[i].length());
+                    if (!TextUtils.isEmpty(tmpStr))
+                        super.log((priority), tag, PREFIX_BORDER + tmpStr, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
         // Finally print bottom line
         super.log((priority), tag, BOTTOM_BORDER, null);

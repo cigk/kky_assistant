@@ -30,11 +30,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        if (TextUtils.isEmpty(ConfigUtil.getUuid())) {
-            mPresenter.getUuid();
-        } else {
+//        if (TextUtils.isEmpty(ConfigUtil.getUuid())) {
+//            mPresenter.getUuid();
+//        } else {
             jump();
-        }
+//        }
     }
 
     @Override
@@ -51,11 +51,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @Override
     public void jump() {
         UIUtil.postDelayed(() -> {
-            if (TextUtils.isEmpty(ConfigUtil.getAuthToken())) {
-                toLogin();
-            } else {
+//            if (TextUtils.isEmpty(ConfigUtil.getAuthToken())) {
+//                toLogin();
+//            } else {
                 toHome();
-            }
+//            }
         }, 1000);
     }
 

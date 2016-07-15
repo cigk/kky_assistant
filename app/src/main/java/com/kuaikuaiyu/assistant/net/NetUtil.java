@@ -46,9 +46,11 @@ public class NetUtil {
 //        SSLSocketFactory socketFactory = getSocketFactory();
         File cacheFile = new File(UIUtil.getContext().getCacheDir(), "okhttp_cache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb缓存
+        HeaderInterceptor headerInterceptor = new HeaderInterceptor();
         CacheControlInterceptor cacheControlInterceptor = new CacheControlInterceptor();
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .addInterceptor(cacheControlInterceptor)
+                .addInterceptor(headerInterceptor)
+                .addNetworkInterceptor(cacheControlInterceptor)
                 .cache(cache)
                 .followRedirects(true);
         if (BuildConfig.DEBUG_MODE) {
@@ -124,7 +126,7 @@ public class NetUtil {
      * @return
      */
     private static Retrofit createTestRetrofit() {
-        return createRetrofit("http://192.168.1.101/");
+        return createRetrofit("http://m1.eqxiu.com");
     }
 
     /**
@@ -132,8 +134,7 @@ public class NetUtil {
      */
     private static Retrofit createRetrofit(String baseurl) {
         return new Retrofit.Builder().baseUrl(baseurl).client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory
-                        (RxJavaCallAdapterFactory.create()).build();
+                .addConverterFactory(GsonConverterFactory.create()).build();
     }
 
     /**
