@@ -67,6 +67,7 @@ public class HomeActivity extends BaseActivity {
             public void onResponse(Call<HttpResult<Object, PageInfo, List<StrollItem>>> call, Response<HttpResult<Object, PageInfo, List<StrollItem>>> response) {
                 Logger.d(response.body().code + "");
                 Logger.d(response.body().msg);
+                Logger.d(response.body().map.toString());
                 Logger.d(response.body().list.toString());
             }
 

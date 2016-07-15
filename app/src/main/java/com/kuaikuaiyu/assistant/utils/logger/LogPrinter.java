@@ -1,7 +1,6 @@
 package com.kuaikuaiyu.assistant.utils.logger;
 
 import android.support.annotation.NonNull;
-import android.support.v4.text.TextUtilsCompat;
 import android.text.TextUtils;
 
 import timber.log.Timber;
@@ -14,9 +13,11 @@ public final class LogPrinter extends Timber.DebugTree {
     private static final int STACK_OFFSET = 8;
     private static final int LINE_LENGTH = 1000;
 
-    private static final String TOP_BORDER = "╔══════════════════════════════════════════════════════";
-    private static final String BOTTOM_BORDER = "╚══════════════════════════════════════════════════════";
-    private static final String MIDDLE_BORDER = "║──────────────────────────────────────────────────────";
+    private static final String BORDER = "══════════════════════════════════════";
+    private static final String DIVIDER = "──────────────────────────────────────";
+    private static final String TOP_BORDER = "╔" + BORDER + BORDER + BORDER;
+    private static final String BOTTOM_BORDER = "╚" + BORDER + BORDER + BORDER;
+    private static final String MIDDLE_BORDER = "╟" + DIVIDER + DIVIDER + DIVIDER;
 
     private static final String PREFIX_BORDER = "║ ";
 
