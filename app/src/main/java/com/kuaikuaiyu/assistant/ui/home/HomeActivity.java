@@ -2,6 +2,7 @@ package com.kuaikuaiyu.assistant.ui.home;
 
 import android.os.Bundle;
 
+import com.google.gson.JsonElement;
 import com.kuaikuaiyu.assistant.R;
 import com.kuaikuaiyu.assistant.base.BaseActivity;
 import com.kuaikuaiyu.assistant.base.BasePresenter;
@@ -13,6 +14,8 @@ import com.kuaikuaiyu.assistant.net.NetUtil;
 import com.kuaikuaiyu.assistant.utils.UIUtil;
 import com.kuaikuaiyu.assistant.utils.logger.Logger;
 import com.umeng.update.UmengUpdateAgent;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -62,17 +65,15 @@ public class HomeActivity extends BaseActivity {
     public void test() {
         EqxService service = NetUtil.createForTest(EqxService.class);
         Call call = service.getShowItems();
-        call.enqueue(new Callback<HttpResult<Object, PageInfo, List<StrollItem>>>() {
+        call.enqueue(new Callback<JSONObject>() {
             @Override
-            public void onResponse(Call<HttpResult<Object, PageInfo, List<StrollItem>>> call, Response<HttpResult<Object, PageInfo, List<StrollItem>>> response) {
-                Logger.d(response.body().code + "");
-                Logger.d(response.body().msg);
-                Logger.d(response.body().map.toString());
-                Logger.d(response.body().list.toString());
+            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+//                JsonElement element = response.body();
+                Logger.json(response.body().toString());
             }
 
             @Override
-            public void onFailure(Call<HttpResult<Object, PageInfo, List<StrollItem>>> call, Throwable t) {
+            public void onFailure(Call<JSONObject> call, Throwable t) {
                 Logger.d("onFailure: %s", t.getMessage());
             }
         });

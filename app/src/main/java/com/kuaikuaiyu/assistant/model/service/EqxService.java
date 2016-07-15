@@ -1,10 +1,8 @@
 package com.kuaikuaiyu.assistant.model.service;
 
-import com.kuaikuaiyu.assistant.model.domain.HttpResult;
-import com.kuaikuaiyu.assistant.model.domain.PageInfo;
-import com.kuaikuaiyu.assistant.model.domain.StrollItem;
+import com.google.gson.JsonElement;
 
-import java.util.List;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,5 +16,5 @@ import retrofit2.http.GET;
 public interface EqxService {
 
     @GET("/app/scene/tag/tpl?pageSize=20&pageNo=1")
-    Call<HttpResult<Object, PageInfo, List<StrollItem>>> getShowItems();
+    Call<JSONObject> getShowItems();
 }

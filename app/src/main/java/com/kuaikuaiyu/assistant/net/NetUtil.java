@@ -22,7 +22,6 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -126,7 +125,9 @@ public class NetUtil {
      * @return
      */
     private static Retrofit createTestRetrofit() {
-        return createRetrofit("http://m1.eqxiu.com");
+//        return createRetrofit("http://m1.eqxiu.com");
+        return new Retrofit.Builder().baseUrl("http://m1.eqxiu.com").client(okHttpClient)
+                .addConverterFactory(new JsonConverterFactory()).build();
     }
 
     /**
