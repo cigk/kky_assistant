@@ -101,4 +101,12 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:scaleType="centerInside"
+        android:id="@+id/iv_test"
+        android:src="@mipmap/img_test"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
 </LinearLayout>

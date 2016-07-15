@@ -104,7 +104,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         loadingDia = null;
         BasePresenter presenter = getPresenter();
         if (null != presenter) presenter.clean();
-        ButterKnife.unbind(this);
+//        ButterKnife.unbind(this);
         super.onDestroyView();
     }
 

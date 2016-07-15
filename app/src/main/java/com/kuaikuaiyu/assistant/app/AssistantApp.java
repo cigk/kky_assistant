@@ -3,9 +3,13 @@ package com.kuaikuaiyu.assistant.app;
 import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.kuaikuaiyu.assistant.BuildConfig;
 import com.kuaikuaiyu.assistant.utils.ImageUtil;
+import com.kuaikuaiyu.assistant.utils.logger.Logger;
+import com.kuaikuaiyu.assistant.utils.logger.Settings;
+import com.squareup.leakcanary.LeakCanary;
 
 import timber.log.Timber;
 
@@ -54,10 +58,12 @@ public class AssistantApp extends Application {
             Timber.plant(new Timber.DebugTree());
 
         //初始化LeakCanary
-//        LeakCanary.install(this);
+        LeakCanary.install(this);
 
         //初始化CrashWoodpecker
         //        CrashWoodpecker.init(this);
+
+        initLogger();
     }
 
 
@@ -79,5 +85,15 @@ public class AssistantApp extends Application {
 
     public static int getMainThreadId() {
         return mMainTheadId;
+    }
+
+    /**
+     * 初始化日志工具
+     */
+    private void initLogger() {
+        Logger.initialize(
+                new Settings().setLogPriority(BuildConfig.DEBUG_MODE ? Log.VERBOSE : Log.ASSERT)
+        );
+        Logger.d("Logger init");
     }
 }

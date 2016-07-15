@@ -1,6 +1,7 @@
 package com.kuaikuaiyu.assistant.net;
 
 import com.kuaikuaiyu.assistant.utils.UIUtil;
+import com.kuaikuaiyu.assistant.utils.logger.Logger;
 
 import java.io.IOException;
 
@@ -8,7 +9,6 @@ import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import timber.log.Timber;
 
 /**
  * Author:  Gavin
@@ -23,7 +23,7 @@ public class CacheControlInterceptor implements Interceptor {
         //TODO need checked with GET rquests
         Request request = chain.request();
         if (!NetUtil.isNetAvailable(UIUtil.getContext()) && "GET".equals(request.method())) {
-            Timber.d("cacheControl = %s", CacheControl.FORCE_CACHE);
+            Logger.d("cacheControl = %s", CacheControl.FORCE_CACHE);
             request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)
                     .build();
@@ -33,12 +33,12 @@ public class CacheControlInterceptor implements Interceptor {
             String cacheControl;
             if ("GET".equals(request.method())) {
                 //GET请求缓存5秒
-                cacheControl = "max-age=5";
+                cacheControl = "max-age=10";
             } else {
                 //读接口上的@Headers里的配置
                 cacheControl = request.cacheControl().toString();
             }
-            Timber.d("cacheControl = %s", cacheControl);
+            Logger.d("cacheControl = %s", cacheControl);
             return originalResponse.newBuilder()
                     .header("Cache-Control", cacheControl)
                     .removeHeader("Pragma")
