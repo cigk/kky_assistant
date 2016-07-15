@@ -8,4 +8,5 @@
 * RxJava
 * EventBus
 * Butterknife
+* Jni
 * ...
